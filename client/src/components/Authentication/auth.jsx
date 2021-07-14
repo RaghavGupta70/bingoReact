@@ -36,7 +36,7 @@ export default function Auth({type}) {
       }
       else 
       {
-          history.push("/SignIn");
+          history.push("/SignIn");-
       }
   }
 
