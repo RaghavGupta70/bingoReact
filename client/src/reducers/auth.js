@@ -1,15 +1,15 @@
 import { FETCH,CHECK,SIGNUP } from "../constants/actionTypes";
 
-const auth = (users=[],action) => {
+const auth = (users={authData:null},action) => {
     switch(action.type) {
         case FETCH: 
         return action.payload;
 
-        case SIGNUP: 
-        return [...users,action.payload];
-
+        case SIGNUP:
+            localStorage.setItem("user",JSON.stringify({...action?.data})) 
+        return {...users,authData:action?.data};
         case CHECK: 
-         return action.payload;
+         return localStorage.getItem("user");
 
          default:
              return users;
