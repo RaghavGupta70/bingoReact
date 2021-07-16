@@ -30,7 +30,7 @@ export default function Auth({type}) {
   const history = useHistory();
 
   const handleClick = (e) => {
-      if(type==="SignIn")
+      if(type === "SignIn")
       {
           history.push("/Home");
       }
