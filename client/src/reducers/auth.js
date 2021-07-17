@@ -6,8 +6,8 @@ const auth = (users={authData:null},action) => {
         return action.payload;
 
         case AUTH:
-            localStorage.setItem("user",JSON.stringify({...action?.data})) 
-            return {...users,authData:action?.data};
+            localStorage.setItem("user",JSON.stringify({...action?.payload})) 
+            return {...users,authData:action?.payload};
         case CHECK: 
          return localStorage.getItem("user");
 
