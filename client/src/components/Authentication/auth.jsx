@@ -40,10 +40,8 @@ export default function Auth({ type }) {
     if (type === "SignIn") {
       dispatch(SignInUser(userData));
       history.push("/Home");
-    
     }
     else {
-    
       dispatch(SignUpUser(userData));
       console.log(userData)
     }
