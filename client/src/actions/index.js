@@ -1,4 +1,5 @@
 import * as api from "../api/index.js";
+import Auth from "../components/Authentication/auth.jsx";
 import { FETCH,AUTH,CHECK } from "../constants/actionTypes.js";
 
 export const fetchUsers = () => async (dispatch) => {
@@ -12,16 +13,16 @@ export const fetchUsers = () => async (dispatch) => {
 }
 
 
-export const signUpUser = (user) => async (dispatch) => {
+export const SignUpUser = (user) => async (dispatch) => {
     try {
         const {data} = await api.signUpUser(user);
-        dispatch({type: SIGNUP,payload: data})
+        dispatch({type: AUTH,payload: data})
     } catch (error) {
-        console.log(error);
+        console.log(error.response);
     }
 } 
 
-export const signInUser = (user) => async (dispatch) => {
+export const SignInUser = (user) => async (dispatch) => {
     try {
         const {data} = await api.signInUser(user);
         dispatch({action: AUTH,payload: data});

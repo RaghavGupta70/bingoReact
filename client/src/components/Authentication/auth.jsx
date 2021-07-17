@@ -14,7 +14,7 @@ import Container from '@material-ui/core/Container';
 import useStyles from "./styles.js";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { signUpUser,signInUser } from '../../actions/index.js';
+import { SignUpUser,SignInUser } from '../../actions/index.js';
 
 function Copyright() {
   return (
@@ -36,11 +36,16 @@ export default function Auth({ type }) {
   });
 
   const handleClick = (e) => {
+    
     if (type === "SignIn") {
+      dispatch(SignInUser(userData));
       history.push("/Home");
+    
     }
     else {
-      history.push("/SignIn");
+    
+      dispatch(SignUpUser(userData));
+      console.log(userData)
     }
   }
 
@@ -49,8 +54,10 @@ export default function Auth({ type }) {
      setUserData(prevVal =>{
          return {...prevVal,[name]:value};
      });
-     console.log(name,value);
+    //  console.log(name,value);
   }
+
+
 
   return (
     <div className={classes.root}>
@@ -63,7 +70,7 @@ export default function Auth({ type }) {
           <Typography component="h1" variant="h5">
             {type}
           </Typography>
-          <form className={classes.form}>
+          <div className={classes.form}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -104,7 +111,6 @@ export default function Auth({ type }) {
               label="Remember me"
             /> : null}
             <Button
-              type="submit"
               fullWidth
               variant="contained"
               color="primary"
@@ -125,7 +131,7 @@ export default function Auth({ type }) {
                 {"Already a User Sign In !!"}
               </Link>}
             </Grid>
-          </form>
+          </div>
         </div>
         <Box mt={8}>
           <Copyright />

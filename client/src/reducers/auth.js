@@ -1,4 +1,4 @@
-import { FETCH,CHECK,SIGNUP } from "../constants/actionTypes";
+import { FETCH,CHECK,AUTH } from "../constants/actionTypes";
 
 const auth = (users={authData:null},action) => {
     switch(action.type) {
