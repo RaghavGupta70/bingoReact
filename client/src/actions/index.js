@@ -25,7 +25,7 @@ export const SignUpUser = (user) => async (dispatch) => {
 export const SignInUser = (user) => async (dispatch) => {
     try {
         const {data} = await api.signInUser(user);
-        dispatch({action: AUTH,data});
+        dispatch({type: AUTH,data});
     } catch (error) {
         console.log(error);
     }
