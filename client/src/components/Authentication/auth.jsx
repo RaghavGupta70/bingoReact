@@ -14,6 +14,7 @@ import Container from '@material-ui/core/Container';
 import useStyles from "./styles.js";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
+import { signUpUser,signInUser } from '../../actions/index.js';
 
 function Copyright() {
   return (

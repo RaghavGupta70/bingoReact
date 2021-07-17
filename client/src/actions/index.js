@@ -1,5 +1,5 @@
 import * as api from "../api/index.js";
-import { FETCH,SIGNUP,CHECK } from "../constants/actionTypes.js";
+import { FETCH,AUTH,CHECK } from "../constants/actionTypes.js";
 
 export const fetchUsers = () => async (dispatch) => {
 
@@ -21,10 +21,10 @@ export const signUpUser = (user) => async (dispatch) => {
     }
 } 
 
-export const checkUser = (user) => async (dispatch) => {
+export const signInUser = (user) => async (dispatch) => {
     try {
-        const {data} = await api.checkUser(user);
-        dispatch({action: CHECK,payload: data});
+        const {data} = await api.signInUser(user);
+        dispatch({action: AUTH,payload: data});
     } catch (error) {
         console.log(error);
     }

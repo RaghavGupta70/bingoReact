@@ -1,3 +1,3 @@
 export const FETCH ="Fetch";
-export const SIGNUP ="SignUp";
+export const AUTH ="SignUp";
 export const CHECK = "Check";
