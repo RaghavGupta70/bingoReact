@@ -44,6 +44,7 @@ export default function Auth({ type }) {
     else {
       dispatch(SignUpUser(userData));
       console.log(userData)
+      
     }
   }
 

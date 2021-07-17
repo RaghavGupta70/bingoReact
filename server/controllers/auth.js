@@ -23,7 +23,7 @@ export const signUp = async(req,res) => {
         
        const result = await Auth.create({userName,email,password:hashedPassword,time:new Date()});
        const token = jwt.sign({email:result.email,time:result.time},"bingoSecretKey",{expiresIn:'1h'});
-       console.log(result);
+    //    console.log(result);
        res.status(201).json({result,token});
 
    } catch (error) {
