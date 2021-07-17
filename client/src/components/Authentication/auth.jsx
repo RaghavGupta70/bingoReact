@@ -46,6 +46,7 @@ export default function Auth({ type }) {
     
       dispatch(SignUpUser(userData));
       console.log(userData)
+      
     }
   }
 
