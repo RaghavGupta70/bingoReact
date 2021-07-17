@@ -7,9 +7,7 @@ import auth from './routes/auth.js';
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(bodyParser.json({extended: true,limit: '50mb'}));
-
 app.use(cors());
 
 app.use('/auth',auth);
