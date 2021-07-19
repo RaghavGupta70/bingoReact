@@ -15,6 +15,7 @@ import useStyles from "./styles.js";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { SignUpUser,SignInUser } from '../../actions/index.js';
+import PropTypes from "prop-types";
 
 function Copyright() {
   return (
@@ -26,8 +27,22 @@ function Copyright() {
   );
 }
 
+async function loginUser(credentials) {
+  return fetch('http://localhost:5000/SignIn', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      "name": "Raghav"
+    })
+  })
+    .then(data => {const r = data.json()
+    console.log(r)
+  return r})
+ }
 
-export default function Auth({ type }) {
+export default function Auth({ type,setToken }) {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -35,18 +50,26 @@ export default function Auth({ type }) {
     email:'',userName:'',password:''
   });
 
-  const handleClick = (e) => {
+  
+
+  const handleClick = async (e) => {
     
-    if (type === "SignIn") {
-      dispatch(SignInUser(userData));
-      history.push("/Home");
+    if (type === "SignIn") 
+    {
+      dispatch(SignInUser(userData,history));
+      const token = await loginUser(userData);
+      console.log(token)
+              setToken(token);
+              localStorage.setItem("tok",JSON.stringify(token));
     }
+
     else {
-      dispatch(SignUpUser(userData));
+      dispatch(SignUpUser(userData,history));
       console.log(userData)
       
     }
-  }
+  
+}
 
   const handleChange = (e) => {
      var {name,value} = e.target;
@@ -138,4 +161,8 @@ export default function Auth({ type }) {
       </Container>
     </div>
   );
+}
+
+Auth.propTypes = {
+  setToken: PropTypes.func.isRequired
 }
