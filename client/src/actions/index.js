@@ -13,12 +13,7 @@ export const fetchUsers = () => async (dispatch) => {
     }
 }
 
-<<<<<<< Updated upstream
-
 export const SignUpUser = (user,history) => async (dispatch) => {
-=======
-export const SignUpUser = (user) => async (dispatch) => {
->>>>>>> Stashed cha
     try {
         const {data} = await api.signUpUser(user);
         dispatch({type: AUTH,payload: data})
