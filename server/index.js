@@ -12,6 +12,11 @@ app.use(cors());
 
 app.use('/auth',auth);
 
+app.use("/SignIn", (req,res) =>
+{
+    res.send({tok: "session_token"});
+})
+
 const mongoUrl = "mongodb+srv://sukhanDeo:Raghav@70@cluster0.4pnog.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 mongoose.connect(mongoUrl,{useNewUrlParser: true,useFindAndModify: false,useUnifiedTopology: true,useCreateIndex: true})
