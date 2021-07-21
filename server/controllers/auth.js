@@ -1,6 +1,9 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import Auth from '../models/auth.js';
+import { OAuth2Client } from 'google-auth-library';
+
+const client = new OAuth2Client("453680329284-9t4ic7kq6krkfgqnabl6tsnak2r63ldq.apps.googleusercontent.com");
 
 export const getUsers = async(req,res) => {
    try {
@@ -48,4 +51,27 @@ export const signIn = async(req,res) => {
        console.log('Error while signing in');
        res.status(409).json({message:error});
    }
+}
+
+export const googleSignIn = async(req,res) => {
+     const {email,userName,password} = req.body;
+     try {
+        const existingUser = await Auth.findOne({email});
+        if(existingUser) {
+          const confirmPassword = await bcrypt.compare(password,existingUser.password);  
+          if(!confirmPassword) return res.status(400).json({message:'Incorrect credentials'});
+
+          const token = jwt.sign({email,time:existingUser.time},"bingoSecretKey",{expiresIn:'1h'});  
+          res.status(201).json({result:existingUser,token});
+        }   
+        else{
+           const hashedPassword = await bcrypt.hash(password,12);
+        
+           const result = await Auth.create({userName,email,password:hashedPassword,time:new Date()});
+           const token = jwt.sign({email:result.email,time:result.time},"bingoSecretKey",{expiresIn:'1h'});
+           res.status(201).json({result,token});
+        }
+     } catch (error) {
+         res.status(400).json({message:"Google Login went wrong"});
+     }
 }

@@ -1,4 +1,4 @@
-import react, { useState } from "react";
+import React, { useState } from "react";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,8 +14,10 @@ import Container from '@material-ui/core/Container';
 import useStyles from "./styles.js";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { SignUpUser,SignInUser } from '../../actions/index.js';
+import { SignUpUser,SignInUser,GoogleSignIn } from '../../actions/index.js';
 import PropTypes from "prop-types";
+import { GoogleLogin } from 'react-google-login';
+import Icon from './icon.jsx';
 
 function Copyright() {
   return (
@@ -65,10 +67,8 @@ export default function Auth({ type,setToken }) {
 
     else {
       dispatch(SignUpUser(userData,history));
-      console.log(userData)
-      
+      console.log(userData) 
     }
-  
 }
 
   const handleChange = (e) => {
@@ -76,9 +76,20 @@ export default function Auth({ type,setToken }) {
      setUserData(prevVal =>{
          return {...prevVal,[name]:value};
      });
-    //  console.log(name,value);
   }
 
+  const googleSuccess = async(res) => {
+     const result = res?.profileObj;
+     dispatch(GoogleSignIn(result,history));
+     const token = await loginUser(userData);
+      console.log(token)
+              setToken(token);
+              localStorage.setItem("tok",JSON.stringify(token));
+  }
+
+  const googleFailure = () => {
+     console.log("Error during google sign in");
+  }
 
 
   return (
@@ -154,6 +165,12 @@ export default function Auth({ type,setToken }) {
               </Link>}
             </Grid>
           </div>
+          <GoogleLogin clientId="453680329284-9t4ic7kq6krkfgqnabl6tsnak2r63ldq.apps.googleusercontent.com" render={(renderProps) =>
+             <Button fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">Google Sign In</Button> 
+          }
+          onSuccess={googleSuccess}
+          onFailure={googleFailure}
+          cookiePolicy="single_host_origin" />
         </div>
         <Box mt={8}>
           <Copyright />
