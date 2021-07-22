@@ -3,8 +3,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -52,7 +50,7 @@ export default function Auth({ type,setToken }) {
     email:'',userName:'',password:''
   });
 
-  
+  const [error, setError] = useState('');  
 
   const handleClick = async (e) => {
     
@@ -64,7 +62,6 @@ export default function Auth({ type,setToken }) {
               setToken(token);
               localStorage.setItem("tok",JSON.stringify(token));
     }
-
     else {
       dispatch(SignUpUser(userData,history));
       console.log(userData) 
@@ -139,10 +136,7 @@ export default function Auth({ type,setToken }) {
               type="password"
               id="password"
             />
-            {type === "SignIn" ? <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            /> : null}
+            <p>{value}</p>
             <Button
               fullWidth
               variant="contained"
@@ -150,7 +144,7 @@ export default function Auth({ type,setToken }) {
               className={classes.submit}
               onClick={handleClick}
             >
-              Submit
+              {type === "SignIn"? "Sign In to Bingo" : "Sign Up on Bingo"}
             </Button>
             <Grid container>
               {type === "SignIn" ? <Grid item xs>

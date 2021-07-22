@@ -1,14 +1,18 @@
-import react from "react";
+import React,{ useEffect } from "react";
+import { useHistory } from 'react-router-dom';
 
 function Home({token}) {
-console.log(token)
-   if(token)
-   {
-       return(<h1>Hello</h1>)
-   }
-
-   else
-   return(<h1>SignIn</h1>)
+    const history = useHistory();
+   useEffect(() => {
+       if(!token)
+        history.push('SignIn');
+   });
+   
+   return(
+       <>
+      {token && <h1>Hello</h1>}
+      </>
+   );
 }
 
 export default Home;
