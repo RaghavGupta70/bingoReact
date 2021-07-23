@@ -58,14 +58,16 @@ export const googleSignIn = async(req,res) => {
      try {
         const existingUser = await Auth.findOne({email});
         if(existingUser) {
-          const confirmPassword = await bcrypt.compare(password,existingUser.password);  
+          const changedPassword = password+"bingoSecretKey"; 
+          const confirmPassword = await bcrypt.compare(changedPassword,existingUser.password);  
           if(!confirmPassword) return res.status(400).json({message:'Incorrect credentials'});
 
           const token = jwt.sign({email,time:existingUser.time},"bingoSecretKey",{expiresIn:'1h'});  
           res.status(201).json({result:existingUser,token});
         }   
         else{
-           const hashedPassword = await bcrypt.hash(password,12);
+           const changedPassword = password+"bingoSecretKey"; 
+           const hashedPassword = await bcrypt.hash(changedPassword,12);
         
            const result = await Auth.create({userName,email,password:hashedPassword,time:new Date()});
            const token = jwt.sign({email:result.email,time:result.time},"bingoSecretKey",{expiresIn:'1h'});

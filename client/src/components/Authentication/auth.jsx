@@ -56,6 +56,12 @@ export default function Auth({ type,setToken }) {
     
     if (type === "SignIn") 
     {
+      if(userData.email.trim()==='' || userData.password.trim() ===''){
+        setError('Please fill all the required fields!')
+        return;
+     }
+      if(!checkFields())
+        return;
       dispatch(SignInUser(userData,history));
       const token = await loginUser(userData);
       console.log(token)
@@ -63,10 +69,24 @@ export default function Auth({ type,setToken }) {
               localStorage.setItem("tok",JSON.stringify(token));
     }
     else {
+      if(userData.email.trim()===''|| userData.userName.trim()===''|| userData.password.trim() ===''){
+         setError('Please fill all the required fields!')
+         return;
+      }
+       if(!checkFields())
+        return;
       dispatch(SignUpUser(userData,history));
       console.log(userData) 
     }
 }
+
+  const checkFields = () => {
+     if(!userData.email.includes('@')){
+       setError("Email must include @ symbol!");
+       return false;
+     }
+     return true;
+  }
 
   const handleChange = (e) => {
      var {name,value} = e.target;
@@ -136,7 +156,7 @@ export default function Auth({ type,setToken }) {
               type="password"
               id="password"
             />
-            <p>{value}</p>
+            <p>{error}</p>
             <Button
               fullWidth
               variant="contained"
