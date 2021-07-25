@@ -3,7 +3,6 @@ import jwt from 'jsonwebtoken';
 import Auth from '../models/auth.js';
 import { OAuth2Client } from 'google-auth-library';
 
-const client = new OAuth2Client("453680329284-9t4ic7kq6krkfgqnabl6tsnak2r63ldq.apps.googleusercontent.com");
 
 export const getUsers = async(req,res) => {
    try {
@@ -21,8 +20,9 @@ export const signUp = async(req,res) => {
 
        if(existingUser) 
           return res.status(404).json({message:'User already exists'});
-
-       const hashedPassword = await bcrypt.hash(password,12);
+       
+       const changedPassword = password+"bingoSecretKey";   
+       const hashedPassword = await bcrypt.hash(changedPassword,12);
         
        const result = await Auth.create({userName,email,password:hashedPassword,time:new Date()});
        const token = jwt.sign({email:result.email,time:result.time},"bingoSecretKey",{expiresIn:'1h'});
@@ -41,7 +41,8 @@ export const signIn = async(req,res) => {
        if(!existingUser)
           return res.status(404).json({message:'User not exists'});
 
-          const confirmPassword = await bcrypt.compare(password,existingUser.password);
+          const changedPassword = password+"bingoSecretKey";
+          const confirmPassword = await bcrypt.compare(changedPassword,existingUser.password);
           if(!confirmPassword) return res.status(400).json({message:'Incorrect credentials'});
        
        const token = jwt.sign({email,time:existingUser.time},"bingoSecretKey",{expiresIn:'1h'});
