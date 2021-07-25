@@ -62,7 +62,7 @@ export default function Auth({ type,setToken }) {
      }
       if(!checkFields())
         return;
-      dispatch(SignInUser(userData,history));
+      const res = dispatch(SignInUser(userData,history));
       const token = await loginUser(userData);
       console.log(token)
               setToken(token);
