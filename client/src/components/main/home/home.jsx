@@ -1,5 +1,6 @@
 import React,{ useEffect } from "react";
 import { useHistory } from 'react-router-dom';
+import BingoGrid from '../../BingoGame/bingoGrid'; 
 
 function Home({token}) {
     const history = useHistory();
@@ -10,7 +11,7 @@ function Home({token}) {
    
    return(
        <>
-      {token && <h1>Hello</h1>}
+      {token && <BingoGrid />}
       </>
    );
 }
