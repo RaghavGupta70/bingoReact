@@ -1,4 +1,4 @@
-import react, { useState } from "react"
+import react, { useEffect, useState } from "react"
 import { Container, Grid } from "@material-ui/core";
 import GridLayout from 'react-grid-layout';
 import { FaSlash } from 'react-icons/fa';
@@ -8,14 +8,30 @@ const BingoGrid = () => {
     var arr = [];
 
     const [styleToggle, setStyleToggle] = useState([]);
+    const [shuffle,setShuffle] = useState(false);
+
     for (var i = 1; i <= 25; i++) {
         styleToggle.push(false);
     }
-    // return(
-    //     <Grid container>
-    //        { arr.map((row,index) => (<Grid key={index} item xs={20%}>{row}</Grid>))}
-    //     </Grid>
-    // )
+
+    var bingoNum = [];
+    for(var h=0;h<25;h++){
+        bingoNum.push(h+1);
+    }
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
+    if(!shuffle){
+        setShuffle(true);
+        shuffleArray(bingoNum);
+        console.log(bingoNum);
+    } 
+
     var obj = {
         i: "",
         x: 0,
@@ -25,11 +41,8 @@ const BingoGrid = () => {
     }
 
     for (var t = 0; t < 25; t++) {
-
-        var r = i;
-        
         obj = {
-            i: (t + 1).toString(),
+            i: (bingoNum[t]).toString(),
             x: (t) % 5,
             y: 0,
             w: 1,
@@ -39,7 +52,7 @@ const BingoGrid = () => {
     }
     
     return (
-        <GridLayout layout={arr} cols={12} colHeight={20} rowHeight={30} width={500} isDraggable={false} style={{backgroundColor: "rgb(247,203,45)",width: "15%", margin: "auto"}}>
+        <GridLayout layout={arr} cols={12} colHeight={20} rowHeight={30} width={500} isDraggable={false} style={{backgroundColor: "rgb(247,203,45)",width: "17%", margin: "auto"}}>
             {arr.map((ar, index) => (<div style={{ display: "flex", justifyContent: "center",border: "1px solid black",alignItems: "center", borderRadius: "4px",margin: "auto"  }} key={ar.i}
                 onClick={(e) => {
                     var newArr = [];
