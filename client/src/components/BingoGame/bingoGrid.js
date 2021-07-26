@@ -26,6 +26,8 @@ const BingoGrid = () => {
 
     for (var t = 0; t < 25; t++) {
 
+        var r = i;
+        
         obj = {
             i: (t + 1).toString(),
             x: (t) % 5,
@@ -37,8 +39,8 @@ const BingoGrid = () => {
     }
     
     return (
-        <GridLayout className="layout" layout={arr} cols={12} colHeight={20} rowHeight={30} width={500} isDraggable={false}>
-            {arr.map((ar, index) => (<div style={{ display: "flex", justifyContent: "center" }} key={ar.i}
+        <GridLayout layout={arr} cols={12} colHeight={20} rowHeight={30} width={500} isDraggable={false} style={{backgroundColor: "rgb(247,203,45)",width: "15%", margin: "auto"}}>
+            {arr.map((ar, index) => (<div style={{ display: "flex", justifyContent: "center",border: "1px solid black",alignItems: "center", borderRadius: "4px",margin: "auto"  }} key={ar.i}
                 onClick={(e) => {
                     var newArr = [];
                     for (var p = 0; p < 25; p++) {
