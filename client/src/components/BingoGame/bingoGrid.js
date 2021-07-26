@@ -35,25 +35,9 @@ const BingoGrid = () => {
         }
         arr[t] = obj;
     }
-    // const layout = [
-    //     {i: 'a', x: 0, y: 0, w: 1, h: 1},
-    //     {i: 'b', x: 1, y: 0, w: 1, h: 1},
-    //     {i: 'c', x: 0, y: 0, w: 1, h: 1},
-    //     {i: 'd', x: 1, y: 0, w: 1, h: 1},
-    //     {i: 'e', x: 0, y: 0, w: 1, h: 1},
-    //     {i: 'f', x: 1, y: 0, w: 1, h: 1},
-
-    //   ];
-
-    // arr[7]={i:"abc",x:1,y:1,w:1,h:1};
+    
     return (
         <GridLayout className="layout" layout={arr} cols={12} colHeight={20} rowHeight={30} width={500} isDraggable={false}>
-            {/* <div key="a">a</div>
-        <div key="b">b</div>
-        <div key="c">c</div>
-        <div key="d">d</div>
-        <div key="e">e</div>
-        <div key="f">f</div> */}
             {arr.map((ar, index) => (<div style={{ display: "flex", justifyContent: "center" }} key={ar.i}
                 onClick={(e) => {
                     var newArr = [];
