@@ -22,7 +22,7 @@ function Home({token}) {
    }
 
    function generator() {
-     const num = Math.floor(Math.random() * 26);
+     const num = Math.floor((Math.random() * 25)+1);
      return num;
    }
    
