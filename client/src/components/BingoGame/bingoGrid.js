@@ -29,7 +29,7 @@ const BingoGrid = () => {
     if(!shuffle){
         setShuffle(true);
         shuffleArray(bingoNum);
-        console.log(bingoNum);
+        console.log('here')
     } 
 
     var obj = {
