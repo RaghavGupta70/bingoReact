@@ -26,12 +26,6 @@ const BingoGrid = () => {
         }
     }
 
-    if(!shuffle){
-        setShuffle(true);
-        shuffleArray(bingoNum);
-        console.log('here')
-    } 
-
     var obj = {
         i: "",
         x: 0,
@@ -40,7 +34,7 @@ const BingoGrid = () => {
         h: 2,
     }
 
-    for (var t = 0; t < 25; t++) {
+    for (var t = 0; t < 25; t++) { 
         obj = {
             i: (bingoNum[t]).toString(),
             x: (t) % 5,
