@@ -21,12 +21,8 @@ const BingoGrid = ({arrNum,shuffleArr,generate}) => {
             shuffleArr(arrNum);
             console.log('here')
         }
-<<<<<<< HEAD
-    }
-=======
    
     // console.log(bingoNum)
->>>>>>> ef718f5f180bdbf1c16db30fdaf362ab94ca387c
 
     var obj = {
         i: "",
@@ -46,14 +42,17 @@ const BingoGrid = ({arrNum,shuffleArr,generate}) => {
         }
         arr[t] = obj;
     }
-    generate
-    
+    const num = generate();
     return (
         <div>
-            <NumberSelector />
+            <NumberSelector num={num} />
         <GridLayout layout={arr} cols={12} colHeight={20} rowHeight={30} width={500} isDraggable={false} style={{backgroundColor: "rgb(247,203,45)",width: "17%", margin: "auto"}}>
             {arr.map((ar, index) => (<div style={{ display: "flex", justifyContent: "center",border: "1px solid black",alignItems: "center", borderRadius: "4px",margin: "auto"  }} key={ar.i}
                 onClick={(e) => {
+                    if(ar.i !== num.toString()){
+                        console.log("Error")
+                        return;
+                    }
                     var newArr = [];
                     for (var p = 0; p < 25; p++) {
                         if(styleToggle[p])
@@ -68,6 +67,7 @@ const BingoGrid = ({arrNum,shuffleArr,generate}) => {
                     setStyleToggle(newArr);
                 }} >
                 {ar.i}<FaSlash style={{ position: "absolute", left: "7px", fontSize: "18px", visibility: styleToggle[index] ? "visible" : "hidden" }} />
+                
                 </div>))}
 
         </GridLayout>

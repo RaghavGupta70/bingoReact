@@ -21,8 +21,9 @@ function Home({token}) {
        }
    }
 
-   function generator(num) {
-    num = Math.floor(Math.random() * 26);
+   function generator() {
+     const num = Math.floor(Math.random() * 26);
+     return num;
    }
    
    return(

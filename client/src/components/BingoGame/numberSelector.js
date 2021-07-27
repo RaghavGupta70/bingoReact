@@ -1,14 +1,9 @@
 import react,{useState} from "react";
 
-const NumberSelector = ({check}) => {
+const NumberSelector = ({num}) => {
 
-
-    if(check!==j)
-    {
-
-    }
     return (
-        <h1>{j}</h1>
+        <h1>{num}</h1>
     )
 
 }
