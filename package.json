@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@react-spring/web": "^9.2.4",
+    "prop-types": "^15.7.2"
+  }
+}

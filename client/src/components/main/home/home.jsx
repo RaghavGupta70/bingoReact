@@ -1,6 +1,7 @@
 import React,{ useEffect } from "react";
 import { useHistory } from 'react-router-dom';
 import BingoGrid from '../../BingoGame/bingoGrid'; 
+import CreateRoom from "../../Buttons/RoomButton/createRoom.js"
 
 function Home({token}) {
     const history = useHistory();
@@ -29,6 +30,7 @@ function Home({token}) {
    return(
        <>
       {token && <BingoGrid arrNum={bingoNum} shuffleArr={shuffleArray} generate={generator} />}
+      <CreateRoom style={{display: "flex",margin: "auto"}} />
       </>
    );
 }
