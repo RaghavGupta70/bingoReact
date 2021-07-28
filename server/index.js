@@ -3,8 +3,12 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import auth from './routes/auth.js';
+import http from 'http';
+import {Server} from 'socket.io';
 
 const app = express();
+const server = http.createServer(app);
+const io = new Server(server);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({extended: true,limit: '50mb'}));
@@ -32,6 +36,6 @@ app.get("/", (req, res) => {
     res.send("Hello Sucker")
 });
 
-app.listen(5000, (req,res) => {
+server.listen(5000, (req,res) => {
     console.log("Port successfully connected")
 });

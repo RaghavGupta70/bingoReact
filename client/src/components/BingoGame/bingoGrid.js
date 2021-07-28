@@ -65,7 +65,7 @@ const BingoGrid = ({arrNum,shuffleArr,generate}) => {
                     }
                     console.log(ar)
                     setStyleToggle(newArr);
-                }} >
+                }}>
                 {ar.i}<FaSlash style={{ position: "absolute", left: "7px", fontSize: "18px", visibility: styleToggle[index] ? "visible" : "hidden" }} />
                 
                 </div>))}
