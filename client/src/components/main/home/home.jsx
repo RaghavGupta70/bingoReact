@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Socket } from "socket.io-client";
 import BingoGrid from '../../BingoGame/bingoGrid'; 
 import CreateRoom from "../../Buttons/RoomButton/createRoom.js"
+import Logout from "../../Buttons/LogOut/Logout.js";
 import { io } from "socket.io-client";
 
 let socket;
@@ -35,6 +36,7 @@ function Home({token}) {
        <>
       {token && <BingoGrid arrNum={bingoNum} shuffleArr={shuffleArray} generate={generator} />}
       <CreateRoom style={{display: "flex",margin: "auto"}} />
+      <Logout />
       </>
    );
 }
