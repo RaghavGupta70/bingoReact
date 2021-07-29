@@ -1,13 +1,17 @@
 import React,{ useEffect } from "react";
 import { useHistory } from 'react-router-dom';
+import { Socket } from "socket.io-client";
 import BingoGrid from '../../BingoGame/bingoGrid'; 
 import CreateRoom from "../../Buttons/RoomButton/createRoom.js"
+import { io } from "socket.io-client";
 
+let socket;
 function Home({token}) {
     const history = useHistory();
    useEffect(() => {
-       if(!token)
+       if(!token){
         history.push('SignIn');
+       } 
    });
 
    var bingoNum = [];

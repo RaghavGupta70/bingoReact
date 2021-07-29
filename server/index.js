@@ -8,17 +8,29 @@ import {Server} from 'socket.io';
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({extended: true,limit: '50mb'}));
 app.use(cors());
+const corsOptions={
+    cors: true,
+    origins:["http://localhost:5000"],
+}
+
+const io = new Server(server,corsOptions);
 
 app.use('/auth',auth);
 
 app.use("/SignIn", (req,res) =>
 {
     res.send({tok: "session_token"});
+})
+
+io.on('connection',(socket) => {
+    console.log('User has connected with socket.io');
+    io.on('disconnect', () => {
+        console.log('User disconnected');
+    });
 })
 
 const mongoUrl = "mongodb+srv://sukhanDeo:Raghav@70@cluster0.4pnog.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";

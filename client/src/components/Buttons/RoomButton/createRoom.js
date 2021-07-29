@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import { io } from "socket.io-client";
 
+let socket;
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',
@@ -21,8 +23,14 @@ const useStyles = makeStyles((theme) => ({
 export default function CreateRoom({type}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const ENDPOINT = 'localhost:5000';
 
-  const handleOpen = () => {
+  useEffect(() => {
+    socket = io(ENDPOINT);
+  },[ENDPOINT]);
+
+  const handleOpen = (e) => {
+    e.preventDefault();
     setOpen(true);
   };
 
@@ -50,11 +58,11 @@ export default function CreateRoom({type}) {
         <Fade in={open}>
           <div className={classes.paper} style={{display: "block",justifyContent: "center"}}>
          <div ><h2 id="transition-modal-title">Create a Room</h2>
-            <input type="number" id="transition-modal-description" placeholder="Room ID" />
+            <input id="transition-modal-description" placeholder="Room ID" />
             </div>
             <div>
             <h2 id="transition-modal-title">Enter a Room</h2>
-            <input type="number" id="transition-modal-description" placeholder="Room ID" />
+            <input id="transition-modal-description" placeholder="Room ID" />
             </div> 
           </div>
         </Fade>

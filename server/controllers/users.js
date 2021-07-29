@@ -27,8 +27,9 @@ export const joinRoom = ({roomId,userName}) => {
        if(rooms.roomId === validRoom.roomId)
         c++;
     }
-    if(c>4)
-     return {error:'Not Allowed u noob'};
+
+    if(c === 4)
+     return {error:'Room is already full'};
 
     const newRoom = {roomId,userName};
     return { newRoom };
