@@ -16,7 +16,7 @@ const BingoGrid = ({arrNum,shuffleArr,generate}) => {
     }
 
     useEffect(() => {
-        if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {           
+        if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {           
            setShuffle(false);
         }
     },[]);
