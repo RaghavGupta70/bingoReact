@@ -28,10 +28,11 @@ app.use("/SignIn", (req,res) =>
 
 io.on('connection',(socket) => {
     console.log('User has connected with socket.io');
-    io.on('disconnect', () => {
+
+    socket.on('disconnect', () => {
         console.log('User disconnected');
     });
-})
+});
 
 const mongoUrl = "mongodb+srv://sukhanDeo:Raghav@70@cluster0.4pnog.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 

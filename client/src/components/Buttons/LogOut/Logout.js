@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
-import {LOGOUT } from "../../../constants/actionTypes"
+import {LOGOUT } from "../../../constants/actionTypes";
 
 
 export default function LogoutButton() {
