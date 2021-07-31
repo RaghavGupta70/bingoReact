@@ -13,10 +13,11 @@ export const createRoom = (userName) => {
     if(existingRoom) return {error:'Try again! You have some connectivity issue LOL:)'};
     
     const newRoom = {roomId,userName};
+    rooms.push(newRoom);
     return { newRoom };
 }
 
-export const joinRoom = ({roomId,userName}) => {
+export const joinRoom = (roomId,userName) => {
     if(!roomId) return {error: 'Enter Room Id!'};
 
     const validRoom = rooms.find((room) => room.roomId === roomId);

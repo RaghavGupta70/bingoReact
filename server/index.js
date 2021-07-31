@@ -44,16 +44,17 @@ io.on('connection',(socket) => {
         console.log(newRoom.roomId)
     })
 
-    socket.on('join',({roomId,userName} ,callback) => {
+    socket.on('join',(roomId,userName,callback) => {
 
-        const {error,newRoom} = room.joinRoom({roomId,userName});
+        console.log(userName);
+        const {error,newRoom} = room.joinRoom(roomId,userName);
         // console.log(userName)
         console.log(newRoom)
-        if(error) return callback(error);
+        if(error) return console.log(error);
 
         socket.join(newRoom.roomId);
         socket.emit('room',(newRoom.roomId), (error) => {
-            console.log(error)
+            console.log(error);
         })
         console.log(newRoom.roomId)
     })
