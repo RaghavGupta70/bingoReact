@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import auth from './routes/auth.js';
 import http from 'http';
 import {Server} from 'socket.io';
+import * as room from './controllers/users.js';
 
 const app = express();
 const server = http.createServer(app);
@@ -28,6 +29,34 @@ app.use("/SignIn", (req,res) =>
 
 io.on('connection',(socket) => {
     console.log('User has connected with socket.io');
+
+    socket.on('create',(userName ,callback) => {
+
+        const {error,newRoom} = room.createRoom(userName);
+        console.log(userName)
+        console.log(newRoom)
+        if(error) return callback(error);
+
+        socket.join(newRoom.roomId);
+        socket.emit('room',(newRoom.roomId), (error) => {
+            console.log(error)
+        })
+        console.log(newRoom.roomId)
+    })
+
+    socket.on('join',({roomId,userName} ,callback) => {
+
+        const {error,newRoom} = room.joinRoom({roomId,userName});
+        // console.log(userName)
+        console.log(newRoom)
+        if(error) return callback(error);
+
+        socket.join(newRoom.roomId);
+        socket.emit('room',(newRoom.roomId), (error) => {
+            console.log(error)
+        })
+        console.log(newRoom.roomId)
+    })
 
     socket.on('disconnect', () => {
         console.log('User disconnected');

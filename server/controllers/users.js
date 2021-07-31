@@ -10,7 +10,7 @@ export const createRoom = (userName) => {
     var roomId = randomString(11, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
 
     const existingRoom = rooms.find((room) => room.roomId === roomId);
-    if(existingRoom) return {error:'Try again! You have some connectivity issue LOL'};
+    if(existingRoom) return {error:'Try again! You have some connectivity issue LOL:)'};
     
     const newRoom = {roomId,userName};
     return { newRoom };
