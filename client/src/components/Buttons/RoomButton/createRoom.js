@@ -63,8 +63,13 @@ export default function CreateRoom({type}) {
     e.preventDefault();
     const v =JSON.parse(localStorage.getItem('user'));
     const value = v.result.userName;
+<<<<<<< HEAD
     
     socket.emit('join',{ID,value},(error) => {
+=======
+
+    socket.emit('join',(ID,value),(error) => {
+>>>>>>> 8cdc0e8ec05c3506a897fb7e33a164d573168c16
       alert("You joined Lodu")
       console.log(error)
     })
