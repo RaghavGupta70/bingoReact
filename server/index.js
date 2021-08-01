@@ -33,8 +33,8 @@ io.on('connection',(socket) => {
     socket.on('create',(userName ,callback) => {
 
         const {error,newRoom} = room.createRoom(userName);
-        console.log(userName)
-        console.log(newRoom)
+        // console.log(userName)
+        // console.log(newRoom)
         if(error) return callback(error);
 
         socket.join(newRoom.roomId);

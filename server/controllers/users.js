@@ -7,13 +7,14 @@ function randomString(length, chars) {
 }
 
 export const createRoom = (userName) => {
-    var roomId = randomString(11, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+    var id = randomString(11, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
 
-    const existingRoom = Rooms.findOne({roomId});
-    if(existingRoom) return {error:'Try again! You have some connectivity issue LOL:)'};
+    const existingRoom = Rooms.findOne({roomId:id});
+    console.log(existingRoom);
+    if(existingRoom.roomId) return {error:'Try again! You have some connectivity issue LOL:)'};
     
     const users = [{name:userName}];
-    const newRoom = new Room({roomId,users});
+    const newRoom = new Rooms({roomId:id,users});
     newRoom.save();
     return { newRoom };
 }
