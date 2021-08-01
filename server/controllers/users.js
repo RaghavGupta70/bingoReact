@@ -9,21 +9,30 @@ function randomString(length, chars) {
 export const createRoom = (userName) => {
     var id = randomString(11, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
 
-    const existingRoom = Rooms.findOne({roomId:id});
+    const existingRoom = Rooms.findOne({ roomId: id });
     console.log(existingRoom);
-    if(existingRoom.roomId) return {error:'Try again! You have some connectivity issue LOL:)'};
-    
-    const users = [{name:userName}];
-    const newRoom = new Rooms({roomId:id,users});
+    if (existingRoom.roomId) return { error: 'Try again! You have some connectivity issue LOL:)' };
+
+    const users = [{ name: userName }];
+    const newRoom = new Rooms({ roomId: id, users });
     newRoom.save();
     return { newRoom };
 }
 
-export const joinRoom = (roomId,userName) => {
-    if(!roomId) return {error: 'Enter Room Id!'};
+export const joinRoom = (Id, userName) => {
+    if (!Id) return { error: 'Enter Room Id!' };
 
-    const validRoom = Rooms.findOne({roomId});
-    if(!validRoom) return {error: 'Given Room Id doesn\'t exists'};
+    var validRoom = Rooms.findOne({ roomId: Id }, (err, roomNo) => {
+        if (err) return console.log(err);
+        else {
+            console.log(roomNo);
+            if (!roomNo) return { error: 'Given Room Id doesn\'t exists' };
+            const object = { name: userName }
+
+            Rooms.update({ roomId: roomNo._id }, { $push: { users: object } });
+        }
+    });
+    return {error:'',roomNo:{roomId:Id}};
     // var c=0;
 
     // for(var i=0;i<validRoom.users.length;i++){
@@ -33,7 +42,4 @@ export const joinRoom = (roomId,userName) => {
 
     // if(c === 4)
     //  return {error:'Room is already full'};
-
-    Rooms.findByIdAndUpdate(validRoom._id,{users:[...{name:userName}]});
-    return { newRoom };
 }
