@@ -22,13 +22,14 @@ export const createRoom = (userName) => {
 export const joinRoom = async(Id, userName) => {
     if (!Id) return { error: 'Enter Room Id!' };
 
-    var validRoom = await Rooms.findOne({ roomId: Id }, (err, roomNo) => {
+    var validRoom = await Rooms.findOne({ roomId: Id }, async(err, roomNo) => {
         if (err) return console.log(err);
         else {
             if (!roomNo) return { error: 'Given Room Id doesn\'t exists',roomNo:{roomId:null} };
             const object = { name: userName }
 
-            Rooms.update({ roomId: roomNo._id }, { $push: { users: object } });
+            console.log('Hello');
+            await Rooms.update({ roomId: roomNo._id }, { $push: { users: object } });
         }
     }).exec();
     console.log(validRoom);
