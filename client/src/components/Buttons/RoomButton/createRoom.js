@@ -64,8 +64,9 @@ export default function CreateRoom({type}) {
     const v =JSON.parse(localStorage.getItem('user'));
     const value = v.result.userName;
 
+    console.log(ID)
     
-    socket.emit('join',(ID,value),(error) => {
+    socket.emit('join',(ID),(value),(error) => {
       alert("You joined Lodu")
       console.log(error)
     })
@@ -103,7 +104,7 @@ export default function CreateRoom({type}) {
             </div>
             <div>
             <h2 id="transition-modal-title">Enter a Room</h2>
-            <input id="transition-modal-description" placeholder="Room ID" value={ID} onChange={(e) => {e.preventDefault(); setID(e.target.value)}}/>
+            <input id="transition-modal-description" placeholder="Room ID" value={ID} onChange={(e) => {setID(e.target.value); console.log(ID)}}/>
             <button id="transition-modal-description" onClick={handleClick2}>Join Room</button>
             </div> 
           </div>

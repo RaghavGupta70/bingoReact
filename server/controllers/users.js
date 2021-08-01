@@ -19,11 +19,11 @@ export const createRoom = (userName) => {
     return { newRoom };
 }
 
-export const joinRoom = (roomId,userName) => {
-    if(!roomId) return {error: 'Enter Room Id!'};
-    console.log(rooms)
+export const joinRoom = (Id,userName) => {
+    if(!Id) return {error: 'Enter Room Id!'};
+    // console.log(rooms)
 
-    const validRoom = Rooms.findOne({roomId});
+    const validRoom = Rooms.find({roomId:Id}).limit(1);
     if(!validRoom) return {error: 'Given Room Id doesn\'t exists'};
     // var c=0;
 
@@ -34,7 +34,9 @@ export const joinRoom = (roomId,userName) => {
 
     // if(c === 4)
     //  return {error:'Room is already full'};
+    const object = {name: userName}
 
-    Rooms.findByIdAndUpdate(validRoom._id,{users:[...{name:userName}]});
-    return { newRoom };
+    Rooms.update({roomId:validRoom._id},{$push:{users:object}});
+    console.log(validRoom)
+    return {validRoom };
 }

@@ -8,6 +8,6 @@ const roomSchema = mongoose.Schema({
     users:[{name:String}]
 });
 
-const Rooms = mongoose.model('Rooms',roomSchema);
+const rooms = mongoose.model('rooms',roomSchema);
 
-export default Rooms;
+export default rooms;
