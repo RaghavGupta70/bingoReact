@@ -29,7 +29,7 @@ export const joinRoom = async(Id, userName) => {
             const object = { name: userName }
 
             console.log('Hello');
-            await Rooms.update({ roomId: roomNo._id }, { $push: { users: object } });
+            await Rooms.findOneAndUpdate({ roomId: roomNo.roomId }, { $push: { users: object } });
         }
     }).exec();
     console.log(validRoom);
