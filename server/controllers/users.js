@@ -19,6 +19,7 @@ export const createRoom = (userName) => {
 
 export const joinRoom = (roomId,userName) => {
     if(!roomId) return {error: 'Enter Room Id!'};
+    console.log(rooms)
 
     const validRoom = Rooms.findOne({roomId});
     if(!validRoom) return {error: 'Given Room Id doesn\'t exists'};
