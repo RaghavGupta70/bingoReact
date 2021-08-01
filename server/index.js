@@ -44,15 +44,19 @@ io.on('connection',(socket) => {
         console.log(newRoom.roomId)
     })
 
-    socket.on('join',(Id,userName,callback) => {
-        const {error,roomNo} = room.joinRoom(Id,userName);
+    socket.on('join',async(Id,userName,callback) =>{
+        const {error,roomNo} = await room.joinRoom(Id,userName);
 
         if(error) return console.log(error);
 
+        console.log('room',roomNo);
+
+        if(roomNo){
         socket.join(roomNo.roomId);
         socket.emit('room',(roomNo.roomId), (error) => {
             console.log(error);
         })
+       }
     })
 
     socket.on('disconnect', () => {

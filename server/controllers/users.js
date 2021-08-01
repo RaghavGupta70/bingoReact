@@ -19,19 +19,19 @@ export const createRoom = (userName) => {
     return { newRoom };
 }
 
-export const joinRoom = (Id, userName) => {
+export const joinRoom = async(Id, userName) => {
     if (!Id) return { error: 'Enter Room Id!' };
 
-    var validRoom = Rooms.findOne({ roomId: Id }, (err, roomNo) => {
+    var validRoom = await Rooms.findOne({ roomId: Id }, (err, roomNo) => {
         if (err) return console.log(err);
         else {
-            console.log(roomNo);
-            if (!roomNo) return { error: 'Given Room Id doesn\'t exists' };
+            if (!roomNo) return { error: 'Given Room Id doesn\'t exists',roomNo:{roomId:null} };
             const object = { name: userName }
 
             Rooms.update({ roomId: roomNo._id }, { $push: { users: object } });
         }
-    });
+    }).exec();
+    console.log(validRoom);
     return {error:'',roomNo:{roomId:Id}};
     // var c=0;
 
