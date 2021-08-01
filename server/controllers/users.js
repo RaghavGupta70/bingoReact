@@ -12,7 +12,8 @@ export const createRoom = (userName) => {
     const existingRoom = Rooms.findOne({roomId});
     if(existingRoom) return {error:'Try again! You have some connectivity issue LOL:)'};
     
-    const newRoom = {roomId,userName};
+    const users = [{name:userName}];
+    const newRoom = new Room({roomId,users});
     newRoom.save();
     return { newRoom };
 }
