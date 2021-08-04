@@ -1,22 +1,26 @@
 import { makeStyles } from '@material-ui/core/styles';
-import background from "../../../src/background.png";
+import background from "../../../src/images/bingo_bg.png";
 
 const useStyles = makeStyles((theme) => ({
     root : {
         backgroundImage: `url(${background})`,
-        height: "100vh",
+        backgroundSize:'auto',
+        backgroundRepeat:'no-repeat',
+        paddingTop:'2.5rem',
+        paddingBottom:'1rem'
     },
     paper: {
-      
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      border: "5px solid-black", 
       backgroundColor: "white",
-      padding: "10px",
-      marginTop: "10px",
-      marginBottom: "10px",
-      
+      backgroundImage: 'url("https://www.transparenttextures.com/patterns/asfalt-dark.png")',
+      padding: "22px",
+      borderRadius:'6px',
+    },
+    error:{
+      color:'red',
+      fontWeight:'700'
     },
     avatar: {
       margin: theme.spacing(1),
@@ -28,10 +32,29 @@ const useStyles = makeStyles((theme) => ({
     },
     submit: {
       margin: theme.spacing(3, 0, 2),
+      borderRadius:'6px',
+      backgroundColor:'#673ab7',
+      color:'white',
+      '&:hover':{
+        backgroundColor:'#ec407a'
+      }
     },
     link: {
-      justifyContent: 'center',
-      alignItems: "center"
+      color:'#f50057',
+      marginBottom:'4px',
+      '&:hover':{
+         color:'#673ab7',
+         textDecoration:'none'
+      }
+    },
+    google:{
+      backgroundColor:'red',
+      color:'white',
+      borderRadius:'6px',
+      border:'2px solid black',
+      '&:hover':{
+        backgroundColor:'#d50000'
+      }
     }
   }));
 

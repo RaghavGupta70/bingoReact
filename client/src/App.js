@@ -14,10 +14,6 @@ const App = () => {
   const [token, setToken] = useState(JSON.parse(localStorage.getItem("tok")));
   let location = useLocation();
 
-  useEffect(() => {
-      history.push("/Home");
-  },[])
-
     return (
         <Switch>
             <Route path="/SignIn"><Auth type={"SignIn"} setToken={setToken} /></Route>

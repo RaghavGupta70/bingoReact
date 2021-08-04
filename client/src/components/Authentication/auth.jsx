@@ -12,18 +12,18 @@ import Container from '@material-ui/core/Container';
 import useStyles from "./styles.js";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import { SignUpUser,SignInUser,GoogleSignIn } from '../../actions/index.js';
+import { SignUpUser, SignInUser, GoogleSignIn } from '../../actions/index.js';
 import PropTypes from "prop-types";
 import { GoogleLogin } from 'react-google-login';
 import Icon from './icon.jsx';
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <p variant="body2" style={{color:'white',fontSize:'0.8rem'}} align="center">
       {'Copyright © '}
       {new Date().getFullYear()}
       {'.'}
-    </Typography>
+    </p>
   );
 }
 
@@ -37,75 +37,76 @@ async function loginUser(credentials) {
       "name": "Raghav"
     })
   })
-    .then(data => {const r = data.json()
-    console.log(r)
-  return r})
- }
+    .then(data => {
+      const r = data.json()
+      console.log(r)
+      return r
+    })
+}
 
-export default function Auth({ type,setToken }) {
+export default function Auth({ type, setToken }) {
   const classes = useStyles();
   const history = useHistory();
   const dispatch = useDispatch();
-  const [userData,setUserData] = useState({
-    email:'',userName:'',password:''
+  const [userData, setUserData] = useState({
+    email: '', userName: '', password: ''
   });
 
-  const [error, setError] = useState('');  
+  const [error, setError] = useState('');
 
   const handleClick = async (e) => {
-    
-    if (type === "SignIn") 
-    {
-      if(userData.email.trim()==='' || userData.password.trim() ===''){
+
+    if (type === "SignIn") {
+      if (userData.email.trim() === '' || userData.password.trim() === '') {
         setError('Please fill all the required fields!')
         return;
-     }
-      if(!checkFields())
+      }
+      if (!checkFields())
         return;
-      const res = dispatch(SignInUser(userData,history));
+      const res = dispatch(SignInUser(userData, history));
       const token = await loginUser(userData);
       console.log(token)
-              setToken(token);
-              localStorage.setItem("tok",JSON.stringify(token));
+      setToken(token);
+      localStorage.setItem("tok", JSON.stringify(token));
     }
     else {
-      if(userData.email.trim()===''|| userData.userName.trim()===''|| userData.password.trim() ===''){
-         setError('Please fill all the required fields!')
-         return;
-      }
-       if(!checkFields())
+      if (userData.email.trim() === '' || userData.userName.trim() === '' || userData.password.trim() === '') {
+        setError('Please fill all the required fields!')
         return;
-      dispatch(SignUpUser(userData,history));
-      console.log(userData) 
+      }
+      if (!checkFields())
+        return;
+      dispatch(SignUpUser(userData, history));
+      console.log(userData)
     }
-}
+  }
 
   const checkFields = () => {
-     if(!userData.email.includes('@')){
-       setError("Email must include @ symbol!");
-       return false;
-     }
-     return true;
+    if (!userData.email.includes('@')) {
+      setError("Email must include @ symbol!");
+      return false;
+    }
+    return true;
   }
 
   const handleChange = (e) => {
-     var {name,value} = e.target;
-     setUserData(prevVal =>{
-         return {...prevVal,[name]:value};
-     });
+    var { name, value } = e.target;
+    setUserData(prevVal => {
+      return { ...prevVal, [name]: value };
+    });
   }
 
-  const googleSuccess = async(res) => {
-     const result = res?.profileObj;
-     dispatch(GoogleSignIn(result,history));
-     const token = await loginUser(userData);
-      console.log(token)
-              setToken(token);
-              localStorage.setItem("tok",JSON.stringify(token));
+  const googleSuccess = async (res) => {
+    const result = res?.profileObj;
+    dispatch(GoogleSignIn(result, history));
+    const token = await loginUser(userData);
+    console.log(token)
+    setToken(token);
+    localStorage.setItem("tok", JSON.stringify(token));
   }
 
   const googleFailure = () => {
-     console.log("Error during google sign in");
+    console.log("Error during google sign in");
   }
 
 
@@ -113,7 +114,7 @@ export default function Auth({ type,setToken }) {
     <div className={classes.root}>
       <Container maxWidth="xs">
         <CssBaseline />
-        <div className={classes.paper}>
+        <div style={{padding: type==='SignUp'?'15px':'22px'}} className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
@@ -127,6 +128,7 @@ export default function Auth({ type,setToken }) {
               required
               fullWidth
               id="email"
+              color="secondary"
               value={userData.email}
               onChange={handleChange}
               label="Email Address"
@@ -138,6 +140,7 @@ export default function Auth({ type,setToken }) {
               margin="normal"
               onChange={handleChange}
               required
+              color="secondary"
               fullWidth
               value={userData.userName}
               id="userName"
@@ -150,41 +153,42 @@ export default function Auth({ type,setToken }) {
               onChange={handleChange}
               value={userData.password}
               required
+              color="secondary"
               fullWidth
               name="password"
               label="Password"
               type="password"
               id="password"
             />
-            <p>{error}</p>
+            <p className={classes.error}>{error}</p>
             <Button
               fullWidth
               variant="contained"
-              color="primary"
               className={classes.submit}
               onClick={handleClick}
             >
-              {type === "SignIn"? "Sign In to Bingo" : "Sign Up on Bingo"}
+              {type === "SignIn" ? "Sign In to Bingo" : "Sign Up on Bingo"}
             </Button>
             <Grid container>
               {type === "SignIn" ? <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="#" className={classes.link} variant="body2">
                   Forgot password?
                 </Link>
               </Grid> : null}
-              {type === "SignIn" ? <Link href="/SignUp" variant="body2">
+              {type === "SignIn" ? <Link className={classes.link} href="/SignUp" variant="body2">
                 {"Don't have an account? Sign Up"}
-              </Link> : <Link href="/SignIn" className={classes.link}>
+              </Link> : <Link href="/SignIn" style={{margin:'auto'}} className={classes.link}>
                 {"Already a User Sign In !!"}
               </Link>}
             </Grid>
           </div>
+          <p style={{color:'#673ab7',padding:'6px'}} > OR </p>
           <GoogleLogin clientId="453680329284-9t4ic7kq6krkfgqnabl6tsnak2r63ldq.apps.googleusercontent.com" render={(renderProps) =>
-             <Button fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">Google Sign In</Button> 
+            <Button className={classes.google} fullWidth onClick={renderProps.onClick} disabled={renderProps.disabled} startIcon={<Icon />} variant="contained">Google Sign In</Button>
           }
-          onSuccess={googleSuccess}
-          onFailure={googleFailure}
-          cookiePolicy="single_host_origin" />
+            onSuccess={googleSuccess}
+            onFailure={googleFailure}
+            cookiePolicy="single_host_origin" />
         </div>
         <Box mt={8}>
           <Copyright />
