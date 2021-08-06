@@ -31,8 +31,15 @@ export default function CreateRoom({type}) {
 
   useEffect(() => {
     socket = io(ENDPOINT);
+   
   },[ENDPOINT]);
 
+  useEffect(() => {
+    socket.on('message',({user,text},callback)=> {
+      console.log(user,text);
+      callback();
+    })
+  },[])
   const handleOpen = (e) => {
     e.preventDefault();
     setOpen(true);
@@ -58,10 +65,7 @@ export default function CreateRoom({type}) {
     callback();
     })
 
-    socket.on('message',({user,text},callback)=> {
-      console.log(user,text);
-      callback();
-    })
+    
   }
 
    const handleClick2 = (e) => {
