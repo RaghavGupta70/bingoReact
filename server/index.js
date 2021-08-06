@@ -56,7 +56,7 @@ io.on('connection',(socket) => {
         socket.emit('room',(roomNo.roomId), (error) => {
             console.log(error);
         })
-        socket.broadcast.to(roomNo.roomId).emit('message',  (user: userName), (text: `${userName} has joined!` ), (error) => {
+        socket.broadcast.to(roomNo.roomId).emit('message',(`${userName} has joined!`), (error) => {
             console.log(error)});
 
        }

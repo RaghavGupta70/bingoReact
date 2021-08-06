@@ -35,8 +35,8 @@ export default function CreateRoom({type}) {
   },[ENDPOINT]);
 
   useEffect(() => {
-    socket.on('message',(user),(text),(callback)=> {
-      console.log(user,text);
+    socket.on('message',(text,callback)=> {
+      console.log(text);
       callback();
     })
   },[])
