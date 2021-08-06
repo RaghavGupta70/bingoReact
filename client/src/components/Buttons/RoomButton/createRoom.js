@@ -57,6 +57,11 @@ export default function CreateRoom({type}) {
       history.push(`/Room?roomID=${roomId}`)
     callback();
     })
+
+    socket.on('message',(user,text,callback)=> {
+      console.log(user,text);
+      callback();
+    })
   }
 
    const handleClick2 = (e) => {

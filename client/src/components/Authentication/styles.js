@@ -1,13 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
-import background from "../../../src/images/bingo_bg.png";
+import background from "../../../src/images/background_login.gif";
 
 const useStyles = makeStyles((theme) => ({
     root : {
-        backgroundImage: `url(${background})`,
-        backgroundSize:'auto',
-        backgroundRepeat:'no-repeat',
-        paddingTop:'2.5rem',
-        paddingBottom:'1rem'
+        background: `url(${background}) no-repeat center center fixed`,
+        width: '100%',
+        height: '100vh',
+        paddingTop:'2.5rem',        
+        paddingBottom:'1rem',
+  backgroundSize: 'cover'
     },
     paper: {
       display: 'flex',
