@@ -4,7 +4,6 @@ import background from "../../../src/images/bingo_bg.png";
 const useStyles = makeStyles((theme) => ({
     root : {
         backgroundImage: `url(${background})`,
-        backgroundSize:'auto',
         backgroundRepeat:'no-repeat',
         paddingTop:'2.5rem',
         paddingBottom:'1rem'
