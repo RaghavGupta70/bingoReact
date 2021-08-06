@@ -35,9 +35,8 @@ export default function CreateRoom({type}) {
   },[ENDPOINT]);
 
   useEffect(() => {
-    socket.on('message',(text,callback)=> {
+    socket.on('message',(text)=> {
       console.log(text);
-      callback();
     })
   },[])
   const handleOpen = (e) => {
