@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CreateRoom({type}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [messages,setMessages] = useState([]);
   const ENDPOINT = 'localhost:5000';
   var [roomId,setroomId] = useState(null);
   const history = useHistory();
@@ -31,14 +32,16 @@ export default function CreateRoom({type}) {
 
   useEffect(() => {
     socket = io(ENDPOINT);
-   
   },[ENDPOINT]);
 
   useEffect(() => {
-    socket.on('message',(text)=> {
-      console.log(text);
+    console.log('J');
+    socket.on('message',text => {
+       setMessages([...messages,text]);
+       console.log(text);
     })
-  },[])
+  },[]);
+
   const handleOpen = (e) => {
     e.preventDefault();
     setOpen(true);
@@ -61,7 +64,7 @@ export default function CreateRoom({type}) {
       console.log(roomId);
       setroomId(roomId);
       history.push(`/Room?roomID=${roomId}`)
-    callback();
+      callback();
     })
 
     

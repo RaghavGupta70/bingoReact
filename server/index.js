@@ -52,13 +52,11 @@ io.on('connection',(socket) => {
         console.log('room',roomNo);
 
         if(roomNo){
-        socket.join(roomNo.roomId);
         socket.emit('room',(roomNo.roomId), (error) => {
             console.log(error);
         })
-        socket.broadcast.to(roomNo.roomId).emit('message',(`${userName} has joined!`), (error) => {
-            console.log(error)});
-
+        socket.broadcast.to(roomNo.roomId).emit('message',(`${userName} has joined!`));
+        socket.join(roomNo.roomId);
        }
     })
 
