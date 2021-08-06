@@ -58,9 +58,9 @@ export default function CreateRoom({type}) {
     callback();
     })
 
-    socket.on('message',(user,text,callback)=> {
+    socket.on('message',({user,text},callback)=> {
       console.log(user,text);
-      callback();//dsdsdsd
+      callback();
     })
   }
 
