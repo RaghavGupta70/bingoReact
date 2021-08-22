@@ -32,22 +32,22 @@ io.on('connection',(socket) => {
 
     socket.on('create',(userName ,callback) => {
 
-        const {error,newRoom} = room.createRoom(userName);
+        const {error,users} = room.createRoom(userName);
         // console.log(userName)
         // console.log(newRoom)
         if(error) return callback(error);
 
-        socket.join(newRoom.roomId);
-        socket.emit('room',(newRoom.roomId), (error) => {
+        socket.join(users.roomId);
+        socket.emit('room',(users.roomId), (error) => {
             console.log(error)
         })
-        console.log(newRoom.roomId)
+        console.log(users.roomId)
     })
 
     socket.on('join',async(Id,userName,callback) =>{
-        const {error,roomNo} = await room.joinRoom(Id,userName);
+        const {err,roomNo} = await room.joinRoom(Id,userName);
 
-        if(error) return console.log(error);
+        if(err) return console.log(err);
 
         console.log('room',roomNo);
 

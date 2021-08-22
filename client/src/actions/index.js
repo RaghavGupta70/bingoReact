@@ -17,7 +17,7 @@ export const SignUpUser = (user,history) => async (dispatch) => {
     try {
         const {data} = await api.signUpUser(user);
         dispatch({type: AUTH,payload: data})
-        history.push("/SignUp");
+        history.push("/Home");
     } catch (error) {
         console.log(error.response);
     }

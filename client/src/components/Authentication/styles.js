@@ -3,8 +3,8 @@ import background from "../../../src/images/background_login.gif";
 
 const useStyles = makeStyles((theme) => ({
     root : {
-        backgroundImage: `url(${background})`,
-        backgroundRepeat:'no-repeat',
+        background: `url(${background})`,
+        backgroundRepeat:'no-repeat center center',
         paddingTop:'2.5rem',
         paddingBottom:'1rem'
     },
