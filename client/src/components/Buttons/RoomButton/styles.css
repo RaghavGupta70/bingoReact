@@ -1,0 +1,27 @@
+.buttonContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top:4rem;
+}
+
+.create{
+    padding:1rem;
+    color:white;
+    border-radius:8px;
+    background:rgb(117, 187, 13);
+    font-size: 1.2rem;
+    margin-bottom:8px;
+    cursor:pointer;
+}
+
+.join{
+    padding:1rem;
+    color:white;
+    border-radius:8px;
+    background:rgb(117, 187, 13);
+    font-size: 1.2rem;
+    margin-bottom:8px;
+    cursor:pointer;
+}

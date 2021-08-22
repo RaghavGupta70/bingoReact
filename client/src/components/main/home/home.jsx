@@ -2,9 +2,9 @@ import React,{ useEffect } from "react";
 import { useHistory } from 'react-router-dom';
 import { Socket } from "socket.io-client";
 import BingoGrid from '../../BingoGame/bingoGrid'; 
-import CreateRoom from "../../Buttons/RoomButton/createRoom.js"
-import Logout from "../../Buttons/LogOut/Logout.js";
+import JoinRoom from "../../Buttons/RoomButton/joinRoom.js"
 import { io } from "socket.io-client";
+import Navbar from '../../Navbar/navbar.jsx';
 
 let socket;
 function Home({token}) {
@@ -14,6 +14,9 @@ function Home({token}) {
         history.push('SignIn');
        } 
    });
+
+   const user = JSON.parse(localStorage.getItem('user'));
+   const person = user.result.userName;
 
    var bingoNum = [];
    for(var h=0;h<25;h++){
@@ -34,9 +37,8 @@ function Home({token}) {
    
    return(
        <>
-      {token && <BingoGrid arrNum={bingoNum} shuffleArr={shuffleArray} generate={generator} />}
-      <CreateRoom style={{display: "flex",margin: "auto"}} />
-      <Logout />
+      {token && <Navbar personChar = {person.charAt(0)}/>}
+      <JoinRoom style={{display: "flex",margin: "auto"}} />
       </>
    );
 }

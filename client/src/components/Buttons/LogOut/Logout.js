@@ -1,8 +1,9 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+import { Tooltip,Button } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
 import {LOGOUT } from "../../../constants/actionTypes";
+import { ExitToApp } from '@material-ui/icons';
 
 
 export default function LogoutButton() {
@@ -12,8 +13,10 @@ export default function LogoutButton() {
 
     const handleClick = (e)=> {dispatch({type:LOGOUT}); history.push("/SignIn")}
   return (
+    <Tooltip title="Logout">
     <Button variant="contained" color="primary" disableElevation onClick={handleClick}>
-      Logout
+      <ExitToApp />
     </Button>
+    </Tooltip>
   );
 }

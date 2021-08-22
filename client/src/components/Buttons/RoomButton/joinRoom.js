@@ -4,7 +4,8 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { io } from "socket.io-client";
-import {useHistory} from "react-router-dom"
+import {useHistory} from "react-router-dom";
+import './styles.css';
 
 let socket;
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CreateRoom({type}) {
+export default function JoinRoom({type}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [messages,setMessages] = useState([]);
@@ -92,8 +93,11 @@ export default function CreateRoom({type}) {
 
   
   return (
-    <div>
-      <button type="button" onClick={handleOpen}>
+    <div class="buttonContainer">
+       <button type="button" onClick={handleClick} class="create" >
+        Create Room
+        </button>
+      <button type="button" onClick={handleOpen} class="join" >
         Join Room
       </button>
       <Modal
@@ -110,11 +114,8 @@ export default function CreateRoom({type}) {
       >
         <Fade in={open}>
           <div className={classes.paper} style={{display: "block",justifyContent: "center"}}>
-         <div ><h2 id="transition-modal-title">Create a Room</h2>
-            <button id="transition-modal-description" onClick={handleClick}>Create Room</button>
-            </div>
             <div>
-            <h2 id="transition-modal-title">Enter a Room</h2>
+            <h2 id="transition-modal-title">Enter Room Id </h2>
             <input id="transition-modal-description" placeholder="Room ID" value={ID} onChange={(e) => {setID(e.target.value); console.log(ID)}}/>
             <button id="transition-modal-description" onClick={handleClick2}>Join Room</button>
             </div> 
