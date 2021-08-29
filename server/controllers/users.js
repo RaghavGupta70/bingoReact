@@ -45,3 +45,7 @@ export const joinRoom = async(Id, userName) => {
       arr.push(roomNo)
       return {roomNo};
 }
+
+export const getUserInRoom = (Id) => {
+     return arr.filter((user)=> user.roomId === Id);
+}

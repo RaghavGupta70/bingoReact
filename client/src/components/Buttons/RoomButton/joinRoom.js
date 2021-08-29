@@ -36,7 +36,6 @@ export default function JoinRoom({type}) {
   },[ENDPOINT]);
 
   useEffect(() => {
-    console.log('J');
     socket.on('message',text => {
        setMessages([...messages,text]);
        console.log(text);

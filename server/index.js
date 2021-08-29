@@ -38,6 +38,7 @@ io.on('connection',(socket) => {
         if(error) return callback(error);
 
         socket.join(users.roomId);
+
         socket.emit('room',(users.roomId), (error) => {
             console.log(error)
         })
@@ -46,6 +47,7 @@ io.on('connection',(socket) => {
 
     socket.on('join',async(Id,userName,callback) =>{
         const {err,roomNo} = await room.joinRoom(Id,userName);
+        const usersInRoom = room.getUserInRoom(Id);
 
         if(err) return console.log(err);
 
