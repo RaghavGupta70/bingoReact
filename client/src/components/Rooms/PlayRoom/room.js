@@ -1,7 +1,8 @@
 
 import queryString from "query-string";
 import react from "react"
-import {useLocation} from "react-router-dom"
+import {useLocation} from "react-router-dom";
+import { getToken } from "../../../utils/commonData/common";
 
 const Room = () => {
 
@@ -10,7 +11,17 @@ const Room = () => {
     ignoreQueryPrefix: true
   });
     console.log(location)
-    return <h1>{roomID}</h1>
+    return <>
+    {getToken() != null ? (
+      <>
+       <h1>{roomID}</h1>
+      </>
+    ) : (
+      <>
+       <h1>Access Denied</h1>
+      </>
+    )}
+    </>
 }
 
 export default Room;

@@ -20,6 +20,7 @@ const App = () => {
             <Route path="/SignUp"><Auth type={"SignUp"} setToken={setToken} /></Route>
             <Route path="/Home"><Home token={token} /></Route>
             <Route path="/Room"><><Room />{console.log(location)}</></Route>
+            <Route path="/Profile"></Route>
         </Switch>
     )
 }
