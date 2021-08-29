@@ -61,18 +61,16 @@ export default function JoinRoom({type}) {
       console.log(error)
     })
 
-    socket.on("room",(roomId,callback)=> {
+    socket.on("room",(roomId,usersInRoom,callback)=> {
       console.log(roomId);
       setroomId(roomId);
-      const success = putUsers([1,2,4]);
+      const success = putUsers(usersInRoom);
       if(success){
       history.push(`/Room?roomID=${roomId}`);
       }
       else{
         history.push("/");
       }
-      
-      callback();
     })
 
     
