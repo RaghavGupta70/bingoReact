@@ -3,4 +3,14 @@ const getToken = () => {
     return token;
 }
 
-export {getToken};
+const getUsers = () => {
+  const allUsers = sessionStorage.getItem('usersRoom')  
+  return allUsers;
+}
+
+const putUsers = (data) => {
+    sessionStorage.setItem('usersRoom',JSON.stringify(data));
+    return 1;
+}
+
+export {getToken,putUsers,getUsers};

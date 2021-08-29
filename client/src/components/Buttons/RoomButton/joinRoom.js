@@ -5,6 +5,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import { io } from "socket.io-client";
 import {useHistory} from "react-router-dom";
+import { putUsers } from '../../../utils/commonData/common';
 import './styles.css';
 
 let socket;
@@ -63,7 +64,14 @@ export default function JoinRoom({type}) {
     socket.on("room",(roomId,callback)=> {
       console.log(roomId);
       setroomId(roomId);
-      history.push(`/Room?roomID=${roomId}`)
+      const success = putUsers([1,2,4]);
+      if(success){
+      history.push(`/Room?roomID=${roomId}`);
+      }
+      else{
+        history.push("/");
+      }
+      
       callback();
     })
 

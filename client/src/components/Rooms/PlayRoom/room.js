@@ -1,11 +1,12 @@
 import queryString from "query-string";
 import React from "react";
 import {useLocation} from "react-router-dom";
-import { getToken } from "../../../utils/commonData/common";
+import { getToken,getUsers } from "../../../utils/commonData/common";
 
 const Room = () => {
 
     const location = useLocation();
+    const usersRoom = getUsers();
     const {roomID} = queryString.parse(location.search,{
     ignoreQueryPrefix: true
   });
@@ -13,7 +14,7 @@ const Room = () => {
     return <>
     {getToken() != null ? (
       <>
-       <h1>{roomID}</h1>
+       <h1>{roomID}{usersRoom}</h1>
       </>
     ) : (
       <>
