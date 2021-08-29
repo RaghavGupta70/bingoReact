@@ -61,12 +61,11 @@ export default function JoinRoom({type}) {
       console.log(error)
     })
 
-    socket.on("room",(roomId,usersInRoom,callback)=> {
-      console.log(roomId);
-      setroomId(roomId);
-      const success = putUsers(usersInRoom);
+    socket.on("room",(roomData,callback)=> {
+      setroomId(roomData.roomId);
+      const success = putUsers(roomData.usersRoom);
       if(success){
-      history.push(`/Room?roomID=${roomId}`);
+      history.push(`/Room?roomID=${roomData.roomId}`);
       }
       else{
         history.push("/");
@@ -88,11 +87,14 @@ export default function JoinRoom({type}) {
       console.log(error)
     })
 
-    socket.on("room",(roomId,callback)=> {
-      console.log(roomId);
-      setroomId(roomId);
-      history.push(`/Room?roomID=${roomId}`)
-    callback();
+    socket.on("room",(roomData,callback)=> {
+       setroomId(roomData.roomId);
+       const success = putUsers(roomData.usersRoom);
+       if (success) {
+         history.push(`/Room?roomID=${roomData.roomId}`);
+       } else {
+         history.push("/");
+       }
     })
   }
 

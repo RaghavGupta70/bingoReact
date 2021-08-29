@@ -15,7 +15,7 @@ export const createRoom = (userName) => {
     console.log(existingRoom);
     if (existingRoom) return { error: 'Try again! You have some connectivity issue LOL:)' };
 
-    const users = { name: userName,roomId: id};
+    const users = { roomId: id,userName: userName};
     arr.push(users);
         console.log(arr);
     return {users};

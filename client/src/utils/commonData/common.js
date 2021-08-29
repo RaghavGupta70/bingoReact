@@ -4,11 +4,13 @@ const getToken = () => {
 }
 
 const getUsers = () => {
-  const allUsers = sessionStorage.getItem('usersRoom')  
+  const allUsers = sessionStorage.getItem('usersRoom')
+  console.log(allUsers)  
   return allUsers;
 }
 
 const putUsers = (data) => {
+    console.log(data)
     sessionStorage.setItem('usersRoom',JSON.stringify(data));
     return 1;
 }

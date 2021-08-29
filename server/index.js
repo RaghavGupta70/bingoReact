@@ -38,8 +38,10 @@ io.on('connection',(socket) => {
         if(error) return callback(error);
 
         socket.join(users.roomId);
+        const roomData = { roomId: users.roomId, usersRoom: [userName] };
+        
 
-        socket.emit('room',(users.roomId), (error) => {
+        socket.emit('room',(roomData), (error) => {
             console.log(error)
         })
         console.log(users.roomId)
@@ -48,13 +50,14 @@ io.on('connection',(socket) => {
     socket.on('join',async(Id,userName,callback) =>{
         const {err,roomNo} = await room.joinRoom(Id,userName);
         const usersInRoom = room.getUserInRoom(Id);
+        console.log(usersInRoom,'JAIFJANFA');
 
         if(err) return console.log(err);
 
         console.log('room',roomNo);
-
+        const roomData = {roomId: roomNo.roomId,usersRoom: usersInRoom}
         if(roomNo){
-        socket.emit('room',(roomNo.roomId,usersInRoom), (error) => {
+        socket.emit('room',(roomData), (error) => {
             console.log(error);
         })
         socket.broadcast.to(roomNo.roomId).emit('message',(`${userName} has joined!`));
