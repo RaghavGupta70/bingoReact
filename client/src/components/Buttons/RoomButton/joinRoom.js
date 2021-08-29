@@ -37,9 +37,8 @@ export default function JoinRoom({type}) {
   },[ENDPOINT]);
 
   useEffect(() => {
-    socket.on('message',text => {
-       setMessages([...messages,text]);
-       console.log(text);
+    socket.on('message',(usersInRoom) => {
+      const success = putUsers(usersInRoom);
     })
   },[]);
 

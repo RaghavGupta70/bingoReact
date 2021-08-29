@@ -60,7 +60,7 @@ io.on('connection',(socket) => {
         socket.emit('room',(roomData), (error) => {
             console.log(error);
         })
-        socket.broadcast.to(roomNo.roomId).emit('message',(`${userName} has joined!`));
+        socket.broadcast.to(roomNo.roomId).emit('message',(usersInRoom));
         socket.join(roomNo.roomId);
        }
     })
