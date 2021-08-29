@@ -1,7 +1,19 @@
 import React from 'react';
 import NavStyles from './navbar.module.css';
+import CustomizedButtons from '../Buttons/NavbarButtons/commonButton';
+import LogoutButton from '../Buttons/LogOut/Logout';
+import { useHistory } from 'react-router';
 
 const Navbar = ({personChar}) => {
+
+  const history = useHistory();
+  const handleLeader = (e) => {
+    history.push('/leaderBoard');
+  }
+
+    const handleProfile = (e) => {
+      history.push("/profile");
+    };
 
   return (
     <>
@@ -12,17 +24,13 @@ const Navbar = ({personChar}) => {
 
       <div className={NavStyles.rightArea}>
         <div className={NavStyles.leader}>
-          <button>LeaderBoard</button>
+          <CustomizedButtons heading={"LeaderBoard"} onClick = {handleLeader} />
         </div>
         <div className={NavStyles.profile}>
-          <button>
-            My Profile
-          </button>
+          <CustomizedButtons heading={"My Profile"} onClick = {handleProfile} />
         </div>
         <div className={NavStyles.logout}>
-          <button>
-            Logout
-          </button>
+         <LogoutButton />
         </div>
       </div>
     </div>
