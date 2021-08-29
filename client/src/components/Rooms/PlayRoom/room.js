@@ -1,12 +1,12 @@
 import queryString from "query-string";
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import {useLocation} from "react-router-dom";
 import { getToken,getUsers } from "../../../utils/commonData/common";
 
 const Room = () => {
 
     const location = useLocation();
-    var usersRoom = getUsers();
+    var [usersRoom,setUsersRoom] = useState(getUsers());
     const currentUserInfo = JSON.parse(localStorage.getItem('user'));
     const currentUser = currentUserInfo.result.userName;
     const {roomID} = queryString.parse(location.search,{
@@ -15,7 +15,7 @@ const Room = () => {
   let members=usersRoom.filter((user)=> user.userName !== currentUser);;
    
   useEffect(()=>{
-    usersRoom = getUsers();
+    setUsersRoom(getUsers());
     members = usersRoom.filter((user)=> user.userName !== currentUser); 
   },[getUsers()])
     
