@@ -1,6 +1,6 @@
 .profile__box{
     display:flex;
-    margin:20px;
+    margin:5%;
     padding:20px;
     border:2px solid black;
     border-radius: 10px;
@@ -13,7 +13,27 @@
     width:25%;
 }
 
-.MuiAvatar-root{
-    width:170px !important;
-    height:170px !important;
+.avatar_img{
+    width:171px;
+    height:171px;
+    border-radius: 50%;
+    border:1px solid whitesmoke;
+}
+
+.more_info{
+    margin:3%;
+}
+
+.head_text{
+    font-size:1.3rem;
+    font-weight:600;
+}
+
+.ans_text{
+    font-size:1.2rem;
+    font-weight:500;
+}
+
+ul{
+   list-style: none;  
 }
