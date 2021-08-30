@@ -16,8 +16,6 @@ const App = () => {
   const history = useHistory(); 
   const [token, setToken] = useState(JSON.parse(localStorage.getItem("tok")));
   let location = useLocation();
-  const user = JSON.parse(localStorage.getItem('user'));
-  const person = user.result.userName;
 
   useEffect(()=>{
      setToken(JSON.parse(localStorage.getItem("tok")));
@@ -25,7 +23,6 @@ const App = () => {
 
     return (
       <>
-      {token && <Navbar personChar={person.charAt(0)} />}
       <Switch>
         <Route path="/SignIn">
           <Auth type={"SignIn"} setToken={setToken} />
@@ -39,6 +36,7 @@ const App = () => {
         <Route path="/Room">
           <>
             <Room />
+            {console.log(location)}
           </>
         </Route>
         <Route path="/leaderBoard"><LeaderBoard /></Route>
