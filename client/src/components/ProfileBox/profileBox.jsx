@@ -12,7 +12,7 @@ const ProfileBox = () => {
     return (
         <div className="profile__box">
             <div className="info">
-                <h1>My Profile</h1>
+                <h1 className="my_profile_text">My Profile</h1>
                 <h2>{user.result.userName}</h2>
                 <div className="more_info" >
                     <ul>

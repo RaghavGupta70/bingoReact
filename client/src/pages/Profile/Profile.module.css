@@ -1,23 +1,25 @@
 .main_container {
-  width: 100vw;
+  width: 98vw;
   height: 90vh;
 }
 
 .section1 {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
 }
 
 .profileBox {
-  width: 60%;
+  margin-top: 4.5%;
+  width: 58%;
   height: 40%;
 }
 
 .playerStats {
-  margin-top: 1.5%;
-  width: 30%;
-  height: 40%;
-  margin-left: 20%;
+  margin-top: 5%;
+  width: 32%;
+  height: 38%;
+  margin-left: 2%;
   background-color: lightyellow;
   border: 1px solid whitesmoke;
   border-radius: 5%;
