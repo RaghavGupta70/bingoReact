@@ -1,0 +1,51 @@
+.main_container {
+  width: 100vw;
+  height: 90vh;
+}
+
+.section1 {
+  display: flex;
+  justify-content: space-around;
+}
+
+.profileBox {
+  width: 60%;
+  height: 40%;
+}
+
+.playerStats {
+  margin-top: 1.5%;
+  width: 30%;
+  height: 40%;
+  margin-left: 20%;
+  background-color: lightyellow;
+  border: 1px solid whitesmoke;
+  border-radius: 5%;
+}
+.donutChart {
+  margin-left: 20%;
+  width: 60%;
+  margin-top: 5%;
+}
+
+.globalStats {
+    margin-left: 8%;
+    margin-top: 2%;
+  width: 80%;
+  height: 50%;
+  padding: 2%;
+  background-color: lightyellow;
+  border: 1px solid whitesmoke;
+  border-radius: 5%;
+}
+
+.toggle {
+    margin: auto;
+    width: fit-content
+}
+
+.barChart {
+  width: 40%;
+  margin: auto;
+  margin-top: 1%;
+}
