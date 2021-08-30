@@ -1,0 +1,19 @@
+.profile__box{
+    display:flex;
+    margin:20px;
+    padding:20px;
+    border:2px solid black;
+    border-radius: 10px;
+}
+.info{
+    width:75%;
+}
+
+.profile_img{
+    width:25%;
+}
+
+.MuiAvatar-root{
+    width:170px !important;
+    height:170px !important;
+}
