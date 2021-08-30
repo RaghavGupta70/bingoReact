@@ -15,9 +15,6 @@ function Home({token}) {
        } 
    });
 
-   const user = JSON.parse(localStorage.getItem('user'));
-   const person = user.result.userName;
-
    var bingoNum = [];
    for(var h=0;h<25;h++){
        bingoNum.push(h+1);
@@ -37,8 +34,7 @@ function Home({token}) {
    
    return(
        <>
-      {token && <Navbar personChar = {person.charAt(0)}/>}
-      <JoinRoom style={{display: "flex",margin: "auto"}} />
+        <JoinRoom style={{display: "flex",margin: "auto"}} />
       </>
    );
 }
