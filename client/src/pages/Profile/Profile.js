@@ -5,6 +5,9 @@ import PrStyles from "./Profile.module.css";
 import BarChart from "../../components/BarChart/barChart";
 import ToggleProf from "../../components/Toggle/ToggleProf";
 import LineChart from "../../components/LineChart/lineChart";
+import PieChart from "../../components/PieChart/pieChart";
+import ReactSelect from "../../components/ReactSelect/ReactSelect";
+import { opponentData } from "../../utils/constantData/constantData";
 
 const Profile = () => {
   const [graph, setGraph] = useState("left");
@@ -15,6 +18,16 @@ const Profile = () => {
           <ProfileBox />
         </div>
         <div className={PrStyles.playerStats}>
+          <div className={PrStyles.dropdown}>
+            <ReactSelect
+              placeholder={"Select Opponent"}
+              height={"5vh"}
+              width={"15vw"}
+              data={opponentData}
+              onChange={(e) => {console.log(e);}}
+              backgroundColor={"#03f8fc"}
+            />
+          </div>
           <div className={PrStyles.donutChart}>
             <DonutChart />
           </div>
@@ -35,7 +48,9 @@ const Profile = () => {
             <LineChart />
           </div>
         ) : (
-          <div className={PrStyles.pieChart}>hello</div>
+          <div className={PrStyles.pieChart}>
+            <PieChart />
+          </div>
         )}
       </div>
     </div>
