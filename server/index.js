@@ -9,6 +9,7 @@ import * as room from './controllers/users.js';
 
 const app = express();
 const server = http.createServer(app);
+const roomN= {roomId: null,userName: ''};
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({extended: true,limit: '50mb'}));
@@ -30,6 +31,8 @@ app.use("/SignIn", (req,res) =>
 io.on('connection',(socket) => {
     console.log('User has connected with socket.io');
 
+
+   
     socket.on('create',(userName ,callback) => {
 
         const {error,users} = room.createRoom(userName);
@@ -40,7 +43,6 @@ io.on('connection',(socket) => {
         socket.join(users.roomId);
         const roomData = { roomId: users.roomId, usersRoom: [userName] };
         
-
         socket.emit('room',(roomData), (error) => {
             console.log(error)
         })
@@ -60,10 +62,16 @@ io.on('connection',(socket) => {
         socket.emit('room',(roomData), (error) => {
             console.log(error);
         })
+        console.log(roomNo.roomId);
         socket.broadcast.to(roomNo.roomId).emit('message',(usersInRoom));
         socket.join(roomNo.roomId);
        }
     })
+     socket.on("gameValue", (gameValue,callback) => {
+       console.log(gameValue,gameValue.roomID,gameValue.numberSelected);
+       const gameV = gameValue.numberSelected;
+       socket.broadcast.to(gameValue.roomID).emit("value", (gameV));
+     });
 
     socket.on('disconnect', () => {
         console.log('User disconnected');

@@ -13,4 +13,11 @@ const putUsers = (data) => {
     return 1;
 }
 
-export {getToken,putUsers,getUsers};
+const getUserName = () => {
+  return JSON.parse(localStorage.getItem('user')).result.userName;
+}
+
+const getPlayValue = () => {
+  return sessionStorage.getItem('playValue');
+}
+export {getToken,putUsers,getUsers,getUserName,getPlayValue};

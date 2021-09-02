@@ -1,13 +1,50 @@
-import react, { useEffect, useState } from "react"
+import react, { useEffect, useState } from "react";
+import { useLocation } from "react-router";
+import queryString from "query-string";
 import { Container, Grid } from "@material-ui/core";
 import GridLayout from 'react-grid-layout';
 import { FaSlash } from 'react-icons/fa';
 import NumberSelector from "./numberSelector";
+import { io } from "socket.io-client";
+import { getUserName } from "../../utils/commonData/common";
+
+let socket;
 
 const BingoGrid = ({arrNum,shuffleArr,generate}) => {
+      const location = useLocation();
+ const { roomID } = queryString.parse(location.search, {
+   ignoreQueryPrefix: true,
+ });
+  const ENDPOINT = "localhost:5000";
+  let dependency = 0;
 
+  
     var arr = [];
+     useEffect(() => {
+       socket = io(ENDPOINT);
+     }, [ENDPOINT]);
 
+  
+
+     const [gameValue,setGameValue] = useState({userName: '',numberSelected: null,roomID: roomID})
+        useEffect(() => {
+          socket.emit("gameValue", (gameValue), (error) => {
+            alert("You bitch");
+          });
+        }, [gameValue]);
+
+        useEffect(()=> {
+            console.log('hey');
+             socket.on("value", (gameV) => {
+               console.log(gameV);
+               console.log("hello");
+               sessionStorage.setItem("playValue", gameV);
+             });
+        },[dependency])
+
+        setInterval(()=> {
+            dependency++;
+        },100);
     const [styleToggle, setStyleToggle] = useState([]);
     const [shuffle,setShuffle] = useState(false);
 
@@ -54,10 +91,14 @@ const BingoGrid = ({arrNum,shuffleArr,generate}) => {
         <GridLayout layout={arr} cols={12} colHeight={20} rowHeight={30} width={500} isDraggable={false} style={{backgroundColor: "rgb(247,203,45)",width: "17%", margin: "auto"}}>
             {arr.map((ar, index) => (<div style={{ display: "flex", justifyContent: "center",border: "1px solid black",alignItems: "center", borderRadius: "4px",margin: "auto"  }} key={ar.i}
                 onClick={(e) => {
-                    if(ar.i !== num.toString()){
-                        console.log("Error")
-                        return;
-                    }
+                    console.log(e.target,ar.i);
+                    // if(ar.i !== num.toString()){
+                    //     console.log("Error")
+                    //     return;
+                    // }
+                    let result = getUserName();
+
+                    setGameValue({userName: result,numberSelected: ar.i,roomID: roomID })
                     var newArr = [];
                     for (var p = 0; p < 25; p++) {
                         if(styleToggle[p])
@@ -70,7 +111,8 @@ const BingoGrid = ({arrNum,shuffleArr,generate}) => {
                     }
                     console.log(ar)
                     setStyleToggle(newArr);
-                }}>
+                }}
+                >
                 {ar.i}<FaSlash style={{ position: "absolute", left: "7px", fontSize: "18px", visibility: styleToggle[index] ? "visible" : "hidden" }} />
                 
                 </div>))}
