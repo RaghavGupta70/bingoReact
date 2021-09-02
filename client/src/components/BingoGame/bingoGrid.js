@@ -51,7 +51,6 @@ const BingoGrid = ({arrNum,shuffleArr,generate}) => {
     const num = generate();
     return (
         <div>
-            <NumberSelector num={num} />
         <GridLayout layout={arr} cols={12} colHeight={20} rowHeight={30} width={500} isDraggable={false} style={{backgroundColor: "rgb(247,203,45)",width: "17%", margin: "auto"}}>
             {arr.map((ar, index) => (<div style={{ display: "flex", justifyContent: "center",border: "1px solid black",alignItems: "center", borderRadius: "4px",margin: "auto"  }} key={ar.i}
                 onClick={(e) => {
