@@ -5,7 +5,6 @@ Link,
 Route,useHistory,useLocation} from "react-router-dom";
 
 import Auth from "./components/Authentication/auth.jsx";
-import Navbar from './components/Navbar/navbar.jsx';
 import Home from "./components/main/home/home";
 import Room from "./components/Rooms/PlayRoom/room.js";
 import LeaderBoard from "./pages/LeaderBoard/leaderBoard.js";
@@ -13,16 +12,11 @@ import Profile from "./pages/Profile/Profile.js";
 
 const App = () => {
 
-  const history = useHistory(); 
+   const history = useHistory(); 
   const [token, setToken] = useState(JSON.parse(localStorage.getItem("tok")));
   let location = useLocation();
 
-  useEffect(()=>{
-     setToken(JSON.parse(localStorage.getItem("tok")));
-  },[token]);
-
-    return (
-      <>
+    return (<>
       <Switch>
         <Route path="/SignIn">
           <Auth type={"SignIn"} setToken={setToken} />
