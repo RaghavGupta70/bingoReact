@@ -9,6 +9,9 @@ import Home from "./components/main/home/home";
 import Room from "./components/Rooms/PlayRoom/room.js";
 import LeaderBoard from "./pages/LeaderBoard/leaderBoard.js";
 import Profile from "./pages/Profile/Profile.js";
+import Navbar from "./components/Navbar/navbar.jsx";
+import AppStyles from './App.module.css';
+import { getToken } from "./utils/commonData/common.js";
 
 const App = () => {
 
@@ -17,6 +20,10 @@ const App = () => {
   let location = useLocation();
 
     return (<>
+    {getToken()!==null? <div className={AppStyles.navbar}>
+      <Navbar />
+    </div>: null}
+   
       <Switch>
         <Route path="/SignIn">
           <Auth type={"SignIn"} setToken={setToken} />

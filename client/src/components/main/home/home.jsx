@@ -37,7 +37,6 @@ function Home({token}) {
    
    return(
        <>
-      {token && <Navbar personChar = {person.charAt(0)}/>}
       <JoinRoom style={{display: "flex",margin: "auto"}} />
       </>
    );
