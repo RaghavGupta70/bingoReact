@@ -68,15 +68,12 @@ io.on('connection',(socket) => {
     })
      socket.on("gameValue", (gameValue,callback) => {
        console.log(gameValue,gameValue.roomID,gameValue.numberSelected);
-       const users = room.getUserInRoom(gameValue.roomID);
-       const usersInRoom = room.fillNumbers(gameValue.roomID,gameValue.userName,gameValue.numberSelected);
-       const len = usersArr[0].numbers.length - 1;
-       const gameV = gameValue.numberSelected;
+       const users = room.fillNumbers(gameValue.roomID,gameValue.userName,gameValue.numberSelected);
+       const len = users[0].numbers.length - 1;
+       const gameV = users[0].numbers[len];
         console.log(gameV);
-        // io.to(gameValue.roomID).emit('value',(gameV));
-       socket.broadcast.to(gameValue.roomID).emit("value", (gameV));
+       socket.broadcast.to(gameValue.roomID).emit('message', (users));
      });
-    //  socket.broadcast.to(roomID).emit("value", (gameV));
 
     socket.on('disconnect', () => {
         console.log('User disconnected');
