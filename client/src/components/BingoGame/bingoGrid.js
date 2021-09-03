@@ -17,6 +17,7 @@ const BingoGrid = ({arrNum,shuffleArr,generate}) => {
  });
   const ENDPOINT = "localhost:5000";
   let dependency = 0;
+  const [otherValue,setOtherValue] = useState({userName: '',numberSelected: null,roomID: roomID});
 
   
     var arr = [];
@@ -26,21 +27,21 @@ const BingoGrid = ({arrNum,shuffleArr,generate}) => {
 
   
 
-     const [gameValue,setGameValue] = useState({userName: '',numberSelected: null,roomID: roomID})
-        useEffect(() => {
-          socket.emit("gameValue", (gameValue), (error) => {
-            alert("You bitch");
-          });
-        }, [gameValue]);
+     let [gameValue,setGameValue] = useState({userName: '',numberSelected: null,roomID: roomID})
+        // useEffect(() => {
+        //   socket.emit("gameValue", (gameValue), (error) => {
+        //     alert("You bitch");
+        //   });
+        // }, [gameValue]);
 
         useEffect(()=> {
             console.log('hey');
-             socket.on("value", (gameV) => {
+             socket.on('value', (gameV) => {
                console.log(gameV);
                console.log("hello");
                sessionStorage.setItem("playValue", gameV);
              });
-        },[dependency])
+        },[]);
 
         setInterval(()=> {
             dependency++;
@@ -98,7 +99,11 @@ const BingoGrid = ({arrNum,shuffleArr,generate}) => {
                     // }
                     let result = getUserName();
 
-                    setGameValue({userName: result,numberSelected: ar.i,roomID: roomID })
+                    gameValue={userName: result,numberSelected: ar.i,roomID: roomID }
+                    setGameValue(gameValue);
+                    socket.emit("gameValue", (gameValue), (error) => {
+                        alert("You bitch");
+                    });
                     var newArr = [];
                     for (var p = 0; p < 25; p++) {
                         if(styleToggle[p])

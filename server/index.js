@@ -9,7 +9,6 @@ import * as room from './controllers/users.js';
 
 const app = express();
 const server = http.createServer(app);
-const roomN= {roomId: null,userName: ''};
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({extended: true,limit: '50mb'}));
@@ -69,9 +68,17 @@ io.on('connection',(socket) => {
     })
      socket.on("gameValue", (gameValue,callback) => {
        console.log(gameValue,gameValue.roomID,gameValue.numberSelected);
-       const gameV = gameValue.numberSelected;
+       const users = room.getUserInRoom(gameValue.roomID);
+       console.log(users);
+    //    const usersArr = room.fillNumbers(gameValue.roomID,gameValue.userName,gameValue.numberSelected);
+        // roomID = gameValue.roomID;
+        // const len = usersArr[0].numbers.length - 1;
+        const gameV = gameValue.numberSelected;
+        console.log(gameV);
+        // io.to(gameValue.roomID).emit('value',(gameV));
        socket.broadcast.to(gameValue.roomID).emit("value", (gameV));
      });
+    //  socket.broadcast.to(roomID).emit("value", (gameV));
 
     socket.on('disconnect', () => {
         console.log('User disconnected');
