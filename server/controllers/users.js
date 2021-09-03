@@ -15,7 +15,7 @@ export const createRoom = (userName) => {
     console.log(existingRoom);
     if (existingRoom) return { error: 'Try again! You have some connectivity issue LOL:)' };
 
-    const users = { roomId: id,userName: userName,numbers:new Set()};
+    const users = { roomId: id,userName: userName,numbers:[]};
     arr.push(users);
         console.log(arr);
     return {users};
@@ -40,7 +40,7 @@ export const joinRoom = async(Id, userName) => {
 
     if(c === 4)
      return {error:'Room is already full'};
-     const roomNo ={roomId: Id,userName: userName,numbers:new Set()}
+     const roomNo ={roomId: Id,userName: userName,numbers:[]}
       console.log(validRoom);
       arr.push(roomNo)
       return {roomNo};
@@ -52,6 +52,6 @@ export const getUserInRoom = (Id) => {
 
 export const fillNumbers = (Id,userName,num) => {
    var users = arr.filter((user)=> user.roomId === Id)
-   users.map((user) => user.numbers.add(num));
+   users.map((user) => user.numbers.push(num));
    return users;
 }
