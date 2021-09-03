@@ -17,7 +17,6 @@ const BingoGrid = ({arrNum,shuffleArr,generate}) => {
  });
   const ENDPOINT = "localhost:5000";
   let dependency = 0;
-  const [otherValue,setOtherValue] = useState({userName: '',numberSelected: null,roomID: roomID});
 
   
     var arr = [];

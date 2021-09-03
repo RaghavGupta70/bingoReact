@@ -1,6 +1,7 @@
 import queryString from "query-string";
 import React, { useEffect,useState } from "react";
 import {useLocation} from "react-router-dom";
+// import { getUserInRoom } from "../../../../../server/controllers/users";
 import { getToken,getUsers,getPlayValue } from "../../../utils/commonData/common";
 import BingoGrid from '../../BingoGame/bingoGrid.js';
 
@@ -47,7 +48,7 @@ const Room = () => {
          {members.map((member)=>(
            <li>{member.userName}</li>
          ))}
-         <li>{getPlayValue()}</li>
+         <li>{getUsers()[0].numbers}</li>
        </ul> 
        <BingoGrid arrNum={bingoNum} shuffleArr={shuffleArray} generate={generator} />
       </>
