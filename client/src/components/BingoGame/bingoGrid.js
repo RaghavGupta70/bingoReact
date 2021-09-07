@@ -17,6 +17,7 @@ const BingoGrid = ({ arrNum, shuffleArr, generate }) => {
   });
   const ENDPOINT = "localhost:5000";
   let dependency = 0;
+  const [turn,setTurn] = useState(0);
 
   var arr = [];
   useEffect(() => {
@@ -35,7 +36,7 @@ const BingoGrid = ({ arrNum, shuffleArr, generate }) => {
   // }, [gameValue]);
 
   useEffect(() => {
-    console.log("hey");
+    console.log(turn);
     socket.on("value", (gameV) => {
       console.log(gameV);
       console.log("hello");
@@ -121,30 +122,51 @@ const BingoGrid = ({ arrNum, shuffleArr, generate }) => {
               let result = getUserName();
 
               var numLen = getUsers()[0].numbers.length;
-              
-              if (numLen === 0) {
+              if(numLen === 0){
                 gameValue = {
-                  userName: result,
-                  numberSelected: ar.i,
-                  roomID: roomID,
-                };
-                setGameValue(gameValue);
-                socket.emit("gameValue", gameValue, (error) => {
-                  alert("You bitch");
-                });
-                var newArr = [];
-                for (var p = 0; p < 25; p++) {
-                  if (styleToggle[p]) newArr[p] = true;
-                  else if (p === index) newArr[p] = true;
-                  else newArr[p] = false;
-                }
-                console.log(ar);
-                setStyleToggle(newArr);
+                    userName: result,
+                    numberSelected: ar.i,
+                    roomID: roomID,
+                  };
+                  setGameValue(gameValue);
+                  socket.emit("gameValue", gameValue, (error) => {
+                    alert("You bitch");
+                  });
+                  var newArr = [];
+                  for (var p = 0; p < 25; p++) {
+                    if (styleToggle[p]) newArr[p] = true;
+                    else if (p === index) newArr[p] = true;
+                    else newArr[p] = false;
+                  }
+                  console.log(ar);
+                  setStyleToggle(newArr);
+                  var f=turn+1;
+                  setTurn(f);
+              }
+              
+              else if (getUsers()[turn].numbers.userName === result) {
+                gameValue = {
+                    userName: result,
+                    numberSelected: ar.i,
+                    roomID: roomID,
+                  };
+                  setGameValue(gameValue);
+                  socket.emit("gameValue", gameValue, (error) => {
+                    alert("You bitch");
+                  });
+                  var newArr = [];
+                  for (var p = 0; p < 25; p++) {
+                    if (styleToggle[p]) newArr[p] = true;
+                    else if (p === index) newArr[p] = true;
+                    else newArr[p] = false;
+                  }
+                  console.log(ar);
+                  setStyleToggle(newArr);
+                  var f=turn+1;
+                  setTurn(f);
               } 
               
               else {
-              
-              
                 if (getUsers()[0].numbers[numLen - 1].userName === result) {
                   alert("Keep Your Calm Boi");
                 } 
@@ -168,6 +190,8 @@ const BingoGrid = ({ arrNum, shuffleArr, generate }) => {
                     }
                     console.log(ar);
                     setStyleToggle(newArr);
+                    var f=turn+1;
+                    setTurn(f);
                   } else {
                     alert("You selected wrong number");
                   }
