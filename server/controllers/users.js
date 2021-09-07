@@ -52,6 +52,6 @@ export const getUserInRoom = (Id) => {
 
 export const fillNumbers = (Id,userName,num) => {
    var users = arr.filter((user)=> user.roomId === Id)
-   users.map((user) => user.numbers.push(num));
+   users.map((user) => {if(!user.numbers.includes(num)) user.numbers.push(num)});
    return users;
 }
