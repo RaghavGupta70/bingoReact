@@ -60,6 +60,15 @@ const BingoGrid = ({ arrNum, shuffleArr, generate }) => {
     }
   }, []);
 
+  useEffect(() => {
+      
+      console.log(getUsers()[turn],turn)
+      if(turn === getUsers().length )
+      {
+          setTurn(0);
+      }
+  }, [turn])
+
   if (!shuffle) {
     setShuffle(true);
     shuffleArr(arrNum);
@@ -123,28 +132,38 @@ const BingoGrid = ({ arrNum, shuffleArr, generate }) => {
 
               var numLen = getUsers()[0].numbers.length;
               if(numLen === 0){
-                gameValue = {
-                    userName: result,
-                    numberSelected: ar.i,
-                    roomID: roomID,
-                  };
-                  setGameValue(gameValue);
-                  socket.emit("gameValue", gameValue, (error) => {
-                    alert("You bitch");
-                  });
-                  var newArr = [];
-                  for (var p = 0; p < 25; p++) {
-                    if (styleToggle[p]) newArr[p] = true;
-                    else if (p === index) newArr[p] = true;
-                    else newArr[p] = false;
-                  }
-                  console.log(ar);
-                  setStyleToggle(newArr);
-                  var f=turn+1;
-                  setTurn(f);
+                
+                if(getUsers()[turn].userName === result)
+                {
+                     gameValue = {
+                       userName: result,
+                       numberSelected: ar.i,
+                       roomID: roomID,
+                     };
+                     setGameValue(gameValue);
+                     socket.emit("gameValue", gameValue, (error) => {
+                       alert("You bitch");
+                     });
+                     var newArr = [];
+                     for (var p = 0; p < 25; p++) {
+                       if (styleToggle[p]) newArr[p] = true;
+                       else if (p === index) newArr[p] = true;
+                       else newArr[p] = false;
+                     }
+                     console.log(ar);
+                     setStyleToggle(newArr);
+                     var f = turn + 1;
+                     setTurn(f);
+                }
+
+                else
+                {
+                    alert('Ruk Ja Chodu');
+                }
+               
               }
               
-              else if (getUsers()[turn].numbers.userName === result) {
+              else if (getUsers()[turn].userName === result) {
                 gameValue = {
                     userName: result,
                     numberSelected: ar.i,
