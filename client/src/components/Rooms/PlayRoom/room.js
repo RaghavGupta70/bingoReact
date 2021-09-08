@@ -36,12 +36,6 @@ const Room = () => {
        }
    }
 
-   function generator() {
-     const num = Math.floor((Math.random() * 25)+1);
-     return num;
-   }
-    
-
     return (
       <>
         {getToken() != null ? (
@@ -59,7 +53,6 @@ const Room = () => {
             <BingoGrid
               arrNum={bingoNum}
               shuffleArr={shuffleArray}
-              generate={generator}
             />
           </>
         ) : (
