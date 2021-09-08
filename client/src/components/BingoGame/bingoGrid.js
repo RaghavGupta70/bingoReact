@@ -10,7 +10,7 @@ import { getUserName, getUsers } from "../../utils/commonData/common";
 
 let socket;
 
-const BingoGrid = ({ arrNum, shuffleArr}) => {
+const BingoGrid = ({ arrNum }) => {
   const location = useLocation();
   const { roomID } = queryString.parse(location.search, {
     ignoreQueryPrefix: true,
@@ -44,6 +44,9 @@ const BingoGrid = ({ arrNum, shuffleArr}) => {
   //   });
   // }, []);
 
+  // setInterval(() => {
+  //   dependency++;
+  // }, 100);
   const [styleToggle, setStyleToggle] = useState([]);
   const [shuffle, setShuffle] = useState(false);
 
@@ -66,11 +69,14 @@ const BingoGrid = ({ arrNum, shuffleArr}) => {
       }
   }, [turn])
 
-  if (!shuffle) {
+ 
+      if (!shuffle) {
     setShuffle(true);
-    shuffleArr(arrNum);
-    console.log("array="+arrNum);
+    console.log("here",arrNum);
   }
+ 
+  console.log('Random')
+
 
   // console.log(bingoNum)
 
@@ -93,6 +99,7 @@ const BingoGrid = ({ arrNum, shuffleArr}) => {
     arr[t] = obj;
   }
   
+  // const num = generate();
   return (
     <div>
       <GridLayout
