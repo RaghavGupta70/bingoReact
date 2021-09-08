@@ -10,7 +10,7 @@ import { getUserName, getUsers } from "../../utils/commonData/common";
 
 let socket;
 
-const BingoGrid = ({ arrNum, shuffleArr, generate }) => {
+const BingoGrid = ({ arrNum }) => {
   const location = useLocation();
   const { roomID } = queryString.parse(location.search, {
     ignoreQueryPrefix: true,
@@ -35,18 +35,18 @@ const BingoGrid = ({ arrNum, shuffleArr, generate }) => {
   //   });
   // }, [gameValue]);
 
-  useEffect(() => {
-    console.log(turn);
-    socket.on("value", (gameV) => {
-      console.log(gameV);
-      console.log("hello");
-      sessionStorage.setItem("playValue", gameV);
-    });
-  }, []);
+  // useEffect(() => {
+  //   console.log(turn);
+  //   socket.on("value", (gameV) => {
+  //     console.log(gameV);
+  //     console.log("hello");
+  //     sessionStorage.setItem("playValue", gameV);
+  //   });
+  // }, []);
 
-  setInterval(() => {
-    dependency++;
-  }, 100);
+  // setInterval(() => {
+  //   dependency++;
+  // }, 100);
   const [styleToggle, setStyleToggle] = useState([]);
   const [shuffle, setShuffle] = useState(false);
 
@@ -69,11 +69,14 @@ const BingoGrid = ({ arrNum, shuffleArr, generate }) => {
       }
   }, [turn])
 
-  if (!shuffle) {
+ 
+      if (!shuffle) {
     setShuffle(true);
-    shuffleArr(arrNum);
-    console.log("here");
+    console.log("here",arrNum);
   }
+ 
+  console.log('Random')
+
 
   // console.log(bingoNum)
 
@@ -95,7 +98,8 @@ const BingoGrid = ({ arrNum, shuffleArr, generate }) => {
     };
     arr[t] = obj;
   }
-  const num = generate();
+  
+  // const num = generate();
   return (
     <div>
       <GridLayout
