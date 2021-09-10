@@ -40,7 +40,12 @@ io.on('connection',(socket) => {
         if(error) return callback(error);
 
         socket.join(users.roomId);
-        const roomData = { roomId: users.roomId, usersRoom: [userName] };
+        const roomData = {
+          roomId: users.roomId,
+          usersRoom: [userName],
+          played: false,
+          numbers: [],
+        };
         
         socket.emit('room',(roomData), (error) => {
             console.log(error)
@@ -56,7 +61,12 @@ io.on('connection',(socket) => {
         if(err) return console.log(err);
 
         console.log('room',roomNo);
-        const roomData = {roomId: roomNo.roomId,usersRoom: usersInRoom}
+        const roomData = {
+          roomId: roomNo.roomId,
+          usersRoom: usersInRoom,
+          played: false,
+          numbers: [],
+        };
         if(roomNo){
         socket.emit('room',(roomData), (error) => {
             console.log(error);

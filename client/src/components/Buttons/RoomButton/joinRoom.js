@@ -62,7 +62,7 @@ export default function JoinRoom({type}) {
 
     socket.on("room",(roomData,callback)=> {
       setroomId(roomData.roomId);
-      const success = putUsers(roomData.usersRoom);
+      const success = putUsers([roomData]);
       if(success){
       history.push(`/Room?roomID=${roomData.roomId}`);
       }
