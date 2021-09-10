@@ -105,7 +105,8 @@ var h=0;
       h++;
     }
   }
-  console.log(arr)
+  console.log(arr);
+  h=0;
   
   // const num = generate();
   return (
@@ -160,7 +161,7 @@ var h=0;
                      var newArr = [];
                      for (var p = 0; p < 25; p++) {
                        if (styleToggle[p]) newArr[p] = true;
-                       else if (p === index) newArr[p] = true;
+                       else if (p === h) newArr[p] = true;
                        else newArr[p] = false;
                      }
                      console.log(ar);
@@ -189,7 +190,7 @@ var h=0;
                   var newArr = [];
                   for (var p = 0; p < 25; p++) {
                     if (styleToggle[p]) newArr[p] = true;
-                    else if (p === index) newArr[p] = true;
+                    else if (p === h) newArr[p] = true;
                     else newArr[p] = false;
                   }
                   console.log(ar);
@@ -217,7 +218,7 @@ var h=0;
                     var newArr = [];
                     for (var p = 0; p < 25; p++) {
                       if (styleToggle[p]) newArr[p] = true;
-                      else if (p === index) newArr[p] = true;
+                      else if (p === h) newArr[p] = true;
                       else newArr[p] = false;
                     }
                     console.log(ar);
@@ -237,19 +238,13 @@ var h=0;
                 position: "absolute",
                 left: "7px",
                 fontSize: "18px",
-                visibility: styleToggle[index] ? "visible" : "hidden",
+                visibility: styleToggle[h] ? "visible" : "hidden",
               }}
             />
           </div>
-          ))
-          
+          ) )
         ))}
       </GridLayout>
-      {arr.map((row)=>(
-         row.map((val)=>(
-          <p>{val.i}</p>
-        ))
-      ))}
     </div>
   );
 };
