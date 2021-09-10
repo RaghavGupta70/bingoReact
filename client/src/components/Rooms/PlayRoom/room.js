@@ -42,7 +42,7 @@ console.log('Chal ja Bhadwe');
     setUsersRoom(getUsers());
     members = usersRoom.filter((user) => user.userName !== currentUser);
     setMessages(getUsers()[0].numbers);
-  }, [getUsers().length]);
+  }, [getUsers()[0]]);
 
   // function generator() {
   //   const num = Math.floor(Math.random() * 25 + 1);
