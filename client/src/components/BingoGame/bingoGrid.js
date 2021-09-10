@@ -19,7 +19,7 @@ const BingoGrid = ({ arrNum }) => {
   let dependency = 0;
   const [turn,setTurn] = useState(0);
 
-  var arr = [];
+  var arr = new Array(5);
   useEffect(() => {
     socket = io(ENDPOINT);
   }, [ENDPOINT]);
@@ -29,6 +29,10 @@ const BingoGrid = ({ arrNum }) => {
     numberSelected: null,
     roomID: roomID,
   });
+  for (var i = 0; i < arr.length; i++) {
+    arr[i] = new Array(5);
+}
+var h=0;
   // useEffect(() => {
   //   socket.emit("gameValue", (gameValue), (error) => {
   //     alert("You bitch");
@@ -88,16 +92,20 @@ const BingoGrid = ({ arrNum }) => {
     h: 2,
   };
 
-  for (var t = 0; t < 25; t++) {
-    obj = {
-      i: arrNum[t].toString(),
-      x: t % 5,
-      y: 0,
-      w: 1,
-      h: 1,
-    };
-    arr[t] = obj;
+  for (var t = 0; t < 5; t++) {
+    for(var j=0;j<5;j++){
+      obj = {
+        i: arrNum[h].toString(),
+        x: h % 5,
+        y: 0,
+        w: 1,
+        h: 1,
+      };
+      arr[t][j] = obj;
+      h++;
+    }
   }
+  console.log(arr)
   
   // const num = generate();
   return (
@@ -115,8 +123,9 @@ const BingoGrid = ({ arrNum }) => {
           margin: "auto",
         }}
       >
-        {arr.map((ar, index) => (
-          <div
+        {arr.map((row, index) => (
+          row.map((ar,ind)=>(
+            <div
             style={{
               display: "flex",
               justifyContent: "center",
@@ -232,8 +241,15 @@ const BingoGrid = ({ arrNum }) => {
               }}
             />
           </div>
+          ))
+          
         ))}
       </GridLayout>
+      {arr.map((row)=>(
+         row.map((val)=>(
+          <p>{val.i}</p>
+        ))
+      ))}
     </div>
   );
 };
