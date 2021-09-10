@@ -20,6 +20,7 @@ const BingoGrid = ({ arrNum }) => {
   const [turn,setTurn] = useState(0);
 
   var arr = new Array(5);
+  var ar = new Array(25);
   useEffect(() => {
     socket = io(ENDPOINT);
   }, [ENDPOINT]);
@@ -105,14 +106,26 @@ var h=0;
       h++;
     }
   }
-  console.log(arr);
-  h=0;
+
+  
+  for (var t = 0; t < 25; t++) {
+      obj = {
+        i: arrNum[t].toString(),
+        x: t % 5,
+        y: 0,
+        w: 1,
+        h: 1,
+      };
+      ar[t] = obj;
+    }
+  
+  console.log(arr)
   
   // const num = generate();
   return (
     <div>
       <GridLayout
-        layout={arr}
+        layout={ar}
         cols={12}
         colHeight={20}
         rowHeight={30}
@@ -124,88 +137,33 @@ var h=0;
           margin: "auto",
         }}
       >
-        {arr.map((row, index) => (
-          row.map((ar,ind)=>(
+        {arr.map((row, index) =>
+          row.map((ar, ind) => (
             <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              border: "1px solid black",
-              alignItems: "center",
-              borderRadius: "4px",
-              margin: "auto",
-            }}
-            key={ar.i}
-            onClick={(e) => {
-              console.log(e.target, ar.i);
-              // if(ar.i !== num.toString()){
-              //     console.log("Error")
-              //     return;
-              // }
-              let result = getUserName();
-
-              var numLen = getUsers()[0].numbers.length;
-              if(numLen === 0){
-                
-                if(getUsers()[turn].userName === result)
-                {
-                     gameValue = {
-                       userName: result,
-                       numberSelected: ar.i,
-                       roomID: roomID,
-                     };
-                     setGameValue(gameValue);
-                     socket.emit("gameValue", gameValue, (error) => {
-                       alert("You bitch");
-                     });
-                     var newArr = [];
-                     for (var p = 0; p < 25; p++) {
-                       if (styleToggle[p]) newArr[p] = true;
-                       else if (p === h) newArr[p] = true;
-                       else newArr[p] = false;
-                     }
-                     console.log(ar);
-                     setStyleToggle(newArr);
-                     var f = turn + 1;
-                     setTurn(f);
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                border: "1px solid black",
+                alignItems: "center",
+                borderRadius: "4px",
+                margin: "auto",
+              }}
+              key={ar.i}
+              onClick={(e) => {
+                if (getUsers().length === 1) {
+                  alert("You are the only one here");
+                  return;
                 }
+                console.log(e.target, ar.i);
+                // if(ar.i !== num.toString()){
+                //     console.log("Error")
+                //     return;
+                // }
+                let result = getUserName();
 
-                else
-                {
-                    alert('Ruk Ja Chodu');
-                }
-               
-              }
-              
-              else if (getUsers()[turn].userName === result) {
-                gameValue = {
-                    userName: result,
-                    numberSelected: ar.i,
-                    roomID: roomID,
-                  };
-                  setGameValue(gameValue);
-                  socket.emit("gameValue", gameValue, (error) => {
-                    alert("You bitch");
-                  });
-                  var newArr = [];
-                  for (var p = 0; p < 25; p++) {
-                    if (styleToggle[p]) newArr[p] = true;
-                    else if (p === h) newArr[p] = true;
-                    else newArr[p] = false;
-                  }
-                  console.log(ar);
-                  setStyleToggle(newArr);
-                  var f=turn+1;
-                  setTurn(f);
-              } 
-              
-              else {
-                if (getUsers()[0].numbers[numLen - 1].userName === result) {
-                  alert("Keep Your Calm Boi");
-                } 
-                
-                else {
-                  if (getUsers()[0].numbers[numLen - 1].value === ar.i) {
+                var numLen = getUsers()[0].numbers.length;
+                if (numLen === 0) {
+                  if (getUsers()[turn].userName === result) {
                     gameValue = {
                       userName: result,
                       numberSelected: ar.i,
@@ -218,32 +176,81 @@ var h=0;
                     var newArr = [];
                     for (var p = 0; p < 25; p++) {
                       if (styleToggle[p]) newArr[p] = true;
-                      else if (p === h) newArr[p] = true;
+                      else if (p === index * 5 + ind) newArr[p] = true;
                       else newArr[p] = false;
                     }
                     console.log(ar);
                     setStyleToggle(newArr);
-                    var f=turn+1;
+                    var f = turn + 1;
                     setTurn(f);
                   } else {
-                    alert("You selected wrong number");
+                    alert("Ruk Ja Chodu");
+                  }
+                } else if (getUsers()[turn].userName === result) {
+                  gameValue = {
+                    userName: result,
+                    numberSelected: ar.i,
+                    roomID: roomID,
+                  };
+                  setGameValue(gameValue);
+                  socket.emit("gameValue", gameValue, (error) => {
+                    alert("You bitch");
+                  });
+                  var newArr = [];
+                  for (var p = 0; p < 25; p++) {
+                    if (styleToggle[p]) newArr[p] = true;
+                    else if (p === index * 5 + ind) newArr[p] = true;
+                    else newArr[p] = false;
+                  }
+                  console.log(ar);
+                  setStyleToggle(newArr);
+                  var f = turn + 1;
+                  setTurn(f);
+                } else {
+                  if (getUsers()[0].numbers[numLen - 1].userName === result) {
+                    alert("Keep Your Calm Boi");
+                  } else {
+                    if (getUsers()[0].numbers[numLen - 1].value === ar.i) {
+                      gameValue = {
+                        userName: result,
+                        numberSelected: ar.i,
+                        roomID: roomID,
+                      };
+                      setGameValue(gameValue);
+                      socket.emit("gameValue", gameValue, (error) => {
+                        alert("You bitch");
+                      });
+                      var newArr = [];
+                      for (var p = 0; p < 25; p++) {
+                        if (styleToggle[p]) newArr[p] = true;
+                        else if (p === index * 5 + ind) newArr[p] = true;
+                        else newArr[p] = false;
+                      }
+                      console.log(ar);
+                      setStyleToggle(newArr);
+                      var f = turn + 1;
+                      setTurn(f);
+                    } else {
+                      alert("You selected wrong number");
+                    }
                   }
                 }
-              }
-            }}
-          >
-            {ar.i}
-            <FaSlash
-              style={{
-                position: "absolute",
-                left: "7px",
-                fontSize: "18px",
-                visibility: styleToggle[h] ? "visible" : "hidden",
               }}
-            />
-          </div>
-          ) )
-        ))}
+            >
+              {ar.i}
+              <FaSlash
+                style={{
+                  position: "absolute",
+                  left: "7px",
+                  fontSize: "18px",
+                  visibility: styleToggle[index * 5 + ind]
+                    ? "visible"
+                    : "hidden",
+                }}
+              />
+            </div>
+          ))
+        )}
       </GridLayout>
     </div>
   );
