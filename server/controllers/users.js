@@ -59,7 +59,7 @@ export const fillNumbers = (Id,userName,num) => {
    var users = arr.filter((user)=> user.roomId === Id)
    console.log(users);
    var obj = {userName: userName,value: num};
-//    users.map((user) => {user.numbers.find(number)=>{number.value=== num}});
+// users.map((user) => {user.numbers.find(number)=>{number.value=== num}});
 users.map((user) => {if(!user.numbers.find(numb => numb.value === num)){user.numbers.push(obj)}});
 
    return users;

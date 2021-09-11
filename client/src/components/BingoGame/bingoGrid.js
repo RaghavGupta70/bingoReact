@@ -73,12 +73,11 @@ var h=0;
           setTurn(0);
       }
   }, [turn])
-
  
       if (!shuffle) {
     setShuffle(true);
     console.log("here",arrNum);
-  }
+   }
  
   console.log('Random')
 
@@ -106,7 +105,6 @@ var h=0;
       h++;
     }
   }
-
   
   for (var t = 0; t < 25; t++) {
       obj = {
@@ -121,7 +119,6 @@ var h=0;
   
   console.log(arr)
   
-  // const num = generate();
   return (
     <div>
       <GridLayout
