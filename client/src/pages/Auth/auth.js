@@ -9,7 +9,7 @@ import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import useStyles from "./styles.js";
+import useStyles from "./authStyles.js";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { SignUpUser, SignInUser, GoogleSignIn } from "../../actions/index.js";

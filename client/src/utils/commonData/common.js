@@ -3,6 +3,11 @@ const getToken = () => {
     return token;
 }
 
+const getType = () => {
+  const type = sessionStorage.getItem('currentType');
+  return type;
+}
+
 const getUsers = () => {
   const allUsers = JSON.parse(sessionStorage.getItem('usersRoom'));
   return allUsers;
@@ -20,4 +25,4 @@ const getUserName = () => {
 const getPlayValue = () => {
   return sessionStorage.getItem('playValue');
 }
-export {getToken,putUsers,getUsers,getUserName,getPlayValue};
+export {getToken,getType,putUsers,getUsers,getUserName,getPlayValue};

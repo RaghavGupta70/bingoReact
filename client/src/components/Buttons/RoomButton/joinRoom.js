@@ -65,6 +65,7 @@ export default function JoinRoom({type}) {
       setroomId(roomData.roomId);
       const success = putUsers([roomData]);
       if(success){
+        sessionStorage.setItem('currentType','Creator');
       history.push(`/Room?roomID=${roomData.roomId}`);
       }
       else{
@@ -91,6 +92,7 @@ export default function JoinRoom({type}) {
        setroomId(roomData.roomId);
        const success = putUsers(roomData.usersRoom);
        if (success) {
+        sessionStorage.setItem("currentType", "NonCreator");
          history.push(`/Room?roomID=${roomData.roomId}`);
        } else {
          history.push("/");

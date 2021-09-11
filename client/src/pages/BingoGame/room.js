@@ -3,8 +3,11 @@ import queryString from "query-string";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 // import { getUserInRoom } from "../../../../../server/controllers/users";
+import BingoImage from '../../assets/images/bingoGame.png';
+import PlayButton from "../../components/Buttons/PlayButton/playButton";
 import {
   getToken,
+  getType,
   getUsers,
   getPlayValue,
 } from "../../utils/commonData/common";
@@ -14,6 +17,7 @@ const Room = () => {
   // var temp = [];
   const location = useLocation();
   const bingoNum=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
+  const [play,setPlay] = useState(true);
   const [messages, setMessages] = useState([]);
   var [usersRoom, setUsersRoom] = useState(getUsers());
   const currentUserInfo = JSON.parse(localStorage.getItem("user"));
@@ -25,6 +29,11 @@ const Room = () => {
   
   // useEffect(() => {
     // setBingoNum(temp);
+
+    const handlePlay = (e) => {
+      e.preventDefault();
+      setPlay(false);
+    }
 
     for (let i = bingoNum.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -55,19 +64,31 @@ console.log('Chal ja Bhadwe');
         <>
           <span>Room Id:-{roomID}</span>
           <h1>Members in Room</h1>
-          <ul>
-            {members.map((member) => (
-              <li>{member.userName}</li>
-            ))}
-            {messages ? (
-              <>
-                {" "}
-                <li>{messages.map((val) => val.userName)}</li>
-                <li>{messages.map((val) => val.value)}</li>
-              </>
-            ) : null}
-          </ul>
-          <BingoGrid arrNum={bingoNum} />
+          {play ? (
+            <>
+            <img src={BingoImage} />
+            {getType() === 'Creator'?
+            <PlayButton onClick={handlePlay}/>
+            :<h4>Waiting for the host to start the game!</h4>}
+            </>
+          ) : (
+            <>
+              {" "}
+              <ul>
+                {members.map((member) => (
+                  <li>{member.userName}</li>
+                ))}
+                {messages ? (
+                  <>
+                    {" "}
+                    <li>{messages.map((val) => val.userName)}</li>
+                    <li>{messages.map((val) => val.value)}</li>
+                  </>
+                ) : null}
+              </ul>
+              <BingoGrid arrNum={bingoNum} />
+            </>
+          )}
         </>
       ) : (
         <>
