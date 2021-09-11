@@ -22,6 +22,7 @@ const BingoGrid = ({ arrNum }) => {
   let dependency = 0;
   const [turn,setTurn] = useState(0);
 
+
   var arr = new Array(5);
   var ar = new Array(25);
   useEffect(() => {
@@ -62,35 +63,7 @@ var h=0;
     styleToggle.push(false);
   }
 
-  useEffect(() => {
-    if(performance.navigation.type === performance.navigation.TYPE_RELOAD){
-      const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-success',
-          cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
-      })
-      
-      swalWithBootstrapButtons.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, Exit Game!',
-        cancelButtonText: 'No, cancel!',
-        reverseButtons: true
-      }).then((result) => {
-        if (result.isConfirmed) {
-          history.push('/home')
-        } else if (
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-          
-        }
-      });
-    }
-  },[]);
+
 
   useEffect(() => {
       

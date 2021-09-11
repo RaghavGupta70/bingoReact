@@ -1,7 +1,7 @@
 // import { set } from "mongoose";
 import queryString from "query-string";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation,useHistory } from "react-router-dom";
 import Swal from 'sweetalert2';
 // import { getUserInRoom } from "../../../../../server/controllers/users";
 import BingoImage from '../../assets/images/bingoGame.png';
@@ -17,8 +17,10 @@ import BingoGrid from "../../components/BingoGame/bingoGrid.js";
 const Room = () => {
   // var temp = [];
   const location = useLocation();
+  const history = useHistory();
   const bingoNum=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
   const [play,setPlay] = useState(true);
+    const [reload, setReload] = useState(0);
   const [messages, setMessages] = useState([]);
   var [usersRoom, setUsersRoom] = useState(getUsers());
   const currentUserInfo = JSON.parse(localStorage.getItem("user"));
@@ -35,6 +37,38 @@ const Room = () => {
       e.preventDefault();
       setPlay(false);
     }
+      useEffect(() => {
+        const swalWithBootstrapButtons = Swal.mixin({
+          customClass: {
+            confirmButton: "btn btn-success",
+            cancelButton: "btn btn-danger",
+          },
+          buttonsStyling: false,
+        });
+
+        swalWithBootstrapButtons
+          .fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Yes, Exit Game!",
+            cancelButtonText: "No, cancel!",
+            reverseButtons: true,
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              history.push("/home");
+            } else if (result.dismiss === Swal.DismissReason.cancel) {
+            }
+          });
+      }, [reload]);
+
+      // useEffect(() => {
+      //   setReload(
+      //     performance.navigation.type === performance.navigation.TYPE_RELOAD
+      //   );
+      // }, []);
 
     for (let i = bingoNum.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
