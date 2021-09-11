@@ -2,14 +2,13 @@
 import queryString from "query-string";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Swal from 'sweetalert2';
 // import { getUserInRoom } from "../../../../../server/controllers/users";
 import {
   getToken,
   getUsers,
   getPlayValue,
-} from "../../utils/commonData/common";
-import BingoGrid from "../../components/BingoGame/bingoGrid.js";
+} from "../../../utils/commonData/common";
+import BingoGrid from "../../BingoGame/bingoGrid.js";
 
 const Room = () => {
   // var temp = [];
@@ -31,11 +30,7 @@ const Room = () => {
       const j = Math.floor(Math.random() * (i + 1));
       [bingoNum[i], bingoNum[j]] = [bingoNum[j], bingoNum[i]];
     }
-  // }, []);
 
-  // for (var h = 0; h < 25; h++) {
-  //   temp.push(h+1);
-  // }
 
 console.log('Chal ja Bhadwe');
 

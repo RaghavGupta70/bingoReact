@@ -5,7 +5,9 @@ import { Container, Grid } from "@material-ui/core";
 import GridLayout from "react-grid-layout";
 import { FaSlash } from "react-icons/fa";
 import { io } from "socket.io-client";
+import Swal from 'sweetalert2';
 import { getUserName, getUsers } from "../../utils/commonData/common";
+import {useHistory} from 'react-router-dom';
 
 let socket;
 
@@ -15,6 +17,7 @@ const BingoGrid = ({ arrNum }) => {
   const { roomID } = queryString.parse(location.search, {
     ignoreQueryPrefix: true,
   });
+  const history = useHistory();
   const ENDPOINT = "localhost:5000";
   let dependency = 0;
   const [turn,setTurn] = useState(0);
@@ -60,11 +63,34 @@ var h=0;
   }
 
   useEffect(() => {
-    if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
-      alert('Game is If you still want to refresh then your game will over.')
-      setShuffle(false);
+    if(performance.navigation.type === performance.navigation.TYPE_RELOAD){
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+      
+      swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, Exit Game!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          history.push('/home')
+        } else if (
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          
+        }
+      });
     }
-  }, []);
+  },[]);
 
   useEffect(() => {
       
