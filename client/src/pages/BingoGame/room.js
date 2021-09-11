@@ -7,8 +7,8 @@ import {
   getToken,
   getUsers,
   getPlayValue,
-} from "../../../utils/commonData/common";
-import BingoGrid from "../../BingoGame/bingoGrid.js";
+} from "../../utils/commonData/common";
+import BingoGrid from "../../components/BingoGame/bingoGrid.js";
 
 const Room = () => {
   // var temp = [];

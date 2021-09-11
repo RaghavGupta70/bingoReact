@@ -1,8 +1,8 @@
 import React,{ useEffect } from "react";
 import { useHistory } from 'react-router-dom'; 
-import JoinRoom from "../../Buttons/RoomButton/joinRoom.js"
+import JoinRoom from "../../components/Buttons/RoomButton/joinRoom.js"
 import { io } from "socket.io-client";
-import Navbar from '../../Navbar/navbar.jsx';
+import Navbar from '../../components/Navbar/navbar.jsx';
 
 function Home({token}) {
     const history = useHistory();

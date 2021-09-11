@@ -9,6 +9,7 @@ import { putUsers } from '../../../utils/commonData/common';
 import './styles.css';
 
 let socket;
+
 const useStyles = makeStyles((theme) => ({
   modal: {
     display: 'flex',

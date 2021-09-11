@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import ProfileBox from "../../components/ProfileBox/profileBox";
-import DonutChart from "../../components/DonutChart/donutChart";
+import DonutChart from "../../components/Charts/DonutChart/donutChart";
 import PrStyles from "./Profile.module.css";
-import BarChart from "../../components/BarChart/barChart";
+import BarChart from "../../components/Charts/BarChart/barChart";
 import ToggleProf from "../../components/Toggle/ToggleProf";
-import LineChart from "../../components/LineChart/lineChart";
-import PieChart from "../../components/PieChart/pieChart";
+import LineChart from "../../components/Charts/LineChart/lineChart";
+import PieChart from "../../components/Charts/PieChart/pieChart";
 import ReactSelect from "../../components/ReactSelect/ReactSelect";
 import { opponentData } from "../../utils/constantData/constantData";
 

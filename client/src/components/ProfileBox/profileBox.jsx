@@ -1,7 +1,7 @@
 import React from 'react';
 import './profile.css';
 import Image from 'react-bootstrap/Image';
-import bingo_bg from '../../images/bingo_bg.png';
+import bingo_bg from '../../assets/images/bingo_bg.png';
 import {MailOutline,Done,FiberManualRecord,Cancel} from '@material-ui/icons';
 import { RiMedalFill } from 'react-icons/ri';
 import { GiPodiumWinner } from 'react-icons/gi';

@@ -1,5 +1,5 @@
 import * as api from "../api/index.js";
-import Auth from "../components/Authentication/auth.jsx";
+import Auth from "../pages/Auth/auth";
 import { FETCH,AUTH,CHECK } from "../constants/actionTypes.js";
 
 

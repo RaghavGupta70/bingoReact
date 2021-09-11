@@ -4,9 +4,9 @@ Switch,
 Link,
 Route,useHistory,useLocation} from "react-router-dom";
 
-import Auth from "./components/Authentication/auth.jsx";
-import Home from "./components/main/home/home";
-import Room from "./components/Rooms/PlayRoom/room.js";
+import Auth from "./pages/Auth/auth";
+import Home from "./pages/Home/home";
+import Room from "./pages/BingoGame/room.js";
 import LeaderBoard from "./pages/LeaderBoard/leaderBoard.js";
 import Profile from "./pages/Profile/Profile.js";
 import Navbar from "./components/Navbar/navbar.jsx";

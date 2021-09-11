@@ -4,13 +4,13 @@ import queryString from "query-string";
 import { Container, Grid } from "@material-ui/core";
 import GridLayout from "react-grid-layout";
 import { FaSlash } from "react-icons/fa";
-import NumberSelector from "./numberSelector";
 import { io } from "socket.io-client";
 import { getUserName, getUsers } from "../../utils/commonData/common";
 
 let socket;
 
 const BingoGrid = ({ arrNum }) => {
+
   const location = useLocation();
   const { roomID } = queryString.parse(location.search, {
     ignoreQueryPrefix: true,
