@@ -11,3 +11,5 @@ const PlayButton = () => {
         </div>
     );
 }
+
+export default PlayButton;
