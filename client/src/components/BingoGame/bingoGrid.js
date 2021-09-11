@@ -61,6 +61,7 @@ var h=0;
 
   useEffect(() => {
     if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+      alert('Game is If you still want to refresh then your game will over.')
       setShuffle(false);
     }
   }, []);
