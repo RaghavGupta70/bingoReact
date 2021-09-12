@@ -5,8 +5,8 @@ const PlayButton = ({onClick}) => {
 
 
     return (
-        <div className={PlayStyles.wrapper}>
-          <a href="#" onClick={onClick}>
+        <div className={PlayStyles.wrapperes}>
+          <a className={PlayStyles.anchor} href="#" onClick={onClick}>
             <span>Start Bingo!</span>
           </a>
         </div>

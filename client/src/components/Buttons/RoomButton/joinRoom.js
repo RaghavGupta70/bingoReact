@@ -6,6 +6,7 @@ import Fade from '@material-ui/core/Fade';
 import { io } from "socket.io-client";
 import {useHistory} from "react-router-dom";
 import { putUsers } from '../../../utils/commonData/common';
+import CreateButton from '../HomeRoomButton/createButton';
 import './styles.css';
 
 let socket;
@@ -103,12 +104,8 @@ export default function JoinRoom({type}) {
   
   return (
     <div class="buttonContainer">
-       <button type="button" onClick={handleClick} class="create" >
-        Create Room
-        </button>
-      <button type="button" onClick={handleOpen} class="join" >
-        Join Room
-      </button>
+       <CreateButton text={"Create Room"} onclick={handleClick} />
+       <CreateButton text={"Join Room"} onclick={handleOpen} />
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
