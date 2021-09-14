@@ -23,7 +23,7 @@ const Room = () => {
   const ENDPOINT = "localhost:5000";
   const history = useHistory();
   const bingoNum=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
-  const [play,setPlay] = useState(true);
+  const [play,setPlay] = useState(false);
   const [messages, setMessages] = useState([]);
   var [usersRoom, setUsersRoom] = useState(getUsers());
   const currentUserInfo = JSON.parse(localStorage.getItem("user"));
@@ -39,11 +39,18 @@ const Room = () => {
       socket = io(ENDPOINT);
     }, [ENDPOINT]);
 
+    useEffect(() => {
+      socket.on('message',(played) =>{
+        console.log('You called me')
+        setPlay(played);
+            })
+    },[])
+
 
     const handlePlay = (e) => {
       e.preventDefault();
       setPlay(true);
-      socket.emit('play',(roomID,play),(error) => {
+      socket.emit('play',(roomID),(error) => {
         console.log('You played');
       })
     }
@@ -103,11 +110,11 @@ const Room = () => {
 
 console.log('Chal ja Bhadwe');
 
-  useEffect(() => {
-    setUsersRoom(getUsers());
-    members = usersRoom.filter((user) => user.userName !== currentUser);
-    setMessages(getUsers()[0].numbers);
-  }, [getUsers()[0]]);
+  // useEffect(() => {
+  //   setUsersRoom(getUsers());
+  //   members = usersRoom.filter((user) => user.userName !== currentUser);
+  //   setMessages(getUsers()[0].numbers);
+  // }, [getUsers()[0]]);
 
   // function generator() {
   //   const num = Math.floor(Math.random() * 25 + 1);

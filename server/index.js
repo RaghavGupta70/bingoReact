@@ -53,8 +53,11 @@ io.on('connection',(socket) => {
         console.log(users.roomId)
     })
 
-    socket.on('play',(roomID,play,callback) => {
-        
+    socket.on('play',(roomID,callback) => {
+        console.log(roomID,'here i am')
+        const played = true;
+        const roomId = roomID.toString();
+        socket.broadcast.emit('message',(played));
     })
 
     socket.on('join',async(Id,userName,callback) =>{
