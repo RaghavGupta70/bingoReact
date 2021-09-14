@@ -53,6 +53,10 @@ io.on('connection',(socket) => {
         console.log(users.roomId)
     })
 
+    socket.on('play',(roomID,play,callback) => {
+        
+    })
+
     socket.on('join',async(Id,userName,callback) =>{
         const {err,roomNo} = await room.joinRoom(Id,userName);
         const usersInRoom = room.getUserInRoom(Id);
@@ -64,7 +68,6 @@ io.on('connection',(socket) => {
         const roomData = {
           roomId: roomNo.roomId,
           usersRoom: usersInRoom,
-          played: false,
           numbers: [],
         };
         if(roomNo){

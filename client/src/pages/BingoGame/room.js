@@ -2,7 +2,8 @@
 import queryString from "query-string";
 import React, { useEffect, useState } from "react";
 import { useLocation,useHistory } from "react-router-dom";
-import Swal from 'sweetalert2';
+import { io } from "socket.io-client";
+import Swal from "sweetalert2";
 // import { getUserInRoom } from "../../../../../server/controllers/users";
 import BingoImage from '../../assets/images/bingoGame.png';
 import PlayButton from "../../components/Buttons/PlayButton/playButton";
@@ -14,12 +15,15 @@ import {
 } from "../../utils/commonData/common";
 import BingoGrid from "../../components/BingoGame/bingoGrid.js";
 
+let socket;
+
 const Room = () => {
   // var temp = [];
   const location = useLocation();
+  const ENDPOINT = "localhost:5000";
   const history = useHistory();
   const bingoNum=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
-  const [play,setPlay] = useState(true);
+  const [play,setPlay] = useState(false);
     const [reload, setReload] = useState(0);
   const [messages, setMessages] = useState([]);
   var [usersRoom, setUsersRoom] = useState(getUsers());
@@ -32,10 +36,17 @@ const Room = () => {
   
   // useEffect(() => {
     // setBingoNum(temp);
+    useEffect(() => {
+      socket = io(ENDPOINT);
+    }, [ENDPOINT]);
+
 
     const handlePlay = (e) => {
       e.preventDefault();
-      setPlay(false);
+      setPlay(true);
+      socket.emit('play',(roomID,play),(error) => {
+        console.log('You played');
+      })
     }
       useEffect(() => {
         const swalWithBootstrapButtons = Swal.mixin({
@@ -99,7 +110,7 @@ console.log('Chal ja Bhadwe');
         <>
           <span>Room Id:-{roomID}</span>
           <h1>Members in Room</h1>
-          {play ? (
+          {!play ? (
             <>
             <img src={BingoImage} />
             {getType() === 'Creator'?

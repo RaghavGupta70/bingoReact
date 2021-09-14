@@ -45,7 +45,7 @@ export const joinRoom = async(Id, userName) => {
 
     if(c === 4)
      return {error:'Room is already full'};
-     const roomNo ={roomId: Id,userName: userName,played: true,numbers:[]}
+     const roomNo ={roomId: Id,userName: userName,numbers:[]}
       console.log(validRoom);
       arr.push(roomNo)
       return {roomNo};
@@ -64,3 +64,9 @@ users.map((user) => {if(!user.numbers.find(numb => numb.value === num)){user.num
 
    return users;
 }
+
+export const setPlayforAll = (roomID,play) => {
+   var users = arr.filter((user) => user.roomId === roomID);
+   
+   return users.map((user)=> (user.played=play));
+} 
