@@ -40,7 +40,7 @@ const Room = () => {
     }, [ENDPOINT]);
 
     useEffect(() => {
-      socket.on('message',(played) =>{
+      socket.on('playStart',(played) =>{
         console.log('You called me')
         setPlay(played);
             })
