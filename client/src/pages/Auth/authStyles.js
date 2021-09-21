@@ -4,7 +4,8 @@ const useStyles = makeStyles((theme) => ({
     root : {
         background:'radial-gradient(circle,rgb(33, 7, 176),rgb(4,0,90))', 
         paddingTop:'2.5rem',
-        paddingBottom:'1rem'
+        paddingBottom:'1rem',
+        height:'100vh'
     },
     paper: {
       display: 'flex',
