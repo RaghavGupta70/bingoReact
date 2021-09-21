@@ -15,7 +15,7 @@ export default function LogoutButton() {
   return (
     <Tooltip title="Logout">
     <Button variant="contained" color="primary" disableElevation onClick={handleClick}>
-      <ExitToApp />
+      Logout
     </Button>
     </Tooltip>
   );

@@ -3,6 +3,7 @@ import NavStyles from './navbar.module.css';
 import CustomizedButtons from '../Buttons/NavbarButtons/commonButton';
 import LogoutButton from '../Buttons/LogOut/Logout';
 import { useHistory } from 'react-router';
+import logo from '../Logo/bingoLogo.gif';
 
 const Navbar = ({personChar}) => {
 
@@ -19,7 +20,7 @@ const Navbar = ({personChar}) => {
     <>
     <div className={NavStyles.main_container}>
       <div className={NavStyles.leftArea}>
-        <h1>Bingo Game</h1>
+        <img src={logo} />
       </div>
 
       <div className={NavStyles.rightArea}>
