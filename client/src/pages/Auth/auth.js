@@ -201,15 +201,15 @@ export default function Auth({ type, setToken }) {
       <Container maxWidth="xs">
         <CssBaseline />
         <div
-          style={{ padding: type === "SignUp" ? "15px" : "22px" }}
+          style={{ padding: type === "SignUp" ? "15px" : "22px",}}
           className={classes.paper}
         >
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <h3>
             {type}
-          </Typography>
+          </h3>
           <div className={classes.form}>
             <TextField
               variant="outlined"

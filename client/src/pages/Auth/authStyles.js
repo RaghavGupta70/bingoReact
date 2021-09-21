@@ -1,10 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
-import background from "../../assets/images/background_login.gif";
 
 const useStyles = makeStyles((theme) => ({
     root : {
-        background: `url(${background})`,
-        backgroundRepeat:'no-repeat center center',
+        background:'radial-gradient(circle,rgb(33, 7, 176),rgb(4,0,90))', 
         paddingTop:'2.5rem',
         paddingBottom:'1rem'
     },
@@ -28,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
     form: {
       width: '100%', // Fix IE 11 issue.
       marginTop: theme.spacing(1),
+      color:'rgb(4,0,90)'
     },
     submit: {
       margin: theme.spacing(3, 0, 2),
