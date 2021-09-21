@@ -1,0 +1,8 @@
+@font-face {
+  font-family: "lithospro_black";
+  src: url("./assets/fonts/Lithos\ Pro\ Black.ttf");
+}
+
+body{
+    font-family: 'lithospro_black';  
+}
