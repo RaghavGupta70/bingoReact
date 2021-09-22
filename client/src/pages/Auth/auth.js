@@ -280,13 +280,13 @@ export default function Auth({ type, setToken }) {
             <Grid container>
               {type === "SignIn" ? (
                 <Grid item xs>
-                  <Link href="#" className={classes.link} variant="body2">
+                  <Link href="#" className={classes.link}>
                     Forgot password?
                   </Link>
                 </Grid>
               ) : null}
               {type === "SignIn" ? (
-                <Link className={classes.link} href="/SignUp" variant="body2">
+                <Link style={{marginTop:'3px'}} className={classes.link} href="/SignUp">
                   {"Don't have an account? Sign Up"}
                 </Link>
               ) : (

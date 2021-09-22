@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
         background:'radial-gradient(circle,rgb(33, 7, 176),rgb(4,0,90))', 
         paddingTop:'2.5rem',
         paddingBottom:'1rem',
-        height:'100vh'
+        height:'120vh'
     },
     paper: {
       display: 'flex',
@@ -32,10 +32,10 @@ const useStyles = makeStyles((theme) => ({
     submit: {
       margin: theme.spacing(3, 0, 2),
       borderRadius:'6px',
-      backgroundColor:'#673ab7',
+      backgroundColor:'rgb(33, 7, 176)',
       color:'white',
       '&:hover':{
-        backgroundColor:'#ec407a'
+        backgroundColor:'rgb(4,0,90)'
       }
     },
     link: {
@@ -44,7 +44,9 @@ const useStyles = makeStyles((theme) => ({
       '&:hover':{
          color:'#673ab7',
          textDecoration:'none'
-      }
+      },
+      // fontFamily:'lithospro_black',
+      fontSize:'75%'
     },
     google:{
       backgroundColor:'red',
