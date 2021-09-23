@@ -4,7 +4,7 @@ export const getProfile = async(req,res) => {
     const email = req.params;
     console.log(email);
     try {
-        const user = await Profile.find({emailId: email.email});
+        const user = await Profile.find({emailId: email});
         if(!user) return res.status(409).json('User not found');
 
         return res.status(201).json(user);
