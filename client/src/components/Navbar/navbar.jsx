@@ -3,7 +3,7 @@ import NavStyles from './navbar.module.css';
 import CustomizedButtons from '../Buttons/NavbarButtons/commonButton';
 import LogoutButton from '../Buttons/LogOut/Logout';
 import { useHistory } from 'react-router';
-import logo from '../Logo/bingoLogo.gif';
+import logo from '../../assets/images/bingoLogo.gif';
 
 const Navbar = ({personChar}) => {
 

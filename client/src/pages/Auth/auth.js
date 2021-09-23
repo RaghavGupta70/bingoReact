@@ -17,6 +17,7 @@ import PropTypes from "prop-types";
 import { GoogleLogin } from "react-google-login";
 import Icon from "./icon.jsx";
 import passwordValidator from "password-validator";
+import Logo from '../../assets/images/bingoLogo.gif';
 
 function Copyright() {
   return (
@@ -204,9 +205,7 @@ export default function Auth({ type, setToken }) {
           style={{ padding: type === "SignUp" ? "15px" : "22px",}}
           className={classes.paper}
         >
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
+          <img src={Logo} className={classes.logo} />
           <h3>
             {type}
           </h3>
