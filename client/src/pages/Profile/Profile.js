@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState,useEffect } from "react";
 import ProfileBox from "../../components/ProfileBox/profileBox";
 import DonutChart from "../../components/Charts/DonutChart/donutChart";
 import PrStyles from "./Profile.module.css";
@@ -8,19 +8,17 @@ import LineChart from "../../components/Charts/LineChart/lineChart";
 import PieChart from "../../components/Charts/PieChart/pieChart";
 import ReactSelect from "../../components/ReactSelect/ReactSelect";
 import { opponentData } from "../../utils/constantData/constantData";
-import { useDispatch } from "react-redux";
-import { fetchProfile } from "../../actions/index";
-import { getUserEmail } from "../../utils/commonData/common";
+import {useDispatch} from 'react-redux';
+import {fetchProfile} from '../../actions/index';
+import {getUserEmail} from '../../utils/commonData/common';
 
 const Profile = () => {
   const [graph, setGraph] = useState("left");
-  const [reloadDonut, setReloadDonut] = useState(0);
+    const dispatch = useDispatch();
 
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchProfile(getUserEmail()));
-  }, [dispatch]);
+    useEffect(() => {
+      dispatch(fetchProfile(getUserEmail()));
+    },[dispatch]);
 
   return (
     <div className={PrStyles.main_container}>
@@ -35,15 +33,12 @@ const Profile = () => {
               height={"5vh"}
               width={"15vw"}
               data={opponentData}
-              onChange={(e) => {
-                console.log(e);
-                setReloadDonut(e.value);
-              }}
+              onChange={(e) => {console.log(e);}}
               backgroundColor={"#03f8fc"}
             />
           </div>
           <div className={PrStyles.donutChart}>
-          {reloadDonut === 0?<DonutChart />:<DonutChart />}
+            <DonutChart />
           </div>
         </div>
       </div>
