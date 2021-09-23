@@ -20,8 +20,6 @@ const Profile = () => {
       dispatch(fetchProfile(getUserEmail()));
     },[dispatch]);
 
-    console.log(getUserEmail());
-
   return (
     <div className={PrStyles.main_container}>
       <div className={PrStyles.section1}>

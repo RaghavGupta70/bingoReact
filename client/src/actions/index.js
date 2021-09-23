@@ -1,7 +1,5 @@
 import * as api from "../api/index.js";
-import Auth from "../pages/Auth/auth";
 import { FETCH,AUTH,CHECK,PROF } from "../constants/actionTypes.js";
-import Profile from "../pages/Profile/Profile.js";
 
 
 export const fetchUsers = () => async (dispatch) => {
@@ -45,10 +43,10 @@ export const GoogleSignIn = (user,history) => async(dispatch) => {
     }
 }
 
-export const fetchProfile  = (email) => async (dispatch) => {
+export const fetchProfile  = (email) => async(dispatch) => {
     try {
-        console.log(email);
-        const {data} = await api.fetchProfile({emailID: email});
+        const emailObj = {emailID:email};
+        const {data} = await api.fetchProfile(emailObj);
 
         dispatch({type: PROF,payload: data});
     }
