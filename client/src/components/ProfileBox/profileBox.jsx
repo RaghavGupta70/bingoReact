@@ -6,15 +6,14 @@ import {MailOutline,Done,FiberManualRecord,Cancel} from '@material-ui/icons';
 import { RiMedalFill } from 'react-icons/ri';
 import { GiPodiumWinner } from 'react-icons/gi';
 import { useSelector } from 'react-redux';
+import { CircularProgress } from '@material-ui/core';
 
 const ProfileBox = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     const profileDetails = useSelector((state) => state.profile);
-
-    console.log(profileDetails);
     const registeredDate = new Date(user.result.time)
     return (
-        <>{profileDetails.length === 0 ?<h1>Hello</h1> : 
+        <>{profileDetails.length === 0 ?<CircularProgress /> : 
         <div className="profile__box">
             <div className="info">
                 <h1 className="my_profile_text">My Profile</h1>
