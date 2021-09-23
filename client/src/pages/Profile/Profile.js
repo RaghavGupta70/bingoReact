@@ -16,9 +16,9 @@ const Profile = () => {
   const [graph, setGraph] = useState("left");
     const dispatch = useDispatch();
 
-    useEffect(() => {
-      dispatch(fetchProfile(getUserEmail()));
-    },[dispatch]);
+    dispatch(fetchProfile(getUserEmail()));
+  
+    console.log(getUserEmail());
 
   return (
     <div className={PrStyles.main_container}>
