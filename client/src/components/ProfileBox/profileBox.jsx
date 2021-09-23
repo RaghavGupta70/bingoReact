@@ -16,28 +16,28 @@ const ProfileBox = () => {
         <div className="profile__box">
             <div className="info">
                 <h1 className="my_profile_text">My Profile</h1>
-                <h2>{user.result.userName}</h2>
+                <h2>{profileDetails[0].userName}</h2>
                 <div className="more_info" >
                     <ul>
                         <li>
                             <span><MailOutline/></span>
                             <span className="head_text">Email Id: </span>
-                            <span className="ans_text">{user.result.email}</span>
+                            <span className="ans_text">{profileDetails[0].emailId}</span>
                         </li>
                         <li>
                             <span><RiMedalFill style={{fontSize:'1.5rem'}} /></span>
                             <span className="head_text">Matches Played: </span>
-                            <span className="ans_text">45</span>
+                            <span className="ans_text">{profileDetails[0].matchesPlayed}</span>
                         </li>
                         <li>
                             <span><GiPodiumWinner style={{fontSize:'1.5rem'}} /></span>
                             <span className="head_text">Matches Won: </span>
-                            <span className="ans_text">32</span>
+                            <span className="ans_text">{profileDetails[0].matchesWon}</span>
                         </li>
                         <li>
                             <span><Cancel /></span>
                             <span className="head_text">Matches Lost: </span>
-                            <span className="ans_text">12</span>
+                            <span className="ans_text">{profileDetails[0].matchesLost}</span>
                         </li>
                         <li>
                             <span><FiberManualRecord /></span>
