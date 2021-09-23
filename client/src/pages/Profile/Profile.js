@@ -17,7 +17,6 @@ const Profile = () => {
   const dispatch = useDispatch();
 
     useEffect(() => {
-      console.log('Here');
       dispatch(fetchProfile(getUserEmail()));
     },[dispatch]);
 
