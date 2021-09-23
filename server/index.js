@@ -3,9 +3,9 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import mongoose from "mongoose";
 import auth from "./routes/auth.js";
+import profile from './routes/profile.js';
 import http from "http";
 import { Server } from "socket.io";
-import * as room from "./controllers/users.js";
 
 const app = express();
 const server = http.createServer(app);
@@ -21,6 +21,7 @@ const corsOptions = {
 const io = new Server(server, corsOptions);
 
 app.use("/auth", auth);
+app.use('/profile',profile);
 
 app.use("/SignIn", (req, res) => {
   res.send({ tok: "session_token" });
