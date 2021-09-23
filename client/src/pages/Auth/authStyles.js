@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
         background:'radial-gradient(circle,rgb(33, 7, 176),rgb(4,0,90))', 
         paddingTop:'2.5rem',
         paddingBottom:'1rem',
-        height:'120vh'
+        height:'100%'
     },
     paper: {
       display: 'flex',
@@ -59,6 +59,9 @@ const useStyles = makeStyles((theme) => ({
       '&:hover':{
         backgroundColor:'#d50000'
       }
+    },
+    bottom: {
+      width: '100%'
     }
   }));
 

@@ -18,6 +18,7 @@ import { GoogleLogin } from "react-google-login";
 import Icon from "./icon.jsx";
 import passwordValidator from "password-validator";
 import Logo from '../../assets/images/bingoLogo.gif';
+import bingoGame from '../../assets/images/authBottom.png'
 
 function Copyright() {
   return (
@@ -202,13 +203,11 @@ export default function Auth({ type, setToken }) {
       <Container maxWidth="xs">
         <CssBaseline />
         <div
-          style={{ padding: type === "SignUp" ? "15px" : "22px",}}
+          style={{ padding: type === "SignUp" ? "15px" : "22px" }}
           className={classes.paper}
         >
           <img src={Logo} className={classes.logo} />
-          <h3>
-            {type}
-          </h3>
+          <h3>{type}</h3>
           <div className={classes.form}>
             <TextField
               variant="outlined"
@@ -285,7 +284,11 @@ export default function Auth({ type, setToken }) {
                 </Grid>
               ) : null}
               {type === "SignIn" ? (
-                <Link style={{marginTop:'3px'}} className={classes.link} href="/SignUp">
+                <Link
+                  style={{ marginTop: "3px" }}
+                  className={classes.link}
+                  href="/SignUp"
+                >
                   {"Don't have an account? Sign Up"}
                 </Link>
               ) : (
@@ -318,6 +321,9 @@ export default function Auth({ type, setToken }) {
             onFailure={googleFailure}
             cookiePolicy="single_host_origin"
           />
+        </div>
+        <div>
+          <img className={classes.bottom} src={bingoGame} />
         </div>
         <Box mt={8}>
           <Copyright />

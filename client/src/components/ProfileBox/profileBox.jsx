@@ -5,6 +5,7 @@ import bingo_bg from '../../assets/images/bingo_bg.png';
 import {MailOutline,Done,FiberManualRecord,Cancel} from '@material-ui/icons';
 import { RiMedalFill } from 'react-icons/ri';
 import { GiPodiumWinner } from 'react-icons/gi';
+import { useDispatch } from 'react-redux';
 
 const ProfileBox = () => {
     const user = JSON.parse(localStorage.getItem('user'));
