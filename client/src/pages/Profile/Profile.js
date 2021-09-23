@@ -8,17 +8,9 @@ import LineChart from "../../components/Charts/LineChart/lineChart";
 import PieChart from "../../components/Charts/PieChart/pieChart";
 import ReactSelect from "../../components/ReactSelect/ReactSelect";
 import { opponentData } from "../../utils/constantData/constantData";
-import {useDispatch} from 'react-redux';
-import {fetchProfile} from '../../actions/index';
-import {getUserEmail} from '../../utils/commonData/common';
 
 const Profile = () => {
   const [graph, setGraph] = useState("left");
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-      dispatch(fetchProfile(getUserEmail()));
-    },[dispatch]);
 
   return (
     <div className={PrStyles.main_container}>

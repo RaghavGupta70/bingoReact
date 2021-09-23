@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './profile.css';
 import Image from 'react-bootstrap/Image';
 import bingo_bg from '../../assets/images/bingo_bg.png';
@@ -10,13 +10,15 @@ import { useSelector } from 'react-redux';
 const ProfileBox = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     const profileDetails = useSelector((state) => state.profile);
+
     console.log(profileDetails);
     const registeredDate = new Date(user.result.time)
     return (
+        <>{profileDetails.length === 0 ?<h1>Hello</h1> : 
         <div className="profile__box">
             <div className="info">
                 <h1 className="my_profile_text">My Profile</h1>
-                <h2>{profileDetails[0].userName}</h2>
+                 <h2>{profileDetails[0].userName}</h2>
                 <div className="more_info" >
                     <ul>
                         <li>
@@ -55,7 +57,8 @@ const ProfileBox = () => {
             <div className="profile_img" xs={6} md={4}>
                 <Image src={bingo_bg} className="avatar_img" roundedCircle />
             </div>
-        </div>
+        </div>}
+        </>
     )
 }
 
