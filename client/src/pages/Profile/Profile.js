@@ -18,7 +18,7 @@ const Profile = () => {
 
     useEffect(() => {
       dispatch(fetchProfile(getUserEmail()));
-    }, [])
+    },[dispatch]);
 
   return (
     <div className={PrStyles.main_container}>

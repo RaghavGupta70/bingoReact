@@ -1,4 +1,4 @@
-import { FETCH, CHECK, AUTH, LOGOUT, PROF } from "../constants/actionTypes";
+import { FETCH, CHECK, AUTH, LOGOUT } from "../constants/actionTypes";
 
 const auth = (users = { authData: null }, action) => {
   switch (action.type) {
@@ -14,9 +14,6 @@ const auth = (users = { authData: null }, action) => {
     case LOGOUT:
       localStorage.clear();
       return { ...users, authData: null };
-
-    case PROF:
-      return action.payload;
 
     default:
       return users;

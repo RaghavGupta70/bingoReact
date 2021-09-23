@@ -3,7 +3,7 @@ import Profile from '../models/profile.js';
 export const getProfile = async(req,res) => {
     const email = req.body;
     try {
-        const user = await Profile.find({email});
+        const user = await Profile.find({emailId: email});
         if(!user) return res.status(409).json('User not found');
 
         return res.status(201).json(user);
