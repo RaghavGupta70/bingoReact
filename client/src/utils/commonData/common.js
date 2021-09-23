@@ -22,7 +22,11 @@ const getUserName = () => {
   return JSON.parse(localStorage.getItem('user')).result.userName;
 }
 
+const getUserEmail = () => {
+  return JSON.parse(localStorage.getItem("user")).result.email;
+};
+
 const getPlayValue = () => {
   return sessionStorage.getItem('playValue');
 }
-export {getToken,getType,putUsers,getUsers,getUserName,getPlayValue};
+export {getToken,getType,putUsers,getUsers,getUserName,getUserEmail,getPlayValue};

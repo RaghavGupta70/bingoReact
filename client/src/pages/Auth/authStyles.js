@@ -5,7 +5,7 @@ const useStyles = makeStyles((theme) => ({
         background:'radial-gradient(circle,rgb(33, 7, 176),rgb(4,0,90))', 
         paddingTop:'2.5rem',
         paddingBottom:'1rem',
-        height:'120vh'
+        height:'100%'
     },
     paper: {
       display: 'flex',
@@ -20,9 +20,12 @@ const useStyles = makeStyles((theme) => ({
       color:'red',
       fontWeight:'700'
     },
-    avatar: {
+    logo: {
       margin: theme.spacing(1),
-      backgroundColor: theme.palette.secondary.main,
+      height: '10%',
+      width: '20%',
+      border: '3px solid yellow',
+      borderRadius: '50%'
     },
     form: {
       width: '100%', // Fix IE 11 issue.
@@ -56,6 +59,9 @@ const useStyles = makeStyles((theme) => ({
       '&:hover':{
         backgroundColor:'#d50000'
       }
+    },
+    bottom: {
+      width: '100%'
     }
   }));
 

@@ -5,9 +5,12 @@ import bingo_bg from '../../assets/images/bingo_bg.png';
 import {MailOutline,Done,FiberManualRecord,Cancel} from '@material-ui/icons';
 import { RiMedalFill } from 'react-icons/ri';
 import { GiPodiumWinner } from 'react-icons/gi';
+import { useSelector } from 'react-redux';
 
 const ProfileBox = () => {
     const user = JSON.parse(localStorage.getItem('user'));
+    const profileDetails = useSelector((state) => state.profile);
+    console.log(profileDetails);
     const registeredDate = new Date(user.result.time)
     return (
         <div className="profile__box">
