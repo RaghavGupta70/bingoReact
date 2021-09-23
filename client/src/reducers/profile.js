@@ -1,6 +1,6 @@
 import {PROF} from '../constants/actionTypes';
 
-const profile = (prof={},action) => {
+const profile = (prof=[],action) => {
     switch (action.type) {
       case PROF:
         return action.payload;

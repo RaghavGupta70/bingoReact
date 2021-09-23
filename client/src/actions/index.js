@@ -47,7 +47,8 @@ export const GoogleSignIn = (user,history) => async(dispatch) => {
 
 export const fetchProfile  = (email) => async (dispatch) => {
     try {
-        const {data} = await api.fetchProfile(email);
+        console.log(email);
+        const {data} = await api.fetchProfile({emailID: email});
 
         dispatch({type: PROF,payload: data});
     }

@@ -1,9 +1,10 @@
 import Profile from '../models/profile.js';
 
 export const getProfile = async(req,res) => {
-    const email = req.body;
+    const {emailID} = req.body;
+    console.log(emailID);
     try {
-        const user = await Profile.find({emailId: email});
+        const user = await Profile.find({emailId: emailID});
         if(!user) return res.status(409).json('User not found');
 
         return res.status(201).json(user);

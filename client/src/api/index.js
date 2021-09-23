@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const url = "http://localhost:5000/auth";
-const profileURl = "https://localhost:5000";
+const profileURl = "http://localhost:5000";
 
 export const fetchUsers= () => axios.get(url);
 export const signUpUser= (data) => axios.post(`${url}/signUp`,data);
