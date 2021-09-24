@@ -11,7 +11,7 @@ import { CircularProgress } from '@material-ui/core';
 const ProfileBox = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     const profileDetails = useSelector((state) => state.profile);
-    const registeredDate = new Date(user.result.time)
+    const registeredDate = new Date(user.result.time);
     return (
         <>{profileDetails.length === 0 ?<CircularProgress /> : 
         <div className="profile__box">

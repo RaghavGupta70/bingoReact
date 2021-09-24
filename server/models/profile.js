@@ -23,7 +23,25 @@ const profileSchema = new Schema({
     matchesLost:{
         type:Number,
         default:0
-    }
+    },
+    profileImage:String,
+    status:String,
+    registeredDate:Date,
+    opponents:[{
+        opponentName:String,
+        opponentEmail:String,
+        matchPlayed:Number,
+        matchWon:Number,
+        matchLost:Number,
+    }],
+    rating:{
+        type:Number,
+        default:10
+    },
+    matches:[{
+        matchResult:String,
+        matchMonth:String
+    }]
 });
 
 const profile = mongoose.model('profile',profileSchema);

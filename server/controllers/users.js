@@ -1,5 +1,3 @@
-import Rooms from '../models/room.js';
-
 const arr = [];
 
 function randomString(length, chars) {

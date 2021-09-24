@@ -6,6 +6,7 @@ import auth from "./routes/auth.js";
 import profile from './routes/profile.js';
 import http from "http";
 import { Server } from "socket.io";
+import * as room from './controllers/users.js';
 
 const app = express();
 const server = http.createServer(app);
