@@ -12,7 +12,6 @@ const ProfileBox = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     const profileDetails = useSelector((state) => state.profile);
     console.log(profileDetails);
-    const registeredDate = new Date(user.result.time)
     return (
         <>{profileDetails.length === 0 ?<CircularProgress /> : 
         <div className="profile__box">
@@ -44,18 +43,18 @@ const ProfileBox = () => {
                         <li>
                             <span><FiberManualRecord /></span>
                             <span className="head_text">Status: </span>
-                            <span className="ans_text">Online</span>
+                            <span className="ans_text">{profileDetails.status}</span>
                         </li>
                         <li>
                             <span><Done /></span>
                             <span className="head_text">Registered on : </span>
-                            <span className="ans_text">{registeredDate.toLocaleDateString()}</span>
+                            <span className="ans_text">{profileDetails.registeredDate.toLocaleDateString()}</span>
                         </li>
                     </ul>
                 </div>
             </div>
             <div className="profile_img" xs={6} md={4}>
-                <Image src={bingo_bg} className="avatar_img" roundedCircle />
+                <Image src={profileDetails.profileImage} className="avatar_img" roundedCircle />
             </div>
         </div>}
         </>
