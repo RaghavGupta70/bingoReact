@@ -43,7 +43,7 @@ const customStyles = {
     ...provided,
     // height: "1vh",
     fontWeight: "bold",
-    fontSize: "15px",
+    fontSize: "13px",
     color: state.selectProps.textColor,
   }),
   //   input: (defaultStyles) => ({
@@ -54,7 +54,7 @@ const customStyles = {
     ...defaultStyles,
     // height: "1vh",
     fontWeight: "bold",
-    fontSize: "15px",
+    fontSize: "13px",
     color: state.selectProps.textColor, //
   }),
   menuList: (base) => ({
@@ -67,6 +67,7 @@ const customStyles = {
   option: (provided) => ({
     ...provided,
     borderRadius: "5px",
+    fontSize: '13px',
   }),
 };
 
