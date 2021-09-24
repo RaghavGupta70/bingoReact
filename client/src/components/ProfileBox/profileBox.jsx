@@ -48,7 +48,7 @@ const ProfileBox = () => {
                         <li>
                             <span><Done /></span>
                             <span className="head_text">Registered on : </span>
-                            <span className="ans_text">{profileDetails.registeredDate.toLocaleDateString()}</span>
+                            <span className="ans_text">{profileDetails.registeredDate.slice(0,10)}</span>
                         </li>
                     </ul>
                 </div>
