@@ -1,7 +1,7 @@
 import React from 'react';
 import {Doughnut} from 'react-chartjs-2';
 
-const DonutChart = () => {
+const DonutChart = ({reload}) => {
 
     const data = {
       labels: ["Won", "Lost", "No Result"],
@@ -44,8 +44,10 @@ const DonutChart = () => {
         },
       },
     };
-    return (
+    return (<>
+      {console.log(reload)}
         <Doughnut data={data} options={options} />
+        </>
     )
 }
 

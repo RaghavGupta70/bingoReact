@@ -11,34 +11,35 @@ import { CircularProgress } from '@material-ui/core';
 const ProfileBox = () => {
     const user = JSON.parse(localStorage.getItem('user'));
     const profileDetails = useSelector((state) => state.profile);
-    const registeredDate = new Date(user.result.time);
+    console.log(profileDetails);
+    const registeredDate = new Date(user.result.time)
     return (
         <>{profileDetails.length === 0 ?<CircularProgress /> : 
         <div className="profile__box">
             <div className="info">
                 <h1 className="my_profile_text">My Profile</h1>
-                 <h2>{profileDetails[0].userName}</h2>
+                 <h2>{profileDetails.userName}</h2>
                 <div className="more_info" >
                     <ul>
                         <li>
                             <span><MailOutline/></span>
                             <span className="head_text">Email Id: </span>
-                            <span className="ans_text">{profileDetails[0].emailId}</span>
+                            <span className="ans_text">{profileDetails.emailId}</span>
                         </li>
                         <li>
                             <span><RiMedalFill style={{fontSize:'1.5rem'}} /></span>
                             <span className="head_text">Matches Played: </span>
-                            <span className="ans_text">{profileDetails[0].matchesPlayed}</span>
+                            <span className="ans_text">{profileDetails.matchesPlayed}</span>
                         </li>
                         <li>
                             <span><GiPodiumWinner style={{fontSize:'1.5rem'}} /></span>
                             <span className="head_text">Matches Won: </span>
-                            <span className="ans_text">{profileDetails[0].matchesWon}</span>
+                            <span className="ans_text">{profileDetails.matchesWon}</span>
                         </li>
                         <li>
                             <span><Cancel /></span>
                             <span className="head_text">Matches Lost: </span>
-                            <span className="ans_text">{profileDetails[0].matchesLost}</span>
+                            <span className="ans_text">{profileDetails.matchesLost}</span>
                         </li>
                         <li>
                             <span><FiberManualRecord /></span>

@@ -1,0 +1,23 @@
+.barChart {
+  width: 35%;
+  margin: auto;
+  margin-top: 1%;
+  height: 20%;
+}
+
+.lineChart {
+  width: 35%;
+  margin: auto;
+  margin-top: 1%;
+}
+
+.pieChart {
+  width: 15%;
+  margin: auto;
+  margin-top: 1%;
+}
+
+.toggle {
+    margin: auto;
+    width: fit-content
+}

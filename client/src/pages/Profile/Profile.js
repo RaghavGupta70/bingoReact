@@ -1,19 +1,13 @@
-import React, { useState,useEffect } from "react";
+import React, {useEffect } from "react";
 import ProfileBox from "../../components/ProfileBox/profileBox";
-import DonutChart from "../../components/Charts/DonutChart/donutChart";
 import PrStyles from "./Profile.module.css";
-import BarChart from "../../components/Charts/BarChart/barChart";
-import ToggleProf from "../../components/Toggle/ToggleProf";
-import LineChart from "../../components/Charts/LineChart/lineChart";
-import PieChart from "../../components/Charts/PieChart/pieChart";
-import ReactSelect from "../../components/ReactSelect/ReactSelect";
-import { opponentData } from "../../utils/constantData/constantData";
 import {useDispatch} from 'react-redux';
 import {fetchProfile} from '../../actions/index';
 import {getUserEmail} from '../../utils/commonData/common';
+import GlobalStats from "../../components/Charts/GlobalStats/globalStats";
+import PlayerStats from "../../components/Charts/PlayerStats/playerStats";
 
 const Profile = () => {
-  const [graph, setGraph] = useState("left");
   const dispatch = useDispatch();
 
     useEffect(() => {
@@ -27,40 +21,14 @@ const Profile = () => {
           <ProfileBox />
         </div>
         <div className={PrStyles.playerStats}>
-          <div className={PrStyles.dropdown}>
-            <ReactSelect
-              placeholder={"Select Opponent"}
-              height={"5vh"}
-              width={"15vw"}
-              data={opponentData}
-              onChange={(e) => {console.log(e);}}
-              backgroundColor={"#03f8fc"}
-            />
-          </div>
-          <div className={PrStyles.donutChart}>
-            <DonutChart />
-          </div>
+          <PlayerStats />
         </div>
       </div>
       <div className={PrStyles.globalStats}>
-        <div className={PrStyles.toggle}>
-          <ToggleProf tog={setGraph} />
+       
+        <div className={PrStyles.globalSt}>
+          <GlobalStats />
         </div>
-        {graph === "left" ? (
-          <>
-            <div className={PrStyles.barChart}>
-              <BarChart />
-            </div>
-          </>
-        ) : graph === "center" ? (
-          <div className={PrStyles.lineChart}>
-            <LineChart />
-          </div>
-        ) : (
-          <div className={PrStyles.pieChart}>
-            <PieChart />
-          </div>
-        )}
       </div>
     </div>
   );
