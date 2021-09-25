@@ -19,27 +19,27 @@ const ProfileBox = ({data}) => {
                 <div className="more_info" >
                     <ul>
                         <li>
-                            <span><MailOutline/></span>
+                            <span><MailOutline style={{color:'#e50000'}}/></span>
                             <span className="head_text">Email Id: </span>
                             <span className="ans_text">{data.emailId}</span>
                         </li>
                         <li>
-                            <span><RiMedalFill style={{fontSize:'1.5rem'}} /></span>
+                            <span><RiMedalFill style={{fontSize:'1.5rem',color:'#b39700'}} /></span>
                             <span className="head_text">Matches Played: </span>
                             <span className="ans_text">{data.matchesPlayed}</span>
                         </li>
                         <li>
-                            <span><GiPodiumWinner style={{fontSize:'1.5rem'}} /></span>
+                            <span><GiPodiumWinner style={{fontSize:'1.5rem', color:'green'}} /></span>
                             <span className="head_text">Matches Won: </span>
                             <span className="ans_text">{data.matchesWon}</span>
                         </li>
                         <li>
-                            <span><Cancel /></span>
+                            <span><Cancel style={{color:'red'}} /></span>
                             <span className="head_text">Matches Lost: </span>
                             <span className="ans_text">{data.matchesLost}</span>
                         </li>
                         <li>
-                            <span><FiberManualRecord /></span>
+                            <span><FiberManualRecord style={{color: profileDetails.status === 'Online'? '#26c126':'maroon'}} /></span>
                             <span className="head_text">Status: </span>
                             <span className="ans_text">{data.status}</span>
                         </li>
