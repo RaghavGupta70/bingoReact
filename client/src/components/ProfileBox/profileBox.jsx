@@ -39,7 +39,7 @@ const ProfileBox = ({data}) => {
                             <span className="ans_text">{data.matchesLost}</span>
                         </li>
                         <li>
-                            <span><FiberManualRecord style={{color: profileDetails.status === 'Online'? '#26c126':'maroon'}} /></span>
+                            <span><FiberManualRecord style={{color: data.status === 'Online'? '#26c126':'maroon'}} /></span>
                             <span className="head_text">Status: </span>
                             <span className="ans_text">{data.status}</span>
                         </li>
