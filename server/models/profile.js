@@ -28,12 +28,18 @@ const profileSchema = new Schema({
     status:String,
     registeredDate:Date,
     opponents:[{
-        opponentName:String,
+        value: Number,
+        label: String        
+    }],
+    opponentsData:[
+        {
+        value: Number,
         opponentEmail:String,
         matchPlayed:Number,
         matchWon:Number,
         matchLost:Number,
-    }],
+        }
+    ],
     rating:{
         type:Number,
         default:10

@@ -1,14 +1,14 @@
 import React from 'react';
 import {Doughnut} from 'react-chartjs-2';
 
-const DonutChart = ({reload}) => {
+const DonutChart = ({value,reload,donutData}) => {
 
-    const data = {
+    const data ={
       labels: ["Won", "Lost", "No Result"],
       datasets: [
         {
           label: "Statistics",
-          data: [300, 50, 100],
+          data: [value[0].matchPlayed,value[0].matchWon,value[0].matchLost],
           backgroundColor: [
             "rgb(255, 99, 132)",
             "rgb(54, 162, 235)",

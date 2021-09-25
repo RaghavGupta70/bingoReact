@@ -5,56 +5,54 @@ import bingo_bg from '../../assets/images/bingo_bg.png';
 import {MailOutline,Done,FiberManualRecord,Cancel} from '@material-ui/icons';
 import { RiMedalFill } from 'react-icons/ri';
 import { GiPodiumWinner } from 'react-icons/gi';
-import { useSelector } from 'react-redux';
 import { CircularProgress } from '@material-ui/core';
 
-const ProfileBox = () => {
+const ProfileBox = ({data}) => {
     const user = JSON.parse(localStorage.getItem('user'));
-    const profileDetails = useSelector((state) => state.profile);
-    console.log(profileDetails);
+    
     return (
-        <>{profileDetails.length === 0 ?<CircularProgress /> : 
+        <>{data.length === 0 ?<CircularProgress /> : 
         <div className="profile__box">
             <div className="info">
                 <h1 className="my_profile_text">My Profile</h1>
-                 <h2>{profileDetails.userName}</h2>
+                 <h2>{data.userName}</h2>
                 <div className="more_info" >
                     <ul>
                         <li>
                             <span><MailOutline/></span>
                             <span className="head_text">Email Id: </span>
-                            <span className="ans_text">{profileDetails.emailId}</span>
+                            <span className="ans_text">{data.emailId}</span>
                         </li>
                         <li>
                             <span><RiMedalFill style={{fontSize:'1.5rem'}} /></span>
                             <span className="head_text">Matches Played: </span>
-                            <span className="ans_text">{profileDetails.matchesPlayed}</span>
+                            <span className="ans_text">{data.matchesPlayed}</span>
                         </li>
                         <li>
                             <span><GiPodiumWinner style={{fontSize:'1.5rem'}} /></span>
                             <span className="head_text">Matches Won: </span>
-                            <span className="ans_text">{profileDetails.matchesWon}</span>
+                            <span className="ans_text">{data.matchesWon}</span>
                         </li>
                         <li>
                             <span><Cancel /></span>
                             <span className="head_text">Matches Lost: </span>
-                            <span className="ans_text">{profileDetails.matchesLost}</span>
+                            <span className="ans_text">{data.matchesLost}</span>
                         </li>
                         <li>
                             <span><FiberManualRecord /></span>
                             <span className="head_text">Status: </span>
-                            <span className="ans_text">{profileDetails.status}</span>
+                            <span className="ans_text">{data.status}</span>
                         </li>
                         <li>
                             <span><Done /></span>
                             <span className="head_text">Registered on : </span>
-                            <span className="ans_text">{profileDetails.registeredDate.slice(0,10)}</span>
+                            <span className="ans_text">{data.registeredDate.slice(0,10)}</span>
                         </li>
                     </ul>
                 </div>
             </div>
             <div className="profile_img" xs={6} md={4}>
-                <Image src={profileDetails.profileImage} className="avatar_img" roundedCircle />
+                <Image src={data.profileImage} className="avatar_img" roundedCircle />
             </div>
         </div>}
         </>

@@ -4,8 +4,10 @@ import DonutChart from '../DonutChart/donutChart';
 import PlStyles from './playerStats.module.css';
 import { opponentData } from '../../../utils/constantData/constantData';
 
-const PlayerStats = () => {
-  const [reloadDonut, setReloadDonut] = useState(0);
+const PlayerStats = ({data}) => {
+  let [reloadDonut, setReloadDonut] = useState(0);
+  const [donutValue,setDonutValue] = useState([]);
+  const [show,setShow] = useState(false);
 
     return (
       <>
@@ -14,16 +16,33 @@ const PlayerStats = () => {
             placeholder={"Select Opponent"}
             height={"5vh"}
             width={"15vw"}
-            data={opponentData}
+            data={data.opponents}
             onChange={(e) => {
               console.log(e);
-              setReloadDonut(e.value);
+              if (e === null) {
+                setShow(false);
+              } else {
+                setShow(true);
+                setDonutValue(
+                  data.opponentsData.filter((dt) => dt.value === e.value)
+                );
+              }
+
+              setReloadDonut(++reloadDonut);
             }}
             backgroundColor={"#03f8fc"}
           />
         </div>
         <div className={PlStyles.donutChart}>
-          <DonutChart reload={reloadDonut} />
+          {show ? (
+            <DonutChart
+              value={donutValue}
+              reload={reloadDonut}
+              donutData={data}
+            />
+          ) : (
+            <h3>Select Opponent to see stats</h3>
+          )}
         </div>
       </>
     );
