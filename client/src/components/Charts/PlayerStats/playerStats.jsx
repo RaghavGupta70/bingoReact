@@ -30,7 +30,7 @@ const PlayerStats = ({data}) => {
 
               setReloadDonut(++reloadDonut);
             }}
-            backgroundColor={"#03f8fc"}
+            backgroundColor={"rgb(103, 58, 183)"}
           />
         </div>
         <div className={PlStyles.donutChart}>

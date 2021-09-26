@@ -27,9 +27,8 @@ const Profile = () => {
         </div>
       </div>
       <div className={PrStyles.globalStats}>
-       
         <div className={PrStyles.globalSt}>
-          <GlobalStats />
+          <GlobalStats playerData={profileDetails} />
         </div>
       </div>
     </div>

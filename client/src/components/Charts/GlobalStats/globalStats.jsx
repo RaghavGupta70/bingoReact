@@ -5,7 +5,7 @@ import BarChart from '../BarChart/barChart';
 import gbStyles from './globalStats.module.css';
 import ToggleProf from '../../Toggle/ToggleProf';
 
-const GlobalStats = () => {
+const GlobalStats = ({playerData}) => {
   const [graph, setGraph] = useState("left");
 
     return (
@@ -25,7 +25,7 @@ const GlobalStats = () => {
           </div>
         ) : (
           <div className={gbStyles.pieChart}>
-            <PieChart />
+            <PieChart playerData={playerData} />
           </div>
         )}
       </>

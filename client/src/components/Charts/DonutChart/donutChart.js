@@ -1,7 +1,7 @@
 import React from 'react';
 import {Doughnut} from 'react-chartjs-2';
 
-const DonutChart = ({value,reload,donutData}) => {
+const DonutChart = ({value,reload}) => {
 
     const data ={
       labels: ["Won", "Lost", "No Result"],
@@ -10,9 +10,9 @@ const DonutChart = ({value,reload,donutData}) => {
           label: "Statistics",
           data: [value[0].matchPlayed,value[0].matchWon,value[0].matchLost],
           backgroundColor: [
-            "rgb(255, 99, 132)",
-            "rgb(54, 162, 235)",
-            "rgb(255, 205, 86)",
+            "rgb(23 205 23)",
+            "rgb(197 9 9)",
+            "rgb(215 173 35)",
           ],
           hoverOffset: 10,
           cutout: '70%',

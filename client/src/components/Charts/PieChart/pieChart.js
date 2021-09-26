@@ -1,13 +1,16 @@
 import {Pie} from 'react-chartjs-2';
 
-const PieChart = () => {
+const PieChart = ({playerData}) => {
+
+  console.log(playerData);
 
     const data = {
-      labels: ["Red", "Blue", "Yellow"],
+      labels: ["Won", "Lose", "No Result"],
       datasets: [
         {
-          label: "My First Dataset",
-          data: [300, 50, 100],
+          label: "Your Statistics",
+          data: [playerData.matchesWon, playerData.matchesLost, 
+            playerData.matchesPlayed-playerData.matchesWon-playerData.matchesLost],
           backgroundColor: [
             "rgb(255, 99, 132)",
             "rgb(54, 162, 235)",
