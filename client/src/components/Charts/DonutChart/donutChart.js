@@ -3,19 +3,19 @@ import {Doughnut} from 'react-chartjs-2';
 
 const DonutChart = ({value,reload}) => {
 
-    const data ={
+    const data = {
       labels: ["Won", "Lost", "No Result"],
       datasets: [
         {
           label: "Statistics",
-          data: [value[0].matchPlayed,value[0].matchWon,value[0].matchLost],
+          data: [value[0].matchPlayed, value[0].matchWon, value[0].matchLost],
           backgroundColor: [
-            "rgb(23 205 23)",
-            "rgb(197 9 9)",
-            "rgb(215 173 35)",
+            "rgb(3 252 103)",
+            "rgb(252 3 61)",
+            "rgb(3 252 232)",
           ],
           hoverOffset: 10,
-          cutout: '70%',
+          cutout: "70%",
         },
       ],
     };
