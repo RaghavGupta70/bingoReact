@@ -31,6 +31,8 @@
 .ans_text{
     font-size:1rem;
     font-weight:500;
+    padding-top:4px;
+    padding-left:4px;
 }
 
 ul{
