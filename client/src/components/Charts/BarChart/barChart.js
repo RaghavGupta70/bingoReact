@@ -1,47 +1,42 @@
 import { Bar } from "react-chartjs-2";
+import {useState} from 'react';
 
-const BarChart = () => {
-
+const BarChart = ({playerData}) => {
+  console.log(playerData.matches)
+  const [barData,setBarData] = useState(playerData.matches);
     const data = {
-      labels: ["Won", "Lost", "No Result"],
+      labels: ["Jan", "Feb", "March"],
 
       datasets: [
         {
-          label: "My First Dataset",
-          data: [65, 59, 80, 81, 56, 55, 40],
-          backgroundColor: [
-            "rgba(255, 99, 132, 0.2)",
-            "rgba(255, 159, 64, 0.2)",
-            "rgba(255, 205, 86, 0.2)",
-            "rgba(75, 192, 192, 0.2)",
-            "rgba(54, 162, 235, 0.2)",
-            "rgba(153, 102, 255, 0.2)",
-            "rgba(201, 203, 207, 0.2)",
-          ],
-          borderColor: [
-            "rgb(255, 99, 132)",
-            "rgb(255, 159, 64)",
-            "rgb(255, 205, 86)",
-            "rgb(75, 192, 192)",
-            "rgb(54, 162, 235)",
-            "rgb(153, 102, 255)",
-            "rgb(201, 203, 207)",
-          ],
-          borderWidth: 1,
+          label: "Won",
+          backgroundColor: "rgb(3 252 103)",
+          data: [3, 7, 4],
+        },
+        {
+          label: "Lost",
+          backgroundColor: "rgb(252 3 61)",
+          data: [4, 3, 5],
+        },
+        {
+          label: "No Result",
+          backgroundColor: "rgb(3 252 232)",
+          data: [7, 2, 6],
         },
       ],
     };
     const options = {
-            title:{
-              display:true,
-              text:'Average Rainfall per month',
-              fontSize:20
-            },
-            legend:{
-              display:true,
-              position:'right'
-            }
-          }
+      
+      title: {
+        display: true,
+        text: "Average Rainfall per month",
+        fontSize: 20,
+      },
+      legend: {
+        display: true,
+        position: "right",
+      },
+    };
     return(<Bar data={data} options={options} />)
 }
 
