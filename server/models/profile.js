@@ -45,8 +45,10 @@ const profileSchema = new Schema({
         default:10
     },
     matches:[{
-        matchResult:String,
-        matchMonth:String
+        matchMonth:String,
+        matchesWon: Number,
+        matchesLost: Number,
+        matchesNoResult: Number,
     }]
 });
 
