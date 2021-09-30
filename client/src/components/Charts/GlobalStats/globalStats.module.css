@@ -5,6 +5,11 @@
   height: 20%;
 }
 
+.dropdown {
+  margin-top: 2%;
+  margin-left: 41%;
+}
+
 .lineChart {
   width: 35%;
   margin: auto;
@@ -18,6 +23,10 @@
 }
 
 .toggle {
-    margin: auto;
-    width: fit-content
+  margin: auto;
+  width: fit-content;
+}
+
+.default img {
+  color: antiquewhite;
 }
