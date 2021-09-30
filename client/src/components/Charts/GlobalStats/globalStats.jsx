@@ -22,7 +22,7 @@ const GlobalStats = ({playerData}) => {
         {graph === "left" ? (
           <>
             <div className={gbStyles.barChart}>
-              <BarChart playerData={playerData} />
+              <BarChart graph={graph} playerData={playerData} />
             </div>
           </>
         ) : graph === "center" ? (
