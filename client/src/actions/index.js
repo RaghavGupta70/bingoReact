@@ -1,5 +1,5 @@
 import * as api from "../api/index.js";
-import { FETCH,AUTH,CHECK,PROF } from "../constants/actionTypes.js";
+import { FETCH,AUTH,CHECK,PROF,OPP_PROF } from "../constants/actionTypes.js";
 
 
 export const fetchUsers = () => async (dispatch) => {
@@ -53,3 +53,12 @@ export const fetchProfile  = (email) => async(dispatch) => {
         console.log(error);
     }
 } 
+
+export const fetchOppProfile = (email) => async (dispatch) => {
+  try {
+    const { data } = await api.getProfile(email);
+    dispatch({ type: OPP_PROF, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+}; 
