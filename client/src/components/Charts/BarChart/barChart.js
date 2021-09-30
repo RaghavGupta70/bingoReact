@@ -1,27 +1,27 @@
 import { Bar } from "react-chartjs-2";
 import {useState} from 'react';
+import { CircularProgress } from "@material-ui/core";
 
 const BarChart = ({playerData}) => {
-  console.log(playerData.matches)
   const [barData,setBarData] = useState(playerData.matches);
     const data = {
-      labels: ["Jan", "Feb", "March"],
+      labels: !barData? ["Jan","Feb","Mar"] : barData.map((data)=> data.matchMonth),
 
       datasets: [
         {
           label: "Won",
           backgroundColor: "rgb(3 252 103)",
-          data: [3, 7, 4],
+          data: !barData? [7,3,1] : barData.map((data)=> data.matchWon),
         },
         {
           label: "Lost",
           backgroundColor: "rgb(252 3 61)",
-          data: [4, 3, 5],
+          data: !barData? [4, 3, 5] : barData.map((data)=> data.matchLost),
         },
         {
           label: "No Result",
           backgroundColor: "rgb(3 252 232)",
-          data: [7, 2, 6],
+          data: !barData? [7,2,6] : barData.map((data)=> data.matchNoResult)
         },
       ],
     };
