@@ -1,27 +1,14 @@
 import { Line } from "react-chartjs-2";
-import { useDispatch } from "react-redux";
-import { fetchOppProfile } from "../../../actions/index";
+
 import { useState,useEffect } from "react";
-import { useSelector } from "react-redux";
 
 const LineChart = ({ value, reload, playerData }) => {
-  const oppProfileDetails = useSelector((state) => state.oppProfile);
 
-  const [oppData,setOppData] = useState({matches:[{matchWon: 2}]});
-
-  const dispatch = useDispatch();
-  console.log(value);
-    console.log(oppProfileDetails);
-
-  useEffect(() => {
-    dispatch(fetchOppProfile(value[0].opponentEmail));
-    // setOppData(oppProfileDetails);
-    console.log(oppProfileDetails)
-    console.log(oppData)
-    console.log(playerData);
-  }, [dispatch,value[0]]);
-
-  const data = (oppData) => ({
+  const [t,setT] = useState([]);
+  if(value.length !== 0) {setT(value.matches.map((op) => op.matchWon))}
+  
+  console.log(t);
+  const data = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
     datasets: [
       {
@@ -34,18 +21,18 @@ const LineChart = ({ value, reload, playerData }) => {
       {
         label: "Opponent Stats",
         data:
-          oppData !== null
-            ? oppData.matches.map((op) => op.matchWon)
+          value.length !==0
+            ? t
             : [1, 2, 3],
         fill: false,
         borderColor: "#742774",
       },
     ],
-  });
+  };
   return (
     <>
       {console.log(reload)}
-      <Line data={data(oppData)} />
+      <Line data={data} />
     </>
   );
 };

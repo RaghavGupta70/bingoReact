@@ -1,8 +1,11 @@
-import react,{useState} from 'react';
+import react,{useState,useEffect} from 'react';
 import PieChart from '../PieChart/pieChart'; 
 import LineChart from '../LineChart/lineChart';
+import { useSelector } from "react-redux";
 import BarChart from '../BarChart/barChart';
 import gbStyles from './globalStats.module.css';
+import { useDispatch } from "react-redux";
+import { fetchOppProfile } from "../../../actions/index";
 import ToggleProf from '../../Toggle/ToggleProf';
 import ReactSelect from '../../ReactSelect/ReactSelect';
 import defaultStat from "../../../assets/images/defaultStat.gif";
@@ -11,8 +14,12 @@ import defaultStat from "../../../assets/images/defaultStat.gif";
 const GlobalStats = ({playerData}) => {
   const [graph, setGraph] = useState("left");
     let [reloadLine, setReloadLine] = useState(0);
-    const [lineValue, setLineValue] = useState([]);
+    const [lineValue, setLineValue] = useState(null);
     const [show, setShow] = useState(false);
+  const oppProfileDetails = useSelector((state) => state.oppProfile);
+  const dispatch = useDispatch();
+console.log(oppProfileDetails);
+
 
     return (
       <>
@@ -39,10 +46,15 @@ const GlobalStats = ({playerData}) => {
                     setShow(false);
                   } else {
                     setShow(true);
-                    setLineValue(
-                      playerData.opponentsData.filter(
-                        (dt) => dt.value === e.value
+                    dispatch(
+                      fetchOppProfile(
+                        playerData.opponentsData.filter(
+                          (dt) => dt.value === e.value
+                        )[0].opponentEmail
                       )
+                    );
+                    setLineValue(
+                      oppProfileDetails
                     );
                   }
 
