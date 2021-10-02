@@ -8,7 +8,7 @@ const BarChart = ({graph,playerData}) => {
 
   useEffect(() => {
     setBarData(playerData.matches);
-  }, [graph])
+  })
 
     const data =(barData)=>( {
       labels: !barData? ["Jan","Feb","Mar"] : barData.map((data)=> data.matchMonth),
@@ -41,9 +41,9 @@ const BarChart = ({graph,playerData}) => {
       legend: {
         display: true,
         position: "right",
-      },
+      }
     };
-    return(<Bar data={data(barData)} options={options} />)
+    return(<>{!barData? <CircularProgress />:<Bar data={data(barData)} options={options} />}</>)
 }
 
 export default BarChart;
