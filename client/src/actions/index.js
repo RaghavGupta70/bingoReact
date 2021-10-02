@@ -57,6 +57,7 @@ export const fetchProfile  = (email) => async(dispatch) => {
 export const fetchOppProfile = (email) => async (dispatch) => {
   try {
     const { data } = await api.getProfile(email);
+    console.log('hi')
     dispatch({ type: OPP_PROF, payload: data });
   } catch (error) {
     console.log(error);
