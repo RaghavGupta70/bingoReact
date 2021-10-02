@@ -63,7 +63,7 @@ console.log(oppProfileDetails);
                 backgroundColor={"rgb(103, 58, 183)"}
               />
             </div>
-            {show ? (
+            {show && lineValue.length!==0 ? (
               <div className={gbStyles.lineChart}>
                 <LineChart
                   value={lineValue}

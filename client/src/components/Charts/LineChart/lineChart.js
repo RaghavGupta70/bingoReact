@@ -5,10 +5,17 @@ import { useState,useEffect } from "react";
 const LineChart = ({ value, reload, playerData }) => {
 
   const [t,setT] = useState([]);
-  if(value.length !== 0) {setT(value.matches.map((op) => op.matchWon))}
+  
+  useEffect(() => {
+    if(value)
+    {
+    console.log(value, value.matches);
+    setT(value.matches.map((op)=>op.matchWon));
+    }
+  },[])
   
   console.log(t);
-  const data = {
+  const data = (val) => ({
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
     datasets: [
       {
@@ -21,18 +28,18 @@ const LineChart = ({ value, reload, playerData }) => {
       {
         label: "Opponent Stats",
         data:
-          value.length !==0
-            ? t
+          value
+            ? val
             : [1, 2, 3],
         fill: false,
         borderColor: "#742774",
       },
     ],
-  };
+  });
   return (
     <>
       {console.log(reload)}
-      <Line data={data} />
+      <Line data={data(t)} />
     </>
   );
 };
