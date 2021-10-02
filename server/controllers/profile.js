@@ -24,6 +24,28 @@ export const createProfile = async(req,res) => {
     }
 }
 
+export const getAllOpponentMatches = async(req,res) => {
+    const email = req.params;
+    const oppoMatches = [];
+    try{
+        const user = await Profile.findOne({emailId: email.email});
+        if(!user) return res.status(409).json('User not found');
+
+        const allOpponents = user.opponentData.map((oppo)=> oppo.opponentEmail);
+
+        for(var i=0;i<allOpponents.length;i++){
+            const opponent = Profile.findOne({emailId:allOpponents[i]},(err,user)=> {
+                if(err)
+                 console.log(err);
+            });
+            oppoMatches = [...oppoMatches,{oppoEmail:opponent.emailId, oppoM:opponent.matches}];
+        }
+        return res.status(200).json(oppoMatches);
+    } catch(error){
+        console.log(error);
+    }
+}
+
 // export const updateProfile = async(req,res) => {
 //     const email = req.body;
 //     try {
