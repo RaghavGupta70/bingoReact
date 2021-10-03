@@ -4,9 +4,6 @@ import { useState,useEffect } from "react";
 
 const LineChart = ({ value, reload, playerData }) => {
 
- console.log(value[0].oppoM);
-  
-  // console.log(t);
   const data = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
     datasets: [
@@ -29,7 +26,6 @@ const LineChart = ({ value, reload, playerData }) => {
 
   return (
     <>
-      {console.log(reload)}
       <Line data={data} />
     </>
   );

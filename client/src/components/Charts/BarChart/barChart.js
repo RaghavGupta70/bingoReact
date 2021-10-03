@@ -4,7 +4,6 @@ import { CircularProgress } from "@material-ui/core";
 
 const BarChart = ({graph,playerData}) => {
   const [barData, setBarData] = useState(playerData.matches);
-  console.log(playerData)
 
   useEffect(() => {
     setBarData(playerData.matches);

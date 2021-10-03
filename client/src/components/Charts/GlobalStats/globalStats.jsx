@@ -15,12 +15,6 @@ const GlobalStats = ({playerData,oppData}) => {
     const [lineValue,setLineValue] = useState(null);
     const [show, setShow] = useState(false);
 
-console.log(oppData);
-
-useEffect(() => {
-  console.log(lineValue)
-}, [lineValue])
-
     return (
       <>
         <div className={gbStyles.toggle}>
@@ -41,13 +35,11 @@ useEffect(() => {
                 width={"15vw"}
                 data={playerData.opponents}
                 onChange={(e) => {
-                  console.log(e);
                   if (e === null) {
                     setShow(false);
                   } else {
                     setShow(true);
                     emailOpp = playerData.opponentsData.filter((opp)=> opp.value===e.value?opp.opponentEmail:null);
-                    console.log(emailOpp)
                     setLineValue(oppData.filter((opp,index)=>(opp.oppoEmail === emailOpp[0].opponentEmail)))
                     
                   }
