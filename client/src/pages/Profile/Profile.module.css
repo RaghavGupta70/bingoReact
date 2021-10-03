@@ -23,6 +23,7 @@
   background-color: lightyellow;
   border: 1px solid whitesmoke;
   border-radius: 5%;
+  box-shadow: 4px 4px 4px #05a8b9;
 }
 
 
@@ -34,8 +35,9 @@
   padding: 2%;
   background-color: lightyellow;
   border: 1px solid whitesmoke;
-  border-radius: 5%;
+  border-radius: 3%;
   padding-bottom: 0%;
+  box-shadow: 4px 4px 4px #05a8b9;
 }
 
 
