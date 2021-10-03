@@ -1,25 +1,25 @@
 import react,{useState,useEffect} from 'react';
 import PieChart from '../PieChart/pieChart'; 
 import LineChart from '../LineChart/lineChart';
-import { useSelector } from "react-redux";
 import BarChart from '../BarChart/barChart';
 import gbStyles from './globalStats.module.css';
-import { useDispatch } from "react-redux";
-import { fetchOppProfile } from "../../../actions/index";
 import ToggleProf from '../../Toggle/ToggleProf';
 import ReactSelect from '../../ReactSelect/ReactSelect';
 import defaultStat from "../../../assets/images/defaultStat.gif";
 
 
-const GlobalStats = ({playerData}) => {
+const GlobalStats = ({playerData,oppData}) => {
   const [graph, setGraph] = useState("left");
+  let emailOpp;
     let [reloadLine, setReloadLine] = useState(0);
-    const [lineValue, setLineValue] = useState(null);
+    const [lineValue,setLineValue] = useState(null);
     const [show, setShow] = useState(false);
-  const oppProfileDetails = useSelector((state) => state.oppProfile);
-  const dispatch = useDispatch();
-console.log(oppProfileDetails);
 
+console.log(oppData);
+
+useEffect(() => {
+  console.log(lineValue)
+}, [lineValue])
 
     return (
       <>
@@ -46,16 +46,10 @@ console.log(oppProfileDetails);
                     setShow(false);
                   } else {
                     setShow(true);
-                    dispatch(
-                      fetchOppProfile(
-                        playerData.opponentsData.filter(
-                          (dt) => dt.value === e.value
-                        )[0].opponentEmail
-                      )
-                    );
-                    setLineValue(
-                      oppProfileDetails
-                    );
+                    emailOpp = playerData.opponentsData.filter((opp)=> opp.value===e.value?opp.opponentEmail:null);
+                    console.log(emailOpp)
+                    setLineValue(oppData.filter((opp,index)=>(opp.oppoEmail === emailOpp[0].opponentEmail)))
+                    
                   }
 
                   setReloadLine(++reloadLine);
@@ -63,7 +57,7 @@ console.log(oppProfileDetails);
                 backgroundColor={"rgb(103, 58, 183)"}
               />
             </div>
-            {show && lineValue.length!==0 ? (
+            {show && lineValue.length !==0 ? (
               <div className={gbStyles.lineChart}>
                 <LineChart
                   value={lineValue}
