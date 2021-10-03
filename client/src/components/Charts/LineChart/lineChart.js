@@ -1,6 +1,6 @@
 import { Line } from "react-chartjs-2";
 
-const LineChart = ({ value, reload, playerData }) => {
+const LineChart = ({ value, reload, playerData,oppLabel }) => {
 
   const data = {
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
@@ -22,9 +22,42 @@ const LineChart = ({ value, reload, playerData }) => {
     ],
   };
 
+  const options = {
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            let str;
+
+            if(context.dataset.label==='Your Stats'){
+              str="You Won : " + context.formattedValue;
+            }
+
+            else
+            {
+              str = oppLabel + " Won : " + context.formattedValue;
+            }
+            // console.log(context)
+            // if (str) {
+            //   str += ": ";
+            //} 
+
+            // let sum = 0;
+            // context.dataset.data.forEach((element) => {
+            //   sum += element;
+            // });
+            // console.log(context.dataset);
+            // str += ((context.formattedValue / sum) * 100).toFixed(1) + "%";
+            return str;
+          },
+        },
+      },
+    },
+  };
+
   return (
     <>
-      <Line data={data} />
+      <Line data={data} options={options} />
     </>
   );
 };

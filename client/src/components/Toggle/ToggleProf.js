@@ -15,9 +15,11 @@ const ToggleProf = ({tog}) => {
   return (
     <ToggleButtonGroup
       value={alignment}
+      size="large"
       exclusive
       onChange={handleAlignment}
       aria-label="text alignment"
+      orientation="vertical"
     >
       <ToggleButton value="left" aria-label="left aligned">
         <FcBarChart />

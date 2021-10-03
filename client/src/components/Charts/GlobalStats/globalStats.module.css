@@ -1,29 +1,37 @@
 .barChart {
   width: 35%;
   margin: auto;
-  margin-top: 1%;
+  /* margin-top: 1%; */
   height: 20%;
 }
 
 .dropdown {
-  margin-top: 2%;
-  margin-left: 41%;
+  /* margin-top: 2%; */
+  margin-left: 15%;
+  height: fit-content;
+  margin-top: 7%;
 }
 
 .lineChart {
-  width: 35%;
+  width: 40%;
   margin: auto;
   margin-top: 1%;
+  margin-left: 10%;
 }
 
 .pieChart {
-  width: 15%;
+  width: 26%;
   margin: auto;
   margin-top: 1%;
 }
 
 .toggle {
   width: fit-content;
+  margin-top: 3%;
+}
+
+.default {
+  margin-left: 20%;
 }
 
 .default img {

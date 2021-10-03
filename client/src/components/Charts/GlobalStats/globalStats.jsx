@@ -13,6 +13,7 @@ const GlobalStats = ({playerData,oppData}) => {
   let emailOpp;
     let [reloadLine, setReloadLine] = useState(0);
     const [lineValue,setLineValue] = useState(null);
+    const [oppLabel,setOppLabel] = useState(null);
     const [show, setShow] = useState(false);
 
     return (
@@ -39,6 +40,7 @@ const GlobalStats = ({playerData,oppData}) => {
                     setShow(false);
                   } else {
                     setShow(true);
+                    setOppLabel(e.label);
                     emailOpp = playerData.opponentsData.filter((opp)=> opp.value===e.value?opp.opponentEmail:null);
                     setLineValue(oppData.filter((opp,index)=>(opp.oppoEmail === emailOpp[0].opponentEmail)))
                     
@@ -55,6 +57,7 @@ const GlobalStats = ({playerData,oppData}) => {
                   value={lineValue}
                   reload={reloadLine}
                   playerData={playerData}
+                  oppLabel={oppLabel}
                 />
               </div>
             ) : (

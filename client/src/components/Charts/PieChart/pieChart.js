@@ -20,8 +20,18 @@ const PieChart = ({playerData}) => {
         },
       ],
     };
+
+    const options = {
+      plugins: {
+        legend: {
+          position: 'right',
+          fullSize: true, 
+        }
+      }
+    };
+
     return(
-        <Pie data={data} />
+        <Pie data={data} options={options} />
     )
 }
 
