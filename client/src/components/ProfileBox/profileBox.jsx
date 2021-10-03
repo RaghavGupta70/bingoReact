@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import './profile.css';
 import Image from 'react-bootstrap/Image';
-import bingo_bg from '../../assets/images/bingo_bg.png';
 import {MailOutline,Done,FiberManualRecord,Cancel} from '@material-ui/icons';
 import { RiMedalFill } from 'react-icons/ri';
 import { GiPodiumWinner } from 'react-icons/gi';
@@ -24,7 +23,7 @@ const ProfileBox = ({data}) => {
                             <span className="ans_text">{data.emailId}</span>
                         </li>
                         <li>
-                            <span><RiMedalFill style={{fontSize:'1.5rem',color:'#b39700'}} /></span>
+                            <span><RiMedalFill style={{fontSize:'1.5rem',color:'rgb(227 194 20)'}} /></span>
                             <span className="head_text">Matches Played: </span>
                             <span className="ans_text">{data.matchesPlayed}</span>
                         </li>
@@ -44,7 +43,7 @@ const ProfileBox = ({data}) => {
                             <span className="ans_text">{data.status}</span>
                         </li>
                         <li>
-                            <span><Done /></span>
+                            <span><Done style={{color: 'rgb(103, 58, 183)'}} /></span>
                             <span className="head_text">Registered on : </span>
                             <span className="ans_text">{data.registeredDate.slice(0,10)}</span>
                         </li>

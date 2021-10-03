@@ -1,7 +1,5 @@
 import { Line } from "react-chartjs-2";
 
-import { useState,useEffect } from "react";
-
 const LineChart = ({ value, reload, playerData }) => {
 
   const data = {

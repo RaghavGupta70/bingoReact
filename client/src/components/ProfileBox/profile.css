@@ -3,6 +3,7 @@
     padding:3%;
     border:2px solid black;
     border-radius: 10px;
+    background-image:url("https://www.transparenttextures.com/patterns/binding-dark.png");
 }
 .info{
     width:75%;
@@ -30,8 +31,10 @@
 
 .ans_text{
     font-size:1rem;
-    font-weight:500;
-    padding-top:4px;
+    font-weight:800;
+    font-family:Georgia, 'Times New Roman';
+    padding-top:3px;
+    color:rgb(33, 7, 176);
     padding-left:4px;
 }
 
@@ -41,4 +44,8 @@ ul{
 
 li {
     display: flex;
+}
+
+.info h2{
+    color:rgb(252 3 61);
 }
