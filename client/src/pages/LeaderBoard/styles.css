@@ -1,9 +1,7 @@
 .leaderboardPaper{
     margin:5% 8%;
-}
-
-.filterDropdown{
-    margin:4%
+    background-color: #fcef005e !important;
+background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
 }
 
 .tableHeading{
@@ -11,4 +9,13 @@
     justify-content: space-between;
     flex:1;
     align-items: center;
+    margin: 2%;
+}
+
+.tableHeading h2 {
+margin-top: 3%;
+}
+
+.tableDrop {
+margin-top: 3%;
 }

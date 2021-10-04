@@ -80,28 +80,35 @@ const rows =leaderDataValue.map((ld,index)=>createData(index+1,ld.userName,ld.ma
 
   return (
     <>
-      <Paper className="leaderboardPaper" sx={{ width: '100%', overflow: 'hidden' }}>
+      <Paper
+        className="leaderboardPaper"
+        sx={{ width: "100%", overflow: "hidden" }}
+      >
         <div className="tableHeading">
-          <h2>
-            Bingo Leaderboard
-          </h2>
-          <ReactSelect className="filterDropdown"
-            placeholder={"Filter Table"}
-            height={"5vh"}
-            width={"15vw"}
-            data={filterTable}
-            backgroundColor={"rgb(103, 58, 183)"}
-          />
+          <h2>Bingo Leaderboard</h2>
+          <div className="tableDrop">
+            <ReactSelect
+              placeholder={"Filter Table"}
+              height={"5vh"}
+              width={"15vw"}
+              data={filterTable}
+              backgroundColor={"rgb(103, 58, 183)"}
+            />
+          </div>
         </div>
         <TableContainer sx={{ maxHeight: 460 }}>
-          <Table stickyHeader aria-label="sticky table">
+          <Table aria-label="sticky table">
             <TableHead>
               <TableRow>
                 {columns.map((column) => (
                   <TableCell
                     key={column.id}
                     align={column.align}
-                    style={{ minWidth: column.minWidth }}
+                    style={{
+                      minWidth: column.minWidth,
+                      fontSize: "20px",
+                      fontFamily: "lithospro_black",
+                    }}
                   >
                     {column.label}
                   </TableCell>
@@ -113,12 +120,24 @@ const rows =leaderDataValue.map((ld,index)=>createData(index+1,ld.userName,ld.ma
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row) => {
                   return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={row.code}
+                    >
                       {columns.map((column) => {
                         const value = row[column.id];
                         return (
-                          <TableCell key={column.id} align={column.align}>
-                            {column.format && typeof value === 'number'
+                          <TableCell
+                            style={{
+                              fontSize: "17px",
+                              fontFamily: "Cursive",
+                            }}
+                            key={column.id}
+                            align={column.align}
+                          >
+                            {column.format && typeof value === "number"
                               ? column.format(value)
                               : value}
                           </TableCell>
