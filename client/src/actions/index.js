@@ -1,5 +1,5 @@
 import * as api from "../api/index.js";
-import { FETCH,AUTH,CHECK,PROF,OPP_PROF } from "../constants/actionTypes.js";
+import { FETCH,AUTH,LEAD_DATA,PROF,OPP_PROF } from "../constants/actionTypes.js";
 
 
 export const fetchUsers = () => async (dispatch) => {
@@ -62,3 +62,12 @@ export const fetchOppProfile = (email) => async (dispatch) => {
     console.log(error);
   }
 }; 
+
+export const fetchLeaderBoardData = () => async(dispatch) => {
+    try {
+        const {data} = await api.getLeaderBoard();
+        dispatch({type: LEAD_DATA, payload: data});
+    } catch (error) {
+        console.log(error);
+    }
+}

@@ -16,6 +16,7 @@ import Profile from "./pages/Profile/Profile.js";
 import Navbar from "./components/Navbar/navbar.jsx";
 import AppStyles from "./App.module.css";
 import { getToken } from "./utils/commonData/common.js";
+import FooterPage from './components/Footer/footer.jsx';
 
 const App = () => {
   const history = useHistory();
@@ -26,8 +27,8 @@ const App = () => {
   return (
     <>
       {getToken() !== null &&
-      (history.location.pathname !== "/SignIn" &&
-        history.location.pathname !== "/SignUp") ? (
+      history.location.pathname !== "/SignIn" &&
+      history.location.pathname !== "/SignUp" ? (
         <div className={AppStyles.navbar}>
           <Navbar />
         </div>
@@ -56,6 +57,13 @@ const App = () => {
           <Profile />
         </Route>
       </Switch>
+      {getToken() !== null &&
+      history.location.pathname !== "/SignIn" &&
+      history.location.pathname !== "/SignUp" ? (
+        <div className={AppStyles.footer}>
+          <FooterPage />
+        </div>
+      ) : null}
     </>
   );
 };

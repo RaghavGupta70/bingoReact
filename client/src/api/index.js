@@ -9,3 +9,4 @@ export const signInUser= (data) => axios.post(`${url}/signIn`,data);
 export const googleSignInUser= (data) => axios.post(`${url}/googleSignIn`,data);
 export const getProfile = (email) => axios.get(`${profileURl}/profile/getMyProfile/${email}`);
 export const getOpponents = (email) => axios.get(`${profileURl}/profile/getAllOpponents/${email}`);
+export const getLeaderBoard = () => axios.get(`${profileURl}/profile/getLeaderboardData`);
