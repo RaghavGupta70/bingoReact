@@ -25,4 +25,23 @@ const opponentData = [
   },
 ];
 
-export {opponentData};
+const filterTable = [
+  {
+    value:0,
+    label:"By Name",
+  },
+  {
+    value:1,
+    label:"By Rating"
+  },
+  {
+    value:2,
+    label:"By Matches Won"
+  },
+  {
+    value:3,
+    label:"By Matches Lost"
+  }
+];
+
+export {opponentData,filterTable};
