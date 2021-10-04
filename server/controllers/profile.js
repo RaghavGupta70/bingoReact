@@ -44,6 +44,14 @@ export const getAllOpponentMatches = async(req,res) => {
     }
 }
 
+export const getLeaderboardData = async(req,res) => {
+    try{
+        const allUsers = await Profile.find();
+        return res.status(200).json(allUsers);
+    } catch(error) {
+        res.status(404).json({message:'Not able to get data from database.'});
+    }
+}
 // export const updateProfile = async(req,res) => {
 //     const email = req.body;
 //     try {

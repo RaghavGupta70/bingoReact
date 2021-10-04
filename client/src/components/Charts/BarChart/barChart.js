@@ -31,10 +31,9 @@ const BarChart = ({graph,playerData}) => {
       ],
     });
     const options = {
-      
       title: {
         display: true,
-        text: "Average Rainfall per month",
+        text: "Statistics Per Month",
         fontSize: 20,
       },
       legend: {
