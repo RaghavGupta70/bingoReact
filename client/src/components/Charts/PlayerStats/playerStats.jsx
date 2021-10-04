@@ -27,7 +27,6 @@ const PlayerStats = ({ data }) => {
                 data.opponentsData.filter((dt) => dt.value === e.value)
               );
             }
-
             setReloadDonut(++reloadDonut);
           }}
           backgroundColor={"rgb(103, 58, 183)"}

@@ -78,6 +78,8 @@ export default function LeaderBoard() {
             height={"5vh"}
             width={"15vw"}
             data={filterTable}
+            onChange={ (e) => {
+            }}
             backgroundColor={"rgb(103, 58, 183)"}
           />
         </div>
