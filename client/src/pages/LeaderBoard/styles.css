@@ -1,0 +1,14 @@
+.leaderboardPaper{
+    margin:5% 8%;
+}
+
+.filterDropdown{
+    margin:4%
+}
+
+.tableHeading{
+    display:flex;
+    justify-content: space-between;
+    flex:1;
+    align-items: center;
+}
