@@ -3,7 +3,7 @@ import { Line } from "react-chartjs-2";
 const LineChart = ({ value, reload, playerData,oppLabel }) => {
 
   const data = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    labels: playerData.matches.map((pl)=>pl.matchMonth),
     datasets: [
       {
         label: "Your Stats",
@@ -23,24 +23,33 @@ const LineChart = ({ value, reload, playerData,oppLabel }) => {
   };
 
   const options = {
+    scales: {
+      y: {
+        grid: {
+          display: false,
+        },
+      },
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+    },
     plugins: {
       tooltip: {
         callbacks: {
           label: function (context) {
             let str;
 
-            if(context.dataset.label==='Your Stats'){
-              str="You Won : " + context.formattedValue;
-            }
-
-            else
-            {
+            if (context.dataset.label === "Your Stats") {
+              str = "You Won : " + context.formattedValue;
+            } else {
               str = oppLabel + " Won : " + context.formattedValue;
             }
             // console.log(context)
             // if (str) {
             //   str += ": ";
-            //} 
+            //}
 
             // let sum = 0;
             // context.dataset.data.forEach((element) => {

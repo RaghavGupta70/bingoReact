@@ -62,15 +62,19 @@ const GlobalStats = ({playerData,oppData}) => {
               </div>
             ) : (
               <div className={gbStyles.default}>
-                <h3>Select Opponent to see stats</h3>
+                <h3>Select Opponent to compare stats</h3>
                 <img src={defaultStat} />
               </div>
             )}
           </>
-        ) : (
+        ) : (<>
           <div className={gbStyles.pieChart}>
             <PieChart playerData={playerData} />
           </div>
+          <div className={gbStyles.pieInfo}>
+            <h1>All Time Stats</h1>
+          </div>
+          </>
         )}
       </>
     );

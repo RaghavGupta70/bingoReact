@@ -20,13 +20,14 @@
 }
 
 .pieChart {
-  width: 26%;
+  width: 24%;
   margin: auto;
-  margin-top: 1%;
+  margin-right: 20%;
 }
 
 .toggle {
   width: fit-content;
+  height: fit-content;
   margin-top: 3%;
 }
 
@@ -36,4 +37,11 @@
 
 .default img {
   color: antiquewhite;
+  margin-left: 25%;
+}
+
+.pieInfo {
+  margin-top: 10%;
+  margin-right: 8%;
+  height: fit-content;
 }
