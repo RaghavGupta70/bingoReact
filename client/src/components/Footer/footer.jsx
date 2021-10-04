@@ -3,6 +3,10 @@ import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
+import { FaNodeJs, FaReact } from "react-icons/fa";
+import { SiMongodb, SiSocketDotIo } from "react-icons/si";
+import expr from '../../assets/images/expressjs-icon.svg';
+import './styles.css';
 
 const FooterPage = () => {
   return (
@@ -46,54 +50,78 @@ const FooterPage = () => {
         <MDBRow className="mt-3">
           <MDBCol md="3" lg="4" xl="3" className="mb-4">
             <h6 className="text-uppercase font-weight-bold">
-              <strong>Company name</strong>
+              <strong>Binod Bingo</strong>
             </h6>
             <hr
               className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
               style={{ width: "60px" }}
             />
             <p>
-              Here you can use rows and columns here to organize your footer
-              content. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Come play bingo and feel high af.A experience to be remembered
+              forever.Play with friends and get fucked.Happy Playing:)
             </p>
           </MDBCol>
           <MDBCol md="2" lg="2" xl="2" className="mb-4">
             <h6 className="text-uppercase font-weight-bold">
-              <strong>Products</strong>
+              <strong>Tech Used</strong>
             </h6>
             <hr
               className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
               style={{ width: "60px" }}
             />
             <p>
-              <a href="#!">MDBootstrap</a>
+              <a href="https://reactjs.org/">
+                <FaReact
+                  style={{ color: "rgb(0,229,255)", marginRight: "3%" }}
+                />
+                React JS
+              </a>
             </p>
             <p>
-              <a href="#!">MDWordPress</a>
+              <a href="https://expressjs.com/">
+                <img src={expr} style={{marginRight: '3%',width: '10%' }} />
+                Express JS
+              </a>
             </p>
             <p>
-              <a href="#!">BrandFlow</a>
+              <a href="https://nodejs.org/en/">
+                <FaNodeJs
+                  style={{ color: "rgb(139,195,74)", marginRight: "3%" }}
+                />
+                Node JS
+              </a>
             </p>
             <p>
-              <a href="#!">Bootstrap Angular</a>
+              <a href="https://www.mongodb.com/">
+                <SiMongodb
+                  style={{ color: "rgb(76,175,80)", marginRight: "3%" }}
+                />
+                Mongo DB
+              </a>
+            </p>
+            <p>
+              <a href="https://socket.io/">
+                <SiSocketDotIo style={{ color: "white", marginRight: "3%" }} />
+                Socket.io
+              </a>
             </p>
           </MDBCol>
           <MDBCol md="3" lg="2" xl="2" className="mb-4">
             <h6 className="text-uppercase font-weight-bold">
-              <strong>Useful links</strong>
+              <strong>More Info</strong>
             </h6>
             <hr
               className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
               style={{ width: "60px" }}
             />
             <p>
-              <a href="#!">Your Account</a>
+              <a href="/profile">Your Profile</a>
             </p>
             <p>
-              <a href="#!">Become an Affiliate</a>
+              <a href="#!">Privacy Policy</a>
             </p>
             <p>
-              <a href="#!">Shipping Rates</a>
+              <a href="#!">About Us</a>
             </p>
             <p>
               <a href="#!">Help</a>
@@ -108,16 +136,13 @@ const FooterPage = () => {
               style={{ width: "60px" }}
             />
             <p>
-              <i className="fa fa-home mr-3" /> New York, NY 10012, US
+              <i className="fa fa-home mr-3" /> Red Light Area,UIET,Chd
             </p>
             <p>
-              <i className="fa fa-envelope mr-3" /> info@example.com
+              <i className="fa fa-envelope mr-3" /> sukhanDeo@gmail.com
             </p>
             <p>
-              <i className="fa fa-phone mr-3" /> + 01 234 567 88
-            </p>
-            <p>
-              <i className="fa fa-print mr-3" /> + 01 234 567 89
+              <i className="fa fa-phone mr-3" /> + 91 98784-77625
             </p>
           </MDBCol>
         </MDBRow>
@@ -125,7 +150,7 @@ const FooterPage = () => {
       <div className="footer-copyright text-center py-3">
         <MDBContainer fluid>
           &copy; {new Date().getFullYear()} Copyright:{" "}
-          <a href="https://www.MDBootstrap.com"> MDBootstrap.com </a>
+          <a href="/home"> Binod Bingo </a>
         </MDBContainer>
       </div>
     </MDBFooter>
