@@ -2,19 +2,32 @@ import React from 'react';
 import NavStyles from './navbar.module.css';
 import CustomizedButtons from '../Buttons/NavbarButtons/commonButton';
 import LogoutButton from '../Buttons/LogOut/Logout';
-import { useHistory } from 'react-router';
+import { useHistory,useLocation } from 'react-router';
 import logo from '../../assets/images/bingoLogo.gif';
 
 const Navbar = ({personChar}) => {
 
   const history = useHistory();
-  const handleLeader = (e) => {
-    history.push('/leaderBoard');
+  const location = useLocation();
+
+  const handleNavButton1 = (e) => {
+    if(location.pathname==='/leaderBoard')
+    {
+      history.push('/home');
+    }
+
+    else
+    {
+    history.push("/leaderBoard");
+    }
   }
 
-    const handleProfile = (e) => {
-      history.push("/profile");
-    };
+    const handleNavButton2 = (e) => {
+  if (location.pathname === "/profile") {
+    history.push("/home");
+  } else {
+    history.push("/profile");
+  }    };
 
   return (
     <>
@@ -25,10 +38,10 @@ const Navbar = ({personChar}) => {
 
       <div className={NavStyles.rightArea}>
         <div className={NavStyles.leader}>
-          <CustomizedButtons heading={"LeaderBoard"} onClick = {handleLeader} />
+          <CustomizedButtons heading={location.pathname !=='/leaderBoard'?"LeaderBoard":"Home"} onClick = {handleNavButton1} />
         </div>
         <div className={NavStyles.profile}>
-          <CustomizedButtons heading={"My Profile"} onClick = {handleProfile} />
+          <CustomizedButtons heading={location.pathname !=='/profile'?"My Profile":"Home"} onClick = {handleNavButton2} />
         </div>
         <div className={NavStyles.logout}>
          <LogoutButton />
