@@ -13,7 +13,7 @@
     font-family: 'Poppins', sans-serif;
     font-size: 18px;
     color: white;
-    background: #6225E6;
+    background: rgb(3,252,232);
     transition: 1s;
     box-shadow: 6px 6px 0 black;
     transform: skewX(-15deg);
@@ -32,11 +32,12 @@
 
 .ctal span:nth-child(2) {
     transition: 0.5s;
-    margin-right: 0px;
+    margin-right: 15px;
 }
 
 .ctal:hover  span:nth-child(2) {
     transition: 0.5s;
+    /* color:#FBC638; */
     /* margin-right: 45px; */
 }
 

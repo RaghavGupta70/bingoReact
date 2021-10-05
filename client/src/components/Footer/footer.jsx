@@ -57,7 +57,7 @@ const FooterPage = () => {
               style={{ width: "60px" }}
             />
             <p>
-              Come play bingo and feel high af.A experience to be remembered
+              Come play bingo and feel high af.An experience to be remembered
               forever.Play with friends and get fucked.Happy Playing:)
             </p>
           </MDBCol>

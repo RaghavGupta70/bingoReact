@@ -16,13 +16,26 @@ import Profile from "./pages/Profile/Profile.js";
 import Navbar from "./components/Navbar/navbar.jsx";
 import AppStyles from "./App.module.css";
 import { getToken } from "./utils/commonData/common.js";
-import FooterPage from './components/Footer/footer.jsx';
+import FooterPage from "./components/Footer/footer.jsx";
+import Error404 from "./pages/Error404/error404";
 
 const App = () => {
   const history = useHistory();
   const [token, setToken] = useState(JSON.parse(localStorage.getItem("tok")));
   let location = useLocation();
-  console.log(history.location.pathname!=='SignIn');
+  console.log(history.location.pathname !== "SignIn");
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      if (getToken() === null) {
+        location.pathname.replace("/SignIn");
+        history.push("/SignIn");
+      } else {
+        location.pathname.replace("/home");
+        history.push("/home");
+      }
+    }
+  }, []);
 
   return (
     <>
@@ -55,6 +68,12 @@ const App = () => {
         </Route>
         <Route path="/Profile">
           <Profile />
+        </Route>
+        <Route path="/error">
+          <Error404 />
+        </Route>
+        <Route>
+          <Home token={token} />
         </Route>
       </Switch>
       {getToken() !== null &&

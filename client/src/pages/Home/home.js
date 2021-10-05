@@ -1,26 +1,34 @@
 import React,{ useEffect } from "react";
-import { useHistory } from 'react-router-dom'; 
+import { useHistory,useLocation } from 'react-router-dom'; 
 import JoinRoom from "../../components/Buttons/RoomButton/joinRoom.js"
-import { io } from "socket.io-client";
-import Navbar from '../../components/Navbar/navbar.jsx';
+import homeBG from '../../assets/images/homeBG.jpg';
+import './homeStyles.css'
 
 
 function Home({token}) {
     const history = useHistory();
+    const location = useLocation();
 
    useEffect(() => {
        if(!token){
-        history.push('SignIn');
-       } 
-   });
+        location.pathname.replace('/error');
+        history.push('/error')
+       }
 
-   const user = JSON.parse(localStorage.getItem('user'));
-   const person = user.result.userName;
+       else
+       {
+        location.pathname.replace("/home");
+        history.push("/home");
+       }
+   },[location.pathname]);
+
+//    const user = JSON.parse(localStorage.getItem('user'));
+//    const person = user.result.userName;
    
    return(
-       <>
+       <div className="image">
       <JoinRoom style={{display: "flex",margin: "auto"}} />
-      </>
+      </div>
    );
 }
 
