@@ -1,3 +1,4 @@
 .image {
-    background: url('../../assets/images/homeBG.svg') no-repeat center center/cover; 
+    background: url('../../assets/images/homeBG.jpg') no-repeat center center/cover; 
+    padding: 10.5% 0px;
 }
