@@ -14,6 +14,8 @@ import {
   getPlayValue,
 } from "../../utils/commonData/common";
 import BingoGrid from "../../components/BingoGame/bingoGrid.js";
+import ChatBox from '../../components/ChatBox/chatBoxGame';
+import roomStyles from './roomStyles.module.css';
 
 let socket;
 
@@ -152,6 +154,9 @@ console.log('Chal ja Bhadwe');
               <BingoGrid arrNum={bingoNum} />
             </>
           )}
+          <div className={roomStyles.chat}>
+            <ChatBox text={"Player Chat"}/>
+          </div>
         </>
       ) : (
         <>
