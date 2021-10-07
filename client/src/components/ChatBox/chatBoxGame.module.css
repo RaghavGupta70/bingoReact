@@ -2,7 +2,7 @@
     border: 5px solid hsl(101, 100%, 53%);
     border-radius: 20px;
     box-shadow: 10px 10px 20px yellow;
-    width: fit-content
+    width: 100%
 }
 
 .header h1 {

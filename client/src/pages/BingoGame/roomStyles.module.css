@@ -6,7 +6,8 @@
 .bingoRoom{
     display:flex;
     flex-direction: row;
-    margin:4% 1%;
+    margin:4% 0% 4% 0%;
+    width: 100%;
 }
 
 .members{
