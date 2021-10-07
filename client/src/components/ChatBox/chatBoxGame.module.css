@@ -4,3 +4,20 @@
     box-shadow: 10px 10px 20px yellow;
     width: fit-content
 }
+
+.header h1 {
+    font-size: 25px;
+}
+
+.content li {
+    font-size: 15px;
+    font-family: cursive;
+}
+
+.message {
+    text-align: left;
+}
+
+.message1 {
+    text-align: right;
+}
