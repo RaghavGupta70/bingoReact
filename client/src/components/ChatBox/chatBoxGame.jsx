@@ -3,7 +3,7 @@ import chatStyles from './chatBoxGame.module.css';
 
 const ChatBox = ({text}) => {
 
-    const [newText,setNewText] = useState(["Player 1 joined","Player 2 joined","Player 3 joined","Player 4 joined"]);
+    const [newText,setNewText] = useState([{Message:"Player 1 joined",type: 'user'},{Message:"Player 2 joined",type: 'other'},{Message:"Player 3 joined",type: 'other'},{Message: "Player 4 joined",type: 'other'}]);
 
     return (
         <div className={chatStyles.mainCont}>
@@ -12,8 +12,8 @@ const ChatBox = ({text}) => {
             </div>
             <div className={chatStyles.content}>
                 <ul>
-                {newText.map((newT)=>(<li>
-                    {newT}
+                {newText.map((newT)=>(<li className={newT.type==='user'?chatStyles.message:chatStyles.message1}>
+                    {newT.Message}
                 </li>))}
                 </ul>
             </div>
