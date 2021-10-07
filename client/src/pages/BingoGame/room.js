@@ -16,6 +16,7 @@ import {
 import BingoGrid from "../../components/BingoGame/bingoGrid.js";
 import ChatBox from '../../components/ChatBox/chatBoxGame';
 import roomStyles from './roomStyles.module.css';
+import MembersInRoom from '../../components/MembersInRoom/membersInRoom.jsx';
 
 let socket;
 
@@ -128,7 +129,7 @@ console.log('Chal ja Bhadwe');
       {getToken() != null ? (
         <>
           <span>Room Id:-{roomID}</span>
-          <h1>Members in Room</h1>
+          <MembersInRoom />
           {!play ? (
             <>
             <img src={BingoImage} />
