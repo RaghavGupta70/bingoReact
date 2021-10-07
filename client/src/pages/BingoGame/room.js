@@ -125,11 +125,13 @@ console.log('Chal ja Bhadwe');
   // }
 
   return (
-    <>
-      {getToken() != null ? (
-        <>
+    <div className={roomStyles.bingoRoom}>
+      {getToken() != null ? (<>
+        <div className="members">
           <span>Room Id:-{roomID}</span>
           <MembersInRoom />
+        </div>  
+          <div className={roomStyles.bingoGame}>
           {!play ? (
             <>
             <img src={BingoImage} />
@@ -155,6 +157,7 @@ console.log('Chal ja Bhadwe');
               <BingoGrid arrNum={bingoNum} />
             </>
           )}
+          </div>
           <div className={roomStyles.chat}>
             <ChatBox text={"Player Chat"}/>
           </div>
@@ -164,7 +167,7 @@ console.log('Chal ja Bhadwe');
           <h1>Access Denied</h1>
         </>
       )}
-    </>
+    </div>
   );
 };
 
