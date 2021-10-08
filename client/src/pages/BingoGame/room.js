@@ -52,7 +52,7 @@ const Room = () => {
       socket.on('playStart',(played) =>{
         console.log('You called me')
         setPlay(played);
-            })
+          })
     },[])
 
 
@@ -138,7 +138,7 @@ console.log('Chal ja Bhadwe');
           <MembersInRoom />
         </div>  
           <div className={roomStyles.bingoGame}>
-          {!play ? (
+          {play ? (
             <>
             <img src={BingoImage} />
             {usersLen >=2? <h6> Start</h6>: null}

@@ -58,6 +58,7 @@ var h=0;
   // }, 100);
   const [styleToggle, setStyleToggle] = useState([]);
   const [shuffle, setShuffle] = useState(false);
+  
 
   for (var i = 1; i <= 25; i++) {
     styleToggle.push(false);
@@ -118,6 +119,28 @@ var h=0;
     }
   
   console.log(arr)
+
+  const handleBingo = (e) => {
+    e.preventDefault();
+    for(let i=0;i<25;i++){
+      if(i%5===0){
+         if(styleToggle[i]&&styleToggle[i+1]&&styleToggle[i+2]&&styleToggle[i+3]&&styleToggle[i+4]){
+           console.log(i,'You can cut now');
+         }
+      }
+    }
+    for(let i=0;i<5;i++){
+      if(styleToggle[i]&&styleToggle[i+5]&&styleToggle[i+10]&&styleToggle[i+15]&&styleToggle[i+20]){
+        console.log(i,'You can cut now');
+      }
+    }
+    if(styleToggle[0]&&styleToggle[6]&&styleToggle[12]&&styleToggle[18]&&styleToggle[24]){
+      console.log('You can cut now');
+    }
+    if(styleToggle[4]&&styleToggle[8]&&styleToggle[12]&&styleToggle[16]&&styleToggle[20]){
+      console.log('You can cut now');
+    }
+  }
   
   return (
     <div>
@@ -151,6 +174,7 @@ var h=0;
                   alert("You are the only one here");
                   return;
                 }
+                console.log(styleToggle);
                 console.log(e.target, ar.i);
                 // if(ar.i !== num.toString()){
                 //     console.log("Error")
@@ -249,6 +273,7 @@ var h=0;
           ))
         )}
       </GridLayout>
+      <button onClick={handleBingo}>Bingo</button>
     </div>
   );
 };
