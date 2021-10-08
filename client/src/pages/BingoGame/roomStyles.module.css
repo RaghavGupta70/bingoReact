@@ -1,19 +1,22 @@
 .chat {
     padding: 20px;
-    width:25vw;
+    width:25%;
 }
 
 .bingoRoom{
     display:flex;
     flex-direction: row;
-    margin:4% 1%;
+    margin:4% 0%;
+    width:100%;
 }
 
 .members{
-    width:25vw;
+    width:25%;
+    padding:2%;
 }
 
 .bingoGame{
-    width:50vw;
+    width:50%;
     text-align:center;
+    margin:auto;
 }
