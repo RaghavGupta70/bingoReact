@@ -56,7 +56,14 @@ io.on("connection", (socket) => {
     const played = true;
     let obj = { id: roomID };
     // const roomId = roomID.toString();
-    socket.broadcast.to(roomID).emit("playStart", played);
+
+    console.log(typeof(roomID))
+    if(roomID)
+    {
+  socket.to(obj.id).emit("playStart", played);
+  console.log("Working");
+    }
+  
     // io.on("connection", (socket) => {
     //   socket.to(roomID).emit('playStart',(played));
     // });
