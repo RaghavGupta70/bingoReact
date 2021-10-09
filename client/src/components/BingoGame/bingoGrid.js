@@ -21,6 +21,7 @@ const BingoGrid = ({ arrNum }) => {
   const ENDPOINT = "localhost:5000";
   let dependency = 0;
   const [turn,setTurn] = useState(0);
+  const [bingoCut,setBingoCut] = useState({horiz: [],vert: [],diag: []})
 
 
   var arr = new Array(5);
@@ -64,7 +65,13 @@ var h=0;
     styleToggle.push(false);
   }
 
-
+useEffect(() => {
+  if (bingoCut.horiz.length + bingoCut.vert.length + bingoCut.diag.length >=5)
+  {
+    console.log('You won Bingo')
+  }
+  
+}, [])
 
   useEffect(() => {
       
@@ -123,24 +130,36 @@ var h=0;
   const handleBingo = (e) => {
     e.preventDefault();
     for(let i=0;i<25;i++){
-      if(i%5===0){
+      if(i%5===0 && !bingoCut.horiz.find((elem)=> elem===i)){
          if(styleToggle[i]&&styleToggle[i+1]&&styleToggle[i+2]&&styleToggle[i+3]&&styleToggle[i+4]){
            console.log(i,'You can cut now');
+           setBingoCut({horiz: [...bingoCut.horiz,i],vert: [...bingoCut.vert],diag: [...bingoCut.diag]});
          }
       }
     }
     for(let i=0;i<5;i++){
       if(styleToggle[i]&&styleToggle[i+5]&&styleToggle[i+10]&&styleToggle[i+15]&&styleToggle[i+20]){
         console.log(i,'You can cut now');
+        setBingoCut({ horiz: [...bingoCut.horiz], vert: [...bingoCut.vert,i], diag: [...bingoCut.diag] } );
+
       }
     }
     if(styleToggle[0]&&styleToggle[6]&&styleToggle[12]&&styleToggle[18]&&styleToggle[24]){
       console.log('You can cut now');
+      setBingoCut({ horiz: [...bingoCut.horiz], vert: [...bingoCut.vert], diag: [...bingoCut.diag,i] } );
+
     }
     if(styleToggle[4]&&styleToggle[8]&&styleToggle[12]&&styleToggle[16]&&styleToggle[20]){
       console.log('You can cut now');
+      setBingoCut({ horiz: [...bingoCut.horiz], vert: [...bingoCut.vert], diag: [...bingoCut.diag, i] } );
     }
-  }
+
+    // if (bingoCut.horiz.length >= 5 || bingoCut.vert.length >= 5 || bingoCut.diag.length >= 5)
+    // {
+    //   console.log('You won Bingo')
+    // }
+  } 
+  
   
   return (
     <div>
