@@ -8,6 +8,8 @@ import { io } from "socket.io-client";
 import Swal from 'sweetalert2';
 import { getUserName, getUsers } from "../../utils/commonData/common";
 import {useHistory} from 'react-router-dom';
+import WinnerGif from '../../assets/images/winnerGif.gif';
+import alertImg from '../../assets/images/bingo_bg.png'
 
 let socket;
 
@@ -68,7 +70,20 @@ var h=0;
 useEffect(() => {
   if (bingoCut.horiz.length + bingoCut.vert.length + bingoCut.diag.length >=5)
   {
-    console.log('You won Bingo')
+    Swal.fire({
+      title: 'Congratulations You Won',
+      color: 'red',
+      width: 600,
+      position: 'bottom',
+      padding: '3em',
+      background: `rgb(255,255,255)`,
+      backdrop: `
+    rgba(0,0,0,0.4)
+    url(${WinnerGif})
+    center top
+    no-repeat
+  `
+    })
   }
 }, [bingoCut])
 
@@ -130,6 +145,7 @@ useEffect(() => {
          if(styleToggle[i]&&styleToggle[i+1]&&styleToggle[i+2]&&styleToggle[i+3]&&styleToggle[i+4]){
            console.log(i,'You can cut now');
            setBingoCut({horiz: [...bingoCut.horiz,i],vert: [...bingoCut.vert],diag: [...bingoCut.diag]});
+           console.log(bingoCut.horiz.length)
          }
       }
     }
@@ -137,6 +153,8 @@ useEffect(() => {
       if(styleToggle[i]&&styleToggle[i+5]&&styleToggle[i+10]&&styleToggle[i+15]&&styleToggle[i+20]){
         console.log(i,'You can cut now');
         setBingoCut({ horiz: [...bingoCut.horiz], vert: [...bingoCut.vert,i], diag: [...bingoCut.diag] } );
+        console.log(bingoCut.vert.length)
+
 
       }
     }
