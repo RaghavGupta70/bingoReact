@@ -70,8 +70,7 @@ useEffect(() => {
   {
     console.log('You won Bingo')
   }
-  
-}, [])
+}, [bingoCut])
 
   useEffect(() => {
       
@@ -88,9 +87,6 @@ useEffect(() => {
    }
  
   console.log('Random')
-
-
-  // console.log(bingoNum)
 
   var obj = {
     i: "",
@@ -153,11 +149,6 @@ useEffect(() => {
       console.log('You can cut now');
       setBingoCut({ horiz: [...bingoCut.horiz], vert: [...bingoCut.vert], diag: [...bingoCut.diag, i] } );
     }
-
-    // if (bingoCut.horiz.length >= 5 || bingoCut.vert.length >= 5 || bingoCut.diag.length >= 5)
-    // {
-    //   console.log('You won Bingo')
-    // }
   } 
   
   
@@ -195,10 +186,6 @@ useEffect(() => {
                 }
                 console.log(styleToggle);
                 console.log(e.target, ar.i);
-                // if(ar.i !== num.toString()){
-                //     console.log("Error")
-                //     return;
-                // }
                 let result = getUserName();
 
                 var numLen = getUsers()[0].numbers.length;
