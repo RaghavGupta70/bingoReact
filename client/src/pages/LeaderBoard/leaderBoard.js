@@ -67,7 +67,7 @@ export default function LeaderBoard() {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
-  const [rows, setRows] = useState(leaderDataValue.map((ld, index) => createData(index + 1, ld.userName, ld.matchesWon, ld.matchesLost, ld.matchesPlayed, ld.rating)));
+  const [rows, setRows] = useState(leaderDataValue.map((ld, index) => createData(index + 1, ld.userName, ld.matchesWon, ld.matchesLost, ld.matchesPlayed, ld.rating.toFixed(2))));
   const handleChangeRowsPerPage = ( event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
@@ -75,7 +75,7 @@ export default function LeaderBoard() {
 
   useEffect(()=> {
     var sortedData = leaderDataValue.sort((a,b)=> a.rating<b.rating?1:-1);
-    var leaderboardData = sortedData.map((ld,index) => createData(index+1,ld.userName, ld.matchesWon, ld.matchesLost, ld.matchesPlayed, ld.rating));
+    var leaderboardData = sortedData.map((ld,index) => createData(index+1,ld.userName, ld.matchesWon, ld.matchesLost, ld.matchesPlayed, ld.rating.toFixed(2)));
     setRows(leaderboardData);
   },[leaderDataValue])
 

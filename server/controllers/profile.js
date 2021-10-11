@@ -52,81 +52,90 @@ export const getLeaderboardData = async (req, res) => {
         res.status(404).json({ message: 'Not able to get data from database.' });
     }
 }
-// export const updateProfile = async(req,res) => {
-//     const email = req.body;
-//     try {
-//         const user = await Profile.find(email);
-//         if(!user) return res.status(409).json('User Not found');
-
-//         await Profile.updateOne
-//     } catch (error) {
-
-//     }
-// }
 
 export const updatePlayerData = async (req, res) => {
     try {
         const playerEmail = req.params.email;
         const { oppData, result } = req.body;
 
-        const playerData = await Profile.find({ emailId: playerEmail });
+        let playerData = await Profile.find({ emailId: playerEmail });
+        playerData = playerData[0];
+
+        const todayMonth = new Date().toLocaleString('default',{month:'long'});
 
         playerData.matchesPlayed++;
 
         if (result === 'Won') {
             playerData.matchesWon++;
+            const matchMon = playerData.matches.filter((mt)=> mt.matchMonth === todayMonth);
+            playerData.matches = playerData.matches.filter((mt)=> mt.matchMonth !== todayMonth);
+            if(matchMon.length>0){
+                matchMon[0].matchWon++;
+            }
+            else{
+                const newMatchMon = {matchMonth:todayMonth,matchWon:1,matchLost:0,matchNoResult:0};
+                matchMon[0] = newMatchMon;
+            }
+            playerData.matches.push(matchMon[0]);
         }
 
         else if (result === 'Lost') {
             playerData.matchesLost++;
+            const matchMon = playerData.matches.filter((mt)=> mt.matchMonth === todayMonth);
+            playerData.matches = playerData.matches.filter((mt)=> mt.matchMonth !== todayMonth);
+            if(matchMon.length>0){
+                matchMon[0].matchLost++;
+            }
+            else{
+                const newMatchMon = {matchMonth:todayMonth,matchWon:0,matchLost:1,matchNoResult:0};
+                matchMon[0] = newMatchMon;
+            }
+            playerData.matches.push(matchMon[0]);
         }
 
-        playerData.rating += playerData.matchesWon / playerData.matchesPlayed;
+        playerData.rating += (playerData.matchesWon / playerData.matchesPlayed);
 
         for (let i = 0; i < oppData.length; i++) {
 
-            const playerOpp = playerData.opponentsData.find((opp) => opp.opponentEmail === oppData[i].email)
+            const playerOpp = playerData.opponentsData.filter((opp) => opp.opponentEmail === oppData[i].email);
+            playerData.opponentsData = playerData.opponentsData.filter((opp) => opp.opponentEmail !== oppData[i].email);
 
-            if (playerOpp) {
-                playerOpp.matchPlayed++;
+            if (playerOpp.length > 0) {
+                playerOpp[0].matchPlayed++;
 
-                if (result === 'Won')
-                    {playerOpp.matchWon++;
-                    }
-                        
-                        else {
-                            if(oppData[i].result === 'Won')
-    playerOpp.matchLost++;
-}
+                if (result === 'Won') {
+                    playerOpp[0].matchWon++;
+                }
 
-const playerOppData = playerData.opponentsData.map((opp)=> {
-    opp.opponentEmail === playerOpp.opponentEmail?
-})
+                else {
+                    if (oppData[i].result === 'Won')
+                        playerOpp[0].matchLost++;
+                }
+                playerData.opponentsData.push(playerOpp[0]);
             }
 
-            else
-            {
+            else {
                 const newOppLab = {
-                    value: playerData.opponents[playerData.opponents.length - 1] + 1,
+                    value: playerData.opponents.length,
                     label: oppData[i].label
                 };
 
                 const newOppData = {
-                    value: playerData.opponentsData[playerData.opponentsData.length-1]+1,
+                    value: playerData.opponentsData.length,
                     opponentEmail: oppData[i].email,
                     matchPlayed: 1,
-                    matchWon: result==='Won'?1:0,
-                    matchLost : result==='Lost'?oppData[i].result ==='Won'?1:0:0 
+                    matchWon: result === 'Won' ? 1 : 0,
+                    matchLost: result === 'Lost' ? oppData[i].result === 'Won' ? 1 : 0 : 0
                 }
                 playerData.opponentsData.push(newOppData);
                 playerData.opponents.push(newOppLab);
             }
-
         }
-
+        const updated = await Profile.findOneAndUpdate({emailId:playerEmail},{$set:playerData},{ new:true,upsert:true });
+        return res.status(201).json(updated);
     }
 
-    catch(error) {
-        console.log(error);
+    catch (error) {
+        return res.status(404).json({message:'You fucked Up'});
     }
 } 
