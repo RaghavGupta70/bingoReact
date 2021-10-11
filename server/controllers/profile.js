@@ -61,7 +61,7 @@ export const updatePlayerData = async (req, res) => {
         let playerData = await Profile.find({ emailId: playerEmail });
         playerData = playerData[0];
 
-        const todayMonth = new Date().toLocaleString('default',{month:'long'});
+        const todayMonth = new Date().getMonth();
 
         playerData.matchesPlayed++;
 

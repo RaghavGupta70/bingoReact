@@ -5,7 +5,7 @@ const LineChart = ({ value, reload, playerData,oppLabel }) => {
 
 
   const data = {
-    labels: playerData.matches.map((pl)=>pl.matchMonth),
+    labels: playerData.matches.map((pl)=>months[pl.matchMonth-1]),
     datasets: [
       {
         label: "Your Stats",
