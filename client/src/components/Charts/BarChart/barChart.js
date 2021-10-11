@@ -1,6 +1,7 @@
 import { Bar } from "react-chartjs-2";
 import {useState,useEffect} from 'react';
 import { CircularProgress } from "@material-ui/core";
+import {months} from '../../../utils/constantData/constantData.js';
 
 const BarChart = ({graph,playerData}) => {
   const [barData, setBarData] = useState(playerData.matches);
@@ -11,19 +12,19 @@ const BarChart = ({graph,playerData}) => {
 
 
   useEffect(()=> {
-    if(barData)
-    setBarData(barData.sort((a,b)=> {
-      var monthStringA = a;
-      var monthStringB = b;
-      var datA = new Date('1 ' + monthStringA + ' 1999');
-      var datB = new Date('1 ' + monthStringB + ' 1999');
-      console.log(datA.getMonth(),datB.getMonth());
-      return datA.getMonth()<datB.getMonth()?1:0;
+    if(playerData.length>0){
+    setBarData(months.filter((mon)=> {
+       for(var i=0;i<playerData.matches.length;i++){
+         if(playerData.matches[i].matchMonth === mon){
+           return playerData.matches[i];
+         }
+       }
     }));
+  }
   },[barData])
 
     const data =(barData)=>( {
-      labels: !barData? ["Jan","Feb","Mar"] : barData.map((data)=> data.matchMonth),
+      labels: !barData? ["Jan","Feb","Mar"] : barData.map((data)=> data.matchMonth ),
 
       datasets: [
         {
