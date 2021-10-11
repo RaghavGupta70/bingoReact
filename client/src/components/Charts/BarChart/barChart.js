@@ -9,6 +9,19 @@ const BarChart = ({graph,playerData}) => {
     setBarData(playerData.matches);
   })
 
+
+  useEffect(()=> {
+    if(barData)
+    setBarData(barData.sort((a,b)=> {
+      var monthStringA = a;
+      var monthStringB = b;
+      var datA = new Date('1 ' + monthStringA + ' 1999');
+      var datB = new Date('1 ' + monthStringB + ' 1999');
+      console.log(datA.getMonth(),datB.getMonth());
+      return datA.getMonth()<datB.getMonth()?1:0;
+    }));
+  },[barData])
+
     const data =(barData)=>( {
       labels: !barData? ["Jan","Feb","Mar"] : barData.map((data)=> data.matchMonth),
 
