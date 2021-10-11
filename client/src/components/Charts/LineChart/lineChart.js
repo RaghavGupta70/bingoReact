@@ -1,7 +1,9 @@
 import { Line } from "react-chartjs-2";
+import {months} from '../../../utils/constantData/constantData'
 
 const LineChart = ({ value, reload, playerData,oppLabel }) => {
 
+  playerData = playerData.matches.sort((a,b)=> a<b?1:0);
   const data = {
     labels: playerData.matches.map((pl)=>pl.matchMonth),
     datasets: [
