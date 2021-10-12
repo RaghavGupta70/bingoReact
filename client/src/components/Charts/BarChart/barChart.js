@@ -11,24 +11,8 @@ const BarChart = ({graph,playerData}) => {
     {
       console.log(playerData.matches.sort((a, b) => a.matchMonth > b.matchMonth ? 1 : -1));
       setBarData(playerData.matches.sort((a, b) => a.matchMonth > b.matchMonth ? 1 : -1));
-
     }
   })
-
-
-  // useEffect(()=> {
-    
-  //   if(playerData.length>0){
-  //     console.log(playerData)
-  //     setBarData(months.filter((mon)=> {
-  //      for(var i=0;i<playerData.matches.length;i++){
-  //        if(playerData.matches[i].matchMonth === mon){
-  //          return playerData.matches[i];
-  //        }
-  //      }
-  //   }));
-  // }
-  // },[barData])
 
     const data =(barData)=>( {
       labels: !barData? ["Jan","Feb","Mar"] : barData.map((data)=> months[data.matchMonth-1] ),
