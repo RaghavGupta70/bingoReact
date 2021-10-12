@@ -1,0 +1,35 @@
+.bingo {
+    margin: auto;
+    width: fit-content;
+}
+
+.bingo img {
+    width: 8%;
+}
+
+.mainGrid {
+    /* margin: auto; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* padding: auto; */
+    /* width: fit-content; */
+    background-color: blue;
+    text-align: center;
+    align-items: center;
+}
+
+.gridLayout {
+    /* display: inline-block;
+    background-color: red;
+    /* width: fit-content; */
+
+    /* text-align: center; */
+    margin: auto; 
+    background-color: red;
+
+}
+
+.mainLayout {
+    
+}
