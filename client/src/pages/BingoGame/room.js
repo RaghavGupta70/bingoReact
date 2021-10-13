@@ -35,13 +35,21 @@ const Room = () => {
   const { roomID } = queryString.parse(location.search, {
     ignoreQueryPrefix: true,
   });
-  let members = usersRoom.filter((user) => user.userName !== currentUser);
+  // let members = usersRoom.filter((user) => user.userName !== currentUser);
   
   // useEffect(() => {
     // setBingoNum(temp);
     useEffect(() => {
       socket = io(ENDPOINT);
     }, [ENDPOINT]);
+
+    useEffect(() =>{
+      console.log(sessionStorage.getItem('usersRoom'))
+    })
+
+    useEffect(() => {
+      setUsersRoom(getUsers());
+    },[sessionStorage.getItem('usersRoom')])
 
     useEffect(() => {
       setUsersLen(getUsers().length)
@@ -147,7 +155,7 @@ console.log('Chal ja Bhadwe');
             <>
               {" "}
               <ul>
-                {members.map((member) => (
+                {usersRoom.map((member) => (
                   <li>{member.userName}</li>
                 ))}
                 {messages ? (

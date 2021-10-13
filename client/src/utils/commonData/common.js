@@ -18,6 +18,13 @@ const putUsers = (data) => {
     return 1;
 }
 
+const addUsers = (data) => {
+  const oldUsers = getUsers();
+  oldUsers.push(data);
+  sessionStorage.setItem('usersRoom', JSON.stringify(oldUsers));
+  return 1;
+}
+
 const getUserName = () => {
   return JSON.parse(localStorage.getItem('user')).result.userName;
 }
@@ -29,4 +36,4 @@ const getUserEmail = () => {
 const getPlayValue = () => {
   return sessionStorage.getItem('playValue');
 }
-export {getToken,getType,putUsers,getUsers,getUserName,getUserEmail,getPlayValue};
+export {getToken,getType,putUsers,getUsers,addUsers,getUserName,getUserEmail,getPlayValue};

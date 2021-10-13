@@ -40,7 +40,7 @@ io.on("connection", (socket) => {
     socket.join(users.roomId);
     const roomData = {
       roomId: users.roomId,
-      usersRoom: [userName],
+      userName: userName,
       played: false,
       numbers: [],
     };
@@ -79,7 +79,7 @@ io.on("connection", (socket) => {
     console.log("room", roomNo);
     const roomData = {
       roomId: roomNo.roomId,
-      usersRoom: usersInRoom,
+      userName: userName,
       numbers: [],
     };
     if (roomNo) {
