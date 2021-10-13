@@ -237,7 +237,6 @@ const BingoGrid = ({ arrNum }) => {
                   border: "1px solid black",
                   alignItems: "center",
                   borderRadius: "4px",
-                  margin: "auto",
                 }}
                 key={ar.i}
                 onClick={(e) => {

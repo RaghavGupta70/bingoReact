@@ -8,25 +8,12 @@
 }
 
 .mainGrid {
-    /* margin: auto; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    /* padding: auto; */
-    /* width: fit-content; */
-    background-color: blue;
-    text-align: center;
-    align-items: center;
+    padding:auto;
 }
 
 .gridLayout {
-    /* display: inline-block;
-    background-color: red;
-    /* width: fit-content; */
-
-    /* text-align: center; */
-    margin: auto; 
-    background-color: red;
+    border:2px solid black;
+    margin-left: 10%;
 
 }
 
