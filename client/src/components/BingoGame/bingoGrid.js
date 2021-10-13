@@ -9,12 +9,17 @@ import Swal from "sweetalert2";
 import { getUserName, getUsers } from "../../utils/commonData/common";
 import { useHistory } from "react-router-dom";
 import WinnerGif from "../../assets/images/winnerGif.gif";
-import alertImg from "../../assets/images/bingo_bg.png";
 import bingoB from "../../assets/images/bingoB.png";
 import bingoI from "../../assets/images/bingoI.png";
 import bingoN from "../../assets/images/bingoN.png";
 import bingoG from "../../assets/images/bingoG.png";
 import bingoO from "../../assets/images/bingoO.png";
+import bingoB2 from '../../assets/images/bingoB2.png'
+import bingoI2 from '../../assets/images/bingoI2.png'
+import bingoN2 from '../../assets/images/bingoN2.png'
+import bingoG2 from '../../assets/images/bingoG2.png'
+import bingoO2 from '../../assets/images/bingoO2.png'
+
 import binStyles from './bingoGrid.module.css';
 
 let socket;
@@ -65,6 +70,8 @@ const BingoGrid = ({ arrNum }) => {
   // }, 100);
   const [styleToggle, setStyleToggle] = useState([]);
   const [shuffle, setShuffle] = useState(false);
+  const [win,setWin] = useState([false,false,false,false,false]);
+  var bingoWin = 0;
 
   for (var i = 1; i <= 25; i++) {
     styleToggle.push(false);
@@ -75,6 +82,7 @@ const BingoGrid = ({ arrNum }) => {
       bingoCut.horiz.length + bingoCut.vert.length + bingoCut.diag.length >=
       5
     ) {
+      if(bingoWin>=4){console.log('Win Done')}
       Swal.fire({
         title: "Congratulations You Won",
         color: "red",
@@ -158,6 +166,9 @@ const BingoGrid = ({ arrNum }) => {
             vert: [...bingoCut.vert],
             diag: [...bingoCut.diag],
           });
+
+          win[bingoWin++] = true;
+          
           console.log(bingoCut.horiz.length);
         }
       }
@@ -177,6 +188,8 @@ const BingoGrid = ({ arrNum }) => {
           diag: [...bingoCut.diag],
         });
         console.log(bingoCut.vert.length);
+        win[bingoWin++] = true;
+
       }
     }
     if (
@@ -192,6 +205,8 @@ const BingoGrid = ({ arrNum }) => {
         vert: [...bingoCut.vert],
         diag: [...bingoCut.diag, i],
       });
+      win[bingoWin++] = true;
+
     }
     if (
       styleToggle[4] &&
@@ -206,17 +221,19 @@ const BingoGrid = ({ arrNum }) => {
         vert: [...bingoCut.vert],
         diag: [...bingoCut.diag, i],
       });
+      win[bingoWin++] = true;
+
     }
   };
 
   return (
     <>
       <div className={binStyles.bingo}>
-        <img src={bingoB} />
-        <img src={bingoI} />
-        <img src={bingoN} />
-        <img src={bingoG} />
-        <img src={bingoO} />
+        <img src={win[0]?bingoB2:bingoB} />
+        <img src={win[1]?bingoI2:bingoI} />
+        <img src={win[2]?bingoN2:bingoN} />
+        <img src={win[3]?bingoG2:bingoG} />
+        <img src={win[4]?bingoO2:bingoO} />
       </div>
       <div className={binStyles.mainGrid}>
         <GridLayout
@@ -228,9 +245,10 @@ const BingoGrid = ({ arrNum }) => {
           isDraggable={false}
           className={binStyles.gridLayout}
         >
+          
           {arr.map((row, index) =>
             row.map((ar, ind) => (
-              <div
+              <div className={binStyles.elem}
                 style={{
                   display: "flex",
                   justifyContent: "center",

@@ -5,18 +5,9 @@
 
 .bingo img {
     width: 8%;
+    color: aqua;
 }
 
-.mainGrid {
-    padding:auto;
-}
-
-.gridLayout {
-    border:2px solid black;
-    margin-left: 10%;
-
-}
-
-.mainLayout {
-    
+.elem {
+    margin-left: 18%;
 }
