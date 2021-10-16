@@ -44,18 +44,7 @@ export default function JoinRoom({ type }) {
     });
   }, []);
 
-  useEffect(() => {
-    socket.on("room", (roomData, callback) => {
-      setroomId(roomData.roomId);
-      const success = addUsers(roomData);
-      if (success) {
-        sessionStorage.setItem("currentType", "NonCreator");
-        history.push(`/Room?roomID=${roomData.roomId}`);
-      } else {
-        history.push("/");
-      }
-    });
-  },[])
+
 
   const handleOpen = (e) => {
     e.preventDefault();
@@ -97,6 +86,16 @@ export default function JoinRoom({ type }) {
     socket.emit("join", ID, value, (error) => {
       alert("You joined Lodu");
       console.log(error);
+    });
+    socket.on("room", (roomData, callback) => {
+      setroomId(roomData.roomId);
+      const success = addUsers(roomData);
+      if (success) {
+        sessionStorage.setItem("currentType", "NonCreator");
+        history.push(`/Room?roomID=${roomData.roomId}`);
+      } else {
+        history.push("/");
+      }
     });
 
    
