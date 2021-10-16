@@ -1,5 +1,5 @@
 import * as api from "../api/index.js";
-import { FETCH,AUTH,LEAD_DATA,PROF,OPP_PROF,UPDATE_PROF } from "../constants/actionTypes.js";
+import { FETCH,AUTH,LEAD_DATA,PROF,OPP_PROF,UPDATE_PROF,CREATE_ROOM,JOIN_ROOM,FETCH_ROOM } from "../constants/actionTypes.js";
 
 
 export const fetchUsers = () => async (dispatch) => {
@@ -74,11 +74,44 @@ export const fetchLeaderBoardData = () => async(dispatch) => {
 
 export const updatePlayerProfile = (email,data) => async(dispatch) => {
     try{
-        const {data} = await api.updatePlayerData(email,data);
-        dispatch({type: UPDATE_PROF, payload: data})
+        const dataNew = await api.updatePlayerData(email,data);
+        dispatch({type: UPDATE_PROF, payload: dataNew})
     }
     catch(error)
     {
         console.log(error);
+    }
+}
+
+export const createRoomPlayer = (data) => async(dispatch) => {
+    try {
+        // console.log(data);
+        const message = await api.createRoom(data);
+        console.log(message.data);
+        dispatch({type: CREATE_ROOM, payload: message.data})
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const joinRoomPlayer = (data) => async (dispatch) => {
+    try {
+        // console.log(data);
+        const message = await api.joinRoom(data);
+        console.log(message.data);
+        dispatch({ type: JOIN_ROOM, payload: message.data })
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const fetchRoomValue = (id) => async(dispatch) => {
+    try {
+        const message = await api.fetchRoom(id);
+        console.log(id,message);
+        dispatch({type: FETCH_ROOM,payload: message.data})
+        return message.data;
+    } catch (error) {
+        console.log(error)
     }
 }

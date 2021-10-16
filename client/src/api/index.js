@@ -14,5 +14,6 @@ export const getOpponents = (email) => axios.get(`${profileURl}/getAllOpponents/
 export const getLeaderBoard = () => axios.get(`${profileURl}/getLeaderboardData`);
 export const updatePlayerData = (email,data) => axios.patch(`${profileURl}/updateProfile/${email}`,data);
 
-export const createRoom = (data) => axios.post(`${gameURl}/createPlayer`);
-export const joinRoom = (data) => axios.post(`${gameURl}/joinPlayer`);
+export const fetchRoom = (id) => axios.get(`${gameURl}/fetchRoomData/${id}`)
+export const createRoom = (data) => axios.post(`${gameURl}/createPlayer`,data);
+export const joinRoom = (data) => axios.post(`${gameURl}/joinPlayer`,data);

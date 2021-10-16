@@ -154,7 +154,7 @@ console.log('Chal ja Bhadwe');
           ) : (
             <>
               {" "}
-              <ul>
+              {/* <ul>
                 {usersRoom.map((member) => (
                   <li>{member.userName}</li>
                 ))}
@@ -165,7 +165,7 @@ console.log('Chal ja Bhadwe');
                     <li>{messages.map((val) => val.value)}</li>
                   </>
                 ) : null}
-              </ul>
+              </ul> */}
               <BingoGrid arrNum={bingoNum} />
             </>
           )}
