@@ -4,6 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import auth from "./routes/auth.js";
 import profile from './routes/profile.js';
+import game from './routes/game.js';
 import http from "http";
 import { Server } from "socket.io";
 import * as room from './controllers/users.js';
@@ -23,6 +24,7 @@ const io = new Server(server, corsOptions);
 
 app.use("/auth", auth);
 app.use('/profile',profile);
+app.use('/game',game);
 
 app.use("/SignIn", (req, res) => {
   res.send({ tok: "session_token" });
@@ -32,7 +34,7 @@ io.on("connection", (socket) => {
   console.log("User has connected with socket.io");
 
   socket.on("create", (userName, callback) => {
-    const { error, users } = room.createRoom(userName);
+    // const { error, users } = room.createRoom(userName);
     // console.log(userName)
     // console.log(newRoom)
     if (error) return callback(error);
