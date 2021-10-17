@@ -282,7 +282,8 @@ const BingoGrid = ({ arrNum }) => {
                       const gameVal = JSON.parse(sessionStorage.getItem('usersRoom'));
                       console.log(gameVal);
                       const num = ar.i;
-                      socket.emit("gameValue", (gameVal,num), (error) => {
+                      const user = getUserName();
+                      socket.emit("gameValue", {gameVal,num,user}, (error) => {
                         alert("You bitch");
                       });
                       var newArr = [];
@@ -308,7 +309,9 @@ const BingoGrid = ({ arrNum }) => {
                     setGameValue(gameValue);
                     const gameVal = getUsers();
                     const num = ar.i;
-                    socket.emit("gameValue", (gameVal, num), (error) => {
+                    const user = getUserName();
+
+                    socket.emit("gameValue", {gameVal,num,user}, (error) => {
                       alert("You bitch");
                     });
                     var newArr = [];
@@ -325,7 +328,7 @@ const BingoGrid = ({ arrNum }) => {
                     if (getUsers()[0].numbers[numLen - 1].userName === result) {
                       alert("Keep Your Calm Boi");
                     } else {
-                      if (getUsers()[0].numbers[numLen - 1].value === ar.i) {
+                      if (getUsers()[0].numbers[numLen - 1] === ar.i) {
                         gameValue = {
                           userName: result,
                           userEmail: getUserEmail(),
@@ -335,7 +338,8 @@ const BingoGrid = ({ arrNum }) => {
                         setGameValue(gameValue);
                         const gameVal = getUsers();
                         const num = ar.i;
-                        socket.emit("gameValue", (gameVal, num), (error) => {
+                        const user = getUserName();
+                        socket.emit("gameValue", {gameVal, num,user}, (error) => {
                           alert("You bitch");
                         });
                         var newArr = [];

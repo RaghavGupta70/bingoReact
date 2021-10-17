@@ -6,7 +6,10 @@ const gameModel = new Schema({
     roomID: String,
     userName: String,
     userEmail: String,
-    numbers: [Number]
+    numbers: [{
+        value: Number,
+        userName: String,
+    }]
 })
 
 const game = mongoose.model('game',gameModel);

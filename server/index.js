@@ -65,15 +65,15 @@ io.on("connection", (socket) => {
     }
   );
 
-  socket.on("gameValue", (gameVal,num, callback) => {
-    console.log(gameVal,num);
+  socket.on("gameValue", (data, callback) => {
+    console.log(data);
 
-  gameVal.forEach(element => {
-      element.numbers.push(num);
+  data.gameVal.forEach(element => {
+      element.numbers.push({value: Number(data.num),userName: data.user});
     });
-    console.log(gameVal,gameVal[0].roomID);
+    console.log(data.gameVal,data.gameVal[0].roomID,data.user);
 
-    socket.broadcast.to(gameVal[0].roomID).emit("message", gameVal);
+    socket.broadcast.to(data.gameVal[0].roomID).emit("message", data.gameVal);
   });
 
   socket.on("disconnect", () => {

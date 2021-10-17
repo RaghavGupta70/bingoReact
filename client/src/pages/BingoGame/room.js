@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation,useHistory } from "react-router-dom";
 import { io } from "socket.io-client";
 import Swal from "sweetalert2";
+import { useSelector } from "react-redux";
 // import { getUserInRoom } from "../../../../../server/controllers/users";
 import BingoImage from '../../assets/images/bingoGame.png';
 import PlayButton from "../../components/Buttons/PlayButton/playButton";
@@ -29,8 +30,8 @@ const Room = () => {
   const bingoNum=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
   const [play,setPlay] = useState(false);
   const [messages, setMessages] = useState([]);
-  var [usersRoom, setUsersRoom] = useState(getUsers());
-  const currentUserInfo = JSON.parse(localStorage.getItem("user"));
+  const usersRoom = useSelector((state) => state.game);
+   const currentUserInfo = JSON.parse(localStorage.getItem("user"));
   const currentUser = currentUserInfo.result.userName;
   const { roomID } = queryString.parse(location.search, {
     ignoreQueryPrefix: true,
@@ -43,16 +44,15 @@ const Room = () => {
       socket = io(ENDPOINT);
     }, [ENDPOINT]);
 
+    console.log(usersRoom,getUsers())
+
     
 
     useEffect(() => {
-      setUsersRoom(getUsers());
-    },[sessionStorage.getItem('usersRoom')])
-
-    useEffect(() => {
+      // setUsersRoom(getUsers())
       setUsersLen(getUsers().length)
       console.log('start',getUsers().length)
-    }, [getUsers()])
+    }, [getUsers().length])
 
     useEffect(() => {
       socket.on('playStart',(played) =>{
@@ -140,8 +140,10 @@ console.log('Chal ja Bhadwe');
     <div className={roomStyles.bingoRoom}>
       {getToken() != null ? (<>
         <div className="members">
-          <span>Room Id:-{roomID}</span>
-          <MembersInRoom />
+          <span>Room Id:-{roomID}</span>{
+            usersRoom.length > 0 &&
+              <MembersInRoom names={usersRoom} />
+          }
         </div>  
           <div className={roomStyles.bingoGame}>
           {play ? (
@@ -153,9 +155,7 @@ console.log('Chal ja Bhadwe');
             <>
               {" "}
               {/* <ul>
-                {usersRoom.map((member) => (
-                  <li>{member.userName}</li>
-                ))}
+                {}
                 {messages ? (
                   <>
                     {" "}
@@ -169,7 +169,7 @@ console.log('Chal ja Bhadwe');
           )}
           </div>
           <div className={roomStyles.chat}>
-            <ChatBox text={"Player Chat"}/>
+          { usersRoom.length>0&&usersRoom[0].numbers.length>0&&<ChatBox text={"Player Chat"} message={usersRoom[0].numbers} />}
           </div>
         </>
       ) : (
