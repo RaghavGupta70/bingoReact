@@ -6,7 +6,7 @@ import GridLayout from "react-grid-layout";
 import { FaSlash } from "react-icons/fa";
 import { io } from "socket.io-client";
 import Swal from "sweetalert2";
-import { getUserName, getUsers } from "../../utils/commonData/common";
+import { getUserEmail, getUserName, getUsers } from "../../utils/commonData/common";
 import { useHistory } from "react-router-dom";
 import WinnerGif from "../../assets/images/winnerGif.gif";
 import bingoB from "../../assets/images/bingoB.png";
@@ -271,11 +271,16 @@ const BingoGrid = ({ arrNum }) => {
                     if (getUsers()[turn].userName === result) {
                       gameValue = {
                         userName: result,
+                        userEmail: getUserEmail(),
                         numberSelected: ar.i,
                         roomID: roomID,
                       };
                       setGameValue(gameValue);
-                      socket.emit("gameValue", gameValue, (error) => {
+                      
+                      const gameVal = JSON.parse(sessionStorage.getItem('usersRoom'));
+                      console.log(gameVal);
+                      const numberSelected = ar.i;
+                      socket.emit("gameValue", (gameVal,numberSelected), (error) => {
                         alert("You bitch");
                       });
                       var newArr = [];
@@ -294,11 +299,14 @@ const BingoGrid = ({ arrNum }) => {
                   } else if (getUsers()[turn].userName === result) {
                     gameValue = {
                       userName: result,
+                      userEmail: getUserEmail(),
                       numberSelected: ar.i,
                       roomID: roomID,
                     };
                     setGameValue(gameValue);
-                    socket.emit("gameValue", gameValue, (error) => {
+                    const gameVal = getUsers();
+                    const numberSelected = ar.i;
+                    socket.emit("gameValue", (gameVal, numberSelected), (error) => {
                       alert("You bitch");
                     });
                     var newArr = [];
@@ -318,11 +326,14 @@ const BingoGrid = ({ arrNum }) => {
                       if (getUsers()[0].numbers[numLen - 1].value === ar.i) {
                         gameValue = {
                           userName: result,
+                          userEmail: getUserEmail(),
                           numberSelected: ar.i,
                           roomID: roomID,
                         };
                         setGameValue(gameValue);
-                        socket.emit("gameValue", gameValue, (error) => {
+                        const gameVal = getUsers();
+                        const numberSelected = ar.i;
+                        socket.emit("gameValue", (gameVal, numberSelected), (error) => {
                           alert("You bitch");
                         });
                         var newArr = [];
