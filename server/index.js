@@ -8,7 +8,6 @@ import game from './routes/game.js';
 import http from "http";
 import { Server } from "socket.io";
 import * as room from './controllers/users.js';
-import {idFetch} from './controllers/game.js';
 
 const app = express();
 const server = http.createServer(app);
@@ -66,18 +65,15 @@ io.on("connection", (socket) => {
     }
   );
 
-  socket.on("gameValue", (gameValue, callback) => {
-    console.log(gameValue, gameValue.roomID, gameValue.numberSelected);
-    const users = room.fillNumbers(
-      gameValue.roomID,
-      gameValue.userName,
-      gameValue.numberSelected
-    );
-    console.log(users);
-    const len = users[0].numbers.length - 1;
-    const gameV = users[0].numbers[len];
-    console.log(gameV);
-    socket.broadcast.to(gameValue.roomID).emit("message", users);
+  socket.on("gameValue", (gameVal,numberSelected, callback) => {
+    console.log(gameVal,numberSelected);
+
+  gameVal.forEach(element => {
+      element.numbers.push(numberSelected);
+    });
+    console.log(gameVal,gameVal[0].roomID);
+
+    socket.broadcast.to(gameVal[0].roomID).emit("message", gameVal);
   });
 
   socket.on("disconnect", () => {
