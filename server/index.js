@@ -23,8 +23,8 @@ const corsOptions = {
 const io = new Server(server, corsOptions);
 
 app.use("/auth", auth);
-app.use('/profile',profile);
-app.use('/game',game);
+app.use('/profile', profile);
+app.use('/game', game);
 
 app.use("/SignIn", (req, res) => {
   res.send({ tok: "session_token" });
@@ -33,11 +33,11 @@ app.use("/SignIn", (req, res) => {
 io.on("connection", (socket) => {
   console.log("User has connected with socket.io");
 
-  socket.on("create",(roomID,callback) => {
+  socket.on("create", (roomID, callback) => {
 
-      socket.join(roomID);
+    socket.join(roomID);
     socket.to(roomID).emit("room", roomID);
-      console.log(roomID,'AA gaye swaad')
+    console.log(roomID, 'AA gaye swaad')
   });
 
   socket.on("play", (roomID, callback) => {
@@ -46,48 +46,42 @@ io.on("connection", (socket) => {
     let obj = { id: roomID };
     // const roomId = roomID.toString();
 
-    console.log(typeof(roomID))
-    if(roomID)
-    {
-  socket.to(obj.id).emit("playStart", played);
-  console.log("Working");
+    console.log(typeof (roomID))
+    if (roomID) {
+      socket.to(obj.id).emit("playStart", played);
+      console.log("Working");
     }
-  
+
     // io.on("connection", (socket) => {
     //   socket.to(roomID).emit('playStart',(played));
     // });
   });
 
   socket.on("join", async (Id, callback) => {
-  
-     
-      socket.join(Id);
-    }
+
+
+    socket.join(Id);
+  }
   );
 
   socket.on("gameValue", (data, callback) => {
-    console.log(data,data.gameVal[0].numbers);
+    console.log(data, data.gameVal[0].numbers);
 
-    if (data.gameVal[0].numbers.length > 0)
-    {
-      console.log(data.gameVal[0].numbers.find((nums) => nums.value === data.num))
-
+    if (data.gameVal[0].numbers.length > 0) {
+      if (!data.gameVal[0].numbers.find((nums) => nums.value === data.num)) {
+        data.gameVal.forEach(element => {
+          element.numbers.push({ value: data.num, userName: data.user });
+        })
+      }
     }
 
-    if(data.gameVal[0].numbers.length>0)
-  {  if(!data.gameVal[0].numbers.find((nums) => nums.value === data.num))
-    {
-      data.gameVal.forEach(element => {
-        element.numbers.push({ value: data.num, userName: data.user });
-      })}}
-
-      else{
+    else {
       data.gameVal.forEach(element => {
         element.numbers.push({ value: data.num, userName: data.user });
       })
-      }
-  
-    console.log(data.gameVal,data.gameVal[0].roomID,data.user);
+    }
+
+    console.log(data.gameVal, data.gameVal[0].roomID, data.user);
 
     socket.broadcast.to(data.gameVal[0].roomID).emit("message", data.gameVal);
   });
