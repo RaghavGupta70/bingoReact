@@ -4,9 +4,11 @@ import cors from "cors";
 import mongoose from "mongoose";
 import auth from "./routes/auth.js";
 import profile from './routes/profile.js';
+import game from './routes/game.js';
 import http from "http";
 import { Server } from "socket.io";
 import * as room from './controllers/users.js';
+import {idFetch} from './controllers/game.js';
 
 const app = express();
 const server = http.createServer(app);
@@ -23,6 +25,7 @@ const io = new Server(server, corsOptions);
 
 app.use("/auth", auth);
 app.use('/profile',profile);
+app.use('/game',game);
 
 app.use("/SignIn", (req, res) => {
   res.send({ tok: "session_token" });
@@ -31,25 +34,11 @@ app.use("/SignIn", (req, res) => {
 io.on("connection", (socket) => {
   console.log("User has connected with socket.io");
 
-  socket.on("create", (userName,userEmail, callback) => {
-    const { error, users } = room.createRoom(userName,userEmail);
-    // console.log(userName)
-    // console.log(newRoom)
-    if (error) return callback(error);
+  socket.on("create",(roomID,callback) => {
 
-    socket.join(users.roomId);
-    const roomData = {
-      roomId: users.roomId,
-      userName: userName,
-      userEmail:userEmail,
-      played: false,
-      numbers: [],
-    };
-
-    socket.emit("room", roomData, (error) => {
-      console.log(error);
-    });
-    console.log(users.roomId);
+      socket.join(roomID);
+    socket.to(roomID).emit("room", roomID);
+      console.log(roomID,'AA gaye swaad')
   });
 
   socket.on("play", (roomID, callback) => {
@@ -70,29 +59,13 @@ io.on("connection", (socket) => {
     // });
   });
 
-  socket.on("join", async (Id, userName,userEmail, callback) => {
-    const { err, roomNo } = await room.joinRoom(Id, userName,userEmail);
-    const usersInRoom = room.getUserInRoom(Id);
-    console.log(usersInRoom, "JAIFJANFA");
-
-    if (err) return console.log(err);
-
-    console.log("room", roomNo);
-    const roomData = {
-      roomId: roomNo.roomId,
-      userName: userName,
-      userEmail:userEmail,
-      numbers: [],
-    };
-    if (roomNo) {
-      socket.emit("room", roomData, (error) => {
-        console.log(error);
-      });
-      console.log(roomNo.roomId);
-      socket.broadcast.to(roomNo.roomId).emit("message", usersInRoom);
-      socket.join(roomNo.roomId);
+  socket.on("join", async (Id, callback) => {
+  
+     
+      socket.join(Id);
     }
-  });
+  );
+
   socket.on("gameValue", (gameValue, callback) => {
     console.log(gameValue, gameValue.roomID, gameValue.numberSelected);
     const users = room.fillNumbers(
