@@ -36,10 +36,6 @@ const Room = () => {
   const { roomID } = queryString.parse(location.search, {
     ignoreQueryPrefix: true,
   });
-  // let members = usersRoom.filter((user) => user.userName !== currentUser);
-  
-  // useEffect(() => {
-    // setBingoNum(temp);
     useEffect(() => {
       socket = io(ENDPOINT);
     }, [ENDPOINT]);
