@@ -3,12 +3,8 @@ import chatStyles from './chatBoxGame.module.css';
 
 const ChatBox = ({text,message}) => {
 
-    const [newText,setNewText] = useState(message[0].numbers);
-
-    useEffect(() => {
-        setNewText(message[0].numbers)
-    }, [message[0].numbers.length])
-    console.log(message[0].numbers);
+    const [newText,setNewText] = useState([{Message:"Player 1 joined",type: 'user'},{Message:"Player 2 joined",type: 'other'},{Message:"Player 3 joined",type: 'other'},{Message: "Player 4 joined",type: 'other'}]);
+    console.log(message);
     return (
         <div className={chatStyles.mainCont}>
             <div className={chatStyles.header}>
@@ -16,8 +12,8 @@ const ChatBox = ({text,message}) => {
             </div>
             <div className={chatStyles.content}>
                 <ul>
-                {newText.map((newT)=>(<li>
-                    hey boi
+                {message.length > 0 && message.map((newT)=>(<li className={newT.type==='user'?chatStyles.message:chatStyles.message1}>
+                    {newT.userName} cuts {newT.value}
                 </li>))}
                 </ul>
             </div>
