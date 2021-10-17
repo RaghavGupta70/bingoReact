@@ -68,7 +68,7 @@ io.on("connection", (socket) => {
     console.log(data);
 
   data.gameVal.forEach(element => {
-      element.numbers.push({value: Number(data.num),userName: data.user});
+      element.numbers.push({value: data.num,userName: data.user});
     });
     console.log(data.gameVal,data.gameVal[0].roomID,data.user);
 
