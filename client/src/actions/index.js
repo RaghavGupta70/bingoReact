@@ -117,6 +117,7 @@ export const fetchRoomValue = (id) => async(dispatch) => {
 }
 
 export const cutNumbers = (numberSel) => async(dispatch) => {
+    console.log(numberSel)
     try {
         dispatch({type: CUT_NUM, payload:numberSel});
     } catch (error) {
