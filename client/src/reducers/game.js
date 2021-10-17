@@ -13,7 +13,7 @@ const game = (player = [], action) => {
         case FETCH_ROOM:
             const allData = action.payload;
             sessionStorage.setItem('usersRoom', JSON.stringify(allData));
-            break;
+            return action.payload;
 
         default:
             return player;

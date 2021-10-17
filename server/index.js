@@ -65,11 +65,11 @@ io.on("connection", (socket) => {
     }
   );
 
-  socket.on("gameValue", (gameVal,numberSelected, callback) => {
-    console.log(gameVal,numberSelected);
+  socket.on("gameValue", (gameVal,num, callback) => {
+    console.log(gameVal,num);
 
   gameVal.forEach(element => {
-      element.numbers.push(numberSelected);
+      element.numbers.push(num);
     });
     console.log(gameVal,gameVal[0].roomID);
 

@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 import { getUserEmail, getUserName, getUsers } from "../../utils/commonData/common";
 import { useHistory } from "react-router-dom";
 import {useDispatch} from 'react-redux';
+import { updatePlayerProfile } from '../../actions/index.js';
 import WinnerGif from "../../assets/images/winnerGif.gif";
 import bingoB from "../../assets/images/bingoB.png";
 import bingoI from "../../assets/images/bingoI.png";
@@ -280,8 +281,8 @@ const BingoGrid = ({ arrNum }) => {
                       
                       const gameVal = JSON.parse(sessionStorage.getItem('usersRoom'));
                       console.log(gameVal);
-                      const numberSelected = ar.i;
-                      socket.emit("gameValue", (gameVal,numberSelected), (error) => {
+                      const num = ar.i;
+                      socket.emit("gameValue", (gameVal,num), (error) => {
                         alert("You bitch");
                       });
                       var newArr = [];
@@ -306,8 +307,8 @@ const BingoGrid = ({ arrNum }) => {
                     };
                     setGameValue(gameValue);
                     const gameVal = getUsers();
-                    const numberSelected = ar.i;
-                    socket.emit("gameValue", (gameVal, numberSelected), (error) => {
+                    const num = ar.i;
+                    socket.emit("gameValue", (gameVal, num), (error) => {
                       alert("You bitch");
                     });
                     var newArr = [];
@@ -333,8 +334,8 @@ const BingoGrid = ({ arrNum }) => {
                         };
                         setGameValue(gameValue);
                         const gameVal = getUsers();
-                        const numberSelected = ar.i;
-                        socket.emit("gameValue", (gameVal, numberSelected), (error) => {
+                        const num = ar.i;
+                        socket.emit("gameValue", (gameVal, num), (error) => {
                           alert("You bitch");
                         });
                         var newArr = [];
