@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 import { getUserEmail, getUserName, getUsers } from "../../utils/commonData/common";
 import { useHistory } from "react-router-dom";
 import {useDispatch} from 'react-redux';
-import { updatePlayerProfile } from '../../actions/index.js';
+import { cutNumbers, updatePlayerProfile } from '../../actions/index.js';
 import WinnerGif from "../../assets/images/winnerGif.gif";
 import bingoB from "../../assets/images/bingoB.png";
 import bingoI from "../../assets/images/bingoI.png";
@@ -283,6 +283,7 @@ const BingoGrid = ({ arrNum }) => {
                       console.log(gameVal);
                       const num = ar.i;
                       const user = getUserName();
+                      dispatch(cutNumbers({userName:user,value:num}));
                       socket.emit("gameValue", {gameVal,num,user}, (error) => {
                         alert("You bitch");
                       });
@@ -310,7 +311,7 @@ const BingoGrid = ({ arrNum }) => {
                     const gameVal = getUsers();
                     const num = ar.i;
                     const user = getUserName();
-
+                    dispatch(cutNumbers({userName:user,value:num}));
                     socket.emit("gameValue", {gameVal,num,user}, (error) => {
                       alert("You bitch");
                     });
@@ -339,6 +340,7 @@ const BingoGrid = ({ arrNum }) => {
                         const gameVal = getUsers();
                         const num = ar.i;
                         const user = getUserName();
+                        dispatch(cutNumbers({userName:user,value:num}));
                         socket.emit("gameValue", {gameVal, num,user}, (error) => {
                           alert("You bitch");
                         });

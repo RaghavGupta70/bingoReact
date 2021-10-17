@@ -63,7 +63,7 @@ export default function JoinRoom({ type }) {
       history.push(`/Room?roomID=${roomData[0].roomID}`);
       sessionStorage.setItem('usersRoom',JSON.stringify(dispatch(fetchRoomValue(roomData[0].roomID))));
     }
-  }, [roomData])
+  }, [roomData.length])
 
   useEffect(()=>{
     socket.on("room", (roomID,callback) => {

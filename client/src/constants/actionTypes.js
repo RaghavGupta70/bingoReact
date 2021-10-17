@@ -9,3 +9,4 @@ export const UPDATE_PROF = "UpdatedProfile";
 export const CREATE_ROOM = "CreateRoomPlayer";
 export const JOIN_ROOM = "JoinRoomPlayer";
 export const FETCH_ROOM = "FetchRoomPlayers";
+export const CUT_NUM = "CutNum";

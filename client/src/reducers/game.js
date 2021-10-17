@@ -1,4 +1,4 @@
-import { CREATE_ROOM, JOIN_ROOM, FETCH_ROOM } from '../constants/actionTypes';
+import { CREATE_ROOM, JOIN_ROOM, FETCH_ROOM, CUT_NUM } from '../constants/actionTypes';
 
 const game = (player = [], action) => {
     switch (action.type) {
@@ -14,6 +14,13 @@ const game = (player = [], action) => {
             const allData = action.payload;
             sessionStorage.setItem('usersRoom', JSON.stringify(allData));
             return action.payload;
+        
+        case CUT_NUM:
+            const oldData = player;
+            for(var i=0;i<oldData.length;i++){
+                oldData[i].numbers.push(action.payload);
+            }
+            return oldData;   
 
         default:
             return player;

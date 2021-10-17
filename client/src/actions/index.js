@@ -1,5 +1,5 @@
 import * as api from "../api/index.js";
-import { FETCH,AUTH,LEAD_DATA,PROF,OPP_PROF,UPDATE_PROF,CREATE_ROOM,JOIN_ROOM,FETCH_ROOM } from "../constants/actionTypes.js";
+import { FETCH,AUTH,LEAD_DATA,PROF,OPP_PROF,UPDATE_PROF,CREATE_ROOM,JOIN_ROOM,FETCH_ROOM,CUT_NUM } from "../constants/actionTypes.js";
 
 
 export const fetchUsers = () => async (dispatch) => {
@@ -113,5 +113,13 @@ export const fetchRoomValue = (id) => async(dispatch) => {
         return message.data;
     } catch (error) {
         console.log(error)
+    }
+}
+
+export const cutNumbers = (numberSel) => async(dispatch) => {
+    try {
+        dispatch({type: CUT_NUM, payload:numberSel});
+    } catch (error) {
+        console.log(error);
     }
 }
