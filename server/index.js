@@ -65,12 +65,23 @@ io.on("connection", (socket) => {
   );
 
   socket.on("gameValue", (data, callback) => {
-    console.log(data);
+    console.log(data, data.gameVal[0].numbers);
 
-  data.gameVal.forEach(element => {
-      element.numbers.push({value: data.num,userName: data.user});
-    });
-    console.log(data.gameVal,data.gameVal[0].roomID,data.user);
+    if (data.gameVal[0].numbers.length > 0) {
+      if (!data.gameVal[0].numbers.find((nums) => nums.value === data.num)) {
+        data.gameVal.forEach(element => {
+          element.numbers.push({ value: data.num, userName: data.user });
+        })
+      }
+    }
+
+    else {
+      data.gameVal.forEach(element => {
+        element.numbers.push({ value: data.num, userName: data.user });
+      })
+    }
+
+    console.log(data.gameVal, data.gameVal[0].roomID, data.user);
 
     socket.broadcast.to(data.gameVal[0].roomID).emit("message", data.gameVal);
   });

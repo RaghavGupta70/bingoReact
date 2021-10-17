@@ -42,7 +42,8 @@ const Room = () => {
 
     useEffect(()=> {
       console.log(usersRoom);
-    },[usersRoom]);
+      setMessages(usersRoom)
+    },[usersRoom[0].numbers.length]);
 
     useEffect(() => {
       // setUsersRoom(getUsers())
@@ -165,7 +166,7 @@ console.log('Chal ja Bhadwe');
           )}
           </div>
           <div className={roomStyles.chat}>
-          { usersRoom.length>0 && <ChatBox text={"Player Chat"} message={usersRoom[0].numbers} />}
+          { messages.length>0 && <ChatBox text={"Player Chat"} message={messages} />}
           </div>
         </>
       ) : (

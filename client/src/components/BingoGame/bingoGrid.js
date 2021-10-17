@@ -329,7 +329,7 @@ const BingoGrid = ({ arrNum }) => {
                     if (getUsers()[0].numbers[numLen - 1].userName === result) {
                       alert("Keep Your Calm Boi");
                     } else {
-                      if (getUsers()[0].numbers[numLen - 1] === ar.i) {
+                      if (getUsers()[0].numbers[numLen - 1].value === ar.i) {
                         gameValue = {
                           userName: result,
                           userEmail: getUserEmail(),
