@@ -20,6 +20,7 @@ const game = (player = [], action) => {
             for(var i=0;i<oldData.length;i++){
                 oldData[i].numbers.push(action.payload);
             }
+            console.log(oldData)
             return oldData;   
 
         default:
