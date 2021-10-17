@@ -55,7 +55,7 @@ export const getUserInRoom = (Id) => {
 }
 
 export const fillNumbers = (Id,userName,num) => {
-   var users = arr.filter((user)=> user.roomId === Id)
+   var users = arr.filter((user)=> user.roomId === Id);
    console.log(users);
    var obj = {userName: userName,value: num};
 // users.map((user) => {user.numbers.find(number)=>{number.value=== num}});
