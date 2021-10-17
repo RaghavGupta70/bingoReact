@@ -6,7 +6,7 @@ function randomString(length, chars) {
     return result;
 }
 
-export const createRoom = (userName) => {
+export const createRoom = (userName,userEmail) => {
     var id = randomString(11, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
     console.log(arr)
     const existingRoom = arr.find((item) => (item.roomId === id));
@@ -16,6 +16,7 @@ export const createRoom = (userName) => {
     const users = {
       roomId: id,
       userName: userName,
+      userEmail:userEmail,
       played: false,
       numbers: [],
     };
@@ -24,7 +25,7 @@ export const createRoom = (userName) => {
     return {users};
 }
 
-export const joinRoom = async(Id, userName) => {
+export const joinRoom = async(Id, userName,userEmail) => {
     if (!Id) return { error: 'Enter Room Id!' };
 
     var validRoom = arr.find((item) => ( item.roomId === Id))
@@ -43,7 +44,7 @@ export const joinRoom = async(Id, userName) => {
 
     if(c === 4)
      return {error:'Room is already full'};
-     const roomNo ={roomId: Id,userName: userName,numbers:[]}
+     const roomNo ={roomId: Id,userName: userName,userEmail:userEmail,numbers:[]}
       console.log(validRoom);
       arr.push(roomNo)
       return {roomNo};

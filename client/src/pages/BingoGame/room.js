@@ -43,9 +43,7 @@ const Room = () => {
       socket = io(ENDPOINT);
     }, [ENDPOINT]);
 
-    useEffect(() =>{
-      console.log(sessionStorage.getItem('usersRoom'))
-    })
+    
 
     useEffect(() => {
       setUsersRoom(getUsers());

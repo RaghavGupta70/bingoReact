@@ -31,8 +31,8 @@ app.use("/SignIn", (req, res) => {
 io.on("connection", (socket) => {
   console.log("User has connected with socket.io");
 
-  socket.on("create", (userName, callback) => {
-    const { error, users } = room.createRoom(userName);
+  socket.on("create", (userName,userEmail, callback) => {
+    const { error, users } = room.createRoom(userName,userEmail);
     // console.log(userName)
     // console.log(newRoom)
     if (error) return callback(error);
@@ -41,6 +41,7 @@ io.on("connection", (socket) => {
     const roomData = {
       roomId: users.roomId,
       userName: userName,
+      userEmail:userEmail,
       played: false,
       numbers: [],
     };
@@ -69,8 +70,8 @@ io.on("connection", (socket) => {
     // });
   });
 
-  socket.on("join", async (Id, userName, callback) => {
-    const { err, roomNo } = await room.joinRoom(Id, userName);
+  socket.on("join", async (Id, userName,userEmail, callback) => {
+    const { err, roomNo } = await room.joinRoom(Id, userName,userEmail);
     const usersInRoom = room.getUserInRoom(Id);
     console.log(usersInRoom, "JAIFJANFA");
 
@@ -80,6 +81,7 @@ io.on("connection", (socket) => {
     const roomData = {
       roomId: roomNo.roomId,
       userName: userName,
+      userEmail:userEmail,
       numbers: [],
     };
     if (roomNo) {

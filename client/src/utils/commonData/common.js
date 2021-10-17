@@ -1,6 +1,6 @@
 const getToken = () => {
-    const token = localStorage.getItem('tok');
-    return token;
+  const token = localStorage.getItem('tok');
+  return token;
 }
 
 const getType = () => {
@@ -14,15 +14,20 @@ const getUsers = () => {
 }
 
 const putUsers = (data) => {
-    sessionStorage.setItem('usersRoom',JSON.stringify(data));
-    return 1;
+  sessionStorage.setItem('usersRoom', JSON.stringify(data));
+  return 1;
 }
 
 const addUsers = (data) => {
   const oldUsers = getUsers();
-  oldUsers.push(data);
-  sessionStorage.setItem('usersRoom', JSON.stringify(oldUsers));
-  return 1;
+  if (oldUsers) {
+    oldUsers.push(data);
+    sessionStorage.setItem('usersRoom', JSON.stringify(oldUsers));
+    return 1;
+  }
+  else{
+    sessionStorage.setItem('usersRoom', JSON.stringify(data));
+  }
 }
 
 const getUserName = () => {
@@ -36,4 +41,4 @@ const getUserEmail = () => {
 const getPlayValue = () => {
   return sessionStorage.getItem('playValue');
 }
-export {getToken,getType,putUsers,getUsers,addUsers,getUserName,getUserEmail,getPlayValue};
+export { getToken, getType, putUsers, getUsers, addUsers, getUserName, getUserEmail, getPlayValue };

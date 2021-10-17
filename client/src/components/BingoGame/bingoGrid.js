@@ -6,8 +6,10 @@ import GridLayout from "react-grid-layout";
 import { FaSlash } from "react-icons/fa";
 import { io } from "socket.io-client";
 import Swal from "sweetalert2";
-import { getUserName, getUsers } from "../../utils/commonData/common";
+import { getUserName, getUsers,getUserEmail } from "../../utils/commonData/common";
+import { updatePlayerProfile } from '../../actions/index.js';
 import { useHistory } from "react-router-dom";
+import {useDispatch} from 'react-redux';
 import WinnerGif from "../../assets/images/winnerGif.gif";
 import bingoB from "../../assets/images/bingoB.png";
 import bingoI from "../../assets/images/bingoI.png";
@@ -34,6 +36,7 @@ const BingoGrid = ({ arrNum }) => {
   let dependency = 0;
   const [turn, setTurn] = useState(0);
   const [bingoCut, setBingoCut] = useState({ horiz: [], vert: [], diag: [] });
+  const dispatch = useDispatch();
 
   var arr = new Array(5);
   var ar = new Array(25);
@@ -50,6 +53,7 @@ const BingoGrid = ({ arrNum }) => {
     arr[i] = new Array(5);
   }
   var h = 0;
+  
   // useEffect(() => {
   //   socket.emit("gameValue", (gameValue), (error) => {
   //     alert("You bitch");
@@ -68,6 +72,7 @@ const BingoGrid = ({ arrNum }) => {
   // setInterval(() => {
   //   dependency++;
   // }, 100);
+
   const [styleToggle, setStyleToggle] = useState([]);
   const [shuffle, setShuffle] = useState(false);
   const [win,setWin] = useState([false,false,false,false,false]);
@@ -78,11 +83,8 @@ const BingoGrid = ({ arrNum }) => {
   }
 
   useEffect(() => {
-    if (
-      bingoCut.horiz.length + bingoCut.vert.length + bingoCut.diag.length >=
-      5
-    ) {
-      if(bingoWin>=4){console.log('Win Done')}
+    if (bingoCut.horiz.length + bingoCut.vert.length + bingoCut.diag.length >= 5) {
+      dispatch(updatePlayerProfile(getUserEmail(),{oppData:[],result:'Won'}))
       Swal.fire({
         title: "Congratulations You Won",
         color: "red",
