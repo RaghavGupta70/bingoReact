@@ -149,7 +149,7 @@ const BingoGrid = ({ arrNum }) => {
     ar[t] = obj;
   }
 
-  console.log(arr);
+  // console.log(arr);
 
   const handleBingo = (e) => {
     e.preventDefault();
