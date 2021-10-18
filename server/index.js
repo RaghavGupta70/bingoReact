@@ -57,6 +57,12 @@ io.on("connection", (socket) => {
     // });
   });
 
+  socket.on("win",(data,callback)=> {
+    console.log(data);
+    const result={type:'Loser',sender: data.email};
+    socket.to(data.roomID).emit("lost",result);
+  })
+
   socket.on("join", async (Id, callback) => {
 
 

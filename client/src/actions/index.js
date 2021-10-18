@@ -72,10 +72,10 @@ export const fetchLeaderBoardData = () => async(dispatch) => {
     }
 }
 
-export const updatePlayerProfile = (email,data) => async(dispatch) => {
+export const updatePlayerProfile = (email,playerData) => async(dispatch) => {
     try{
-        const dataNew = await api.updatePlayerData(email,data);
-        dispatch({type: UPDATE_PROF, payload: dataNew})
+        const {data} = await api.updatePlayerData(email,playerData);
+        dispatch({type: UPDATE_PROF, payload: data})
     }
     catch(error)
     {

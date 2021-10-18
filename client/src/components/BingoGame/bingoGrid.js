@@ -44,6 +44,16 @@ const BingoGrid = ({ arrNum }) => {
     socket = io(ENDPOINT);
   }, [ENDPOINT]);
 
+  useEffect(() => {
+     console.log('Socket bhadwa hai')
+    socket.on("lost",(result,callback) =>{
+      const winData = getUsers().filter((elem) => elem.userEmail !== getUserEmail());
+      const finalData = winData.map((elem) => { return { label: elem.userName, email: elem.userEmail, result: 'Lost' } });
+    console.log(result);
+      // dispatch(updatePlayerProfile(getUserEmail(), { oppData: finalData, result: 'Lost' }))
+    })
+  },[])
+
   let [gameValue, setGameValue] = useState({
     userName: "",
     numberSelected: null,
@@ -76,7 +86,7 @@ const BingoGrid = ({ arrNum }) => {
   const [styleToggle, setStyleToggle] = useState([]);
   const [shuffle, setShuffle] = useState(false);
   const [win,setWin] = useState([false,false,false,false,false]);
-  var bingoWin = 0;
+  const [bingoWin,setBingoWin] = useState(0);
 
   for (var i = 1; i <= 25; i++) {
     styleToggle.push(false);
@@ -85,7 +95,12 @@ const BingoGrid = ({ arrNum }) => {
   useEffect(() => {
     if (bingoCut.horiz.length + bingoCut.vert.length + bingoCut.diag.length >= 5) {
       console.log(bingoCut);
-      dispatch(updatePlayerProfile(getUserEmail(),{oppData:[],result:'Won'}))
+      const winData = getUsers().filter((elem)=> elem.userEmail!== getUserEmail());
+      const finalData = winData.map((elem)=> {return {label: elem.userName,email: elem.userEmail,result: 'Lost'}});
+      socket.emit("win",{roomID:getUsers()[0].roomID,email:getUserEmail()},(error)=> {
+        console.log(error);
+      })
+      dispatch(updatePlayerProfile(getUserEmail(),{oppData:finalData,result:'Won'}))
       Swal.fire({
         title: "Congratulations You Won",
         color: "red",
@@ -170,7 +185,11 @@ const BingoGrid = ({ arrNum }) => {
             diag: [...bingoCut.diag],
           });
 
-          win[bingoWin++] = true;
+          win[bingoWin] = true;
+          setBingoWin(bingoWin+1)
+          const newWin = win;
+          console.log(win,bingoWin);
+          setWin(newWin);
           
           console.log(bingoCut.horiz.length);
         }
@@ -192,6 +211,13 @@ const BingoGrid = ({ arrNum }) => {
           diag: [...bingoCut.diag],
         });
         console.log(bingoCut.vert.length);
+        win[bingoWin] = true;
+        setBingoWin(bingoWin + 1);
+        const newWin = win;
+        console.log(win,bingoWin);
+
+        setWin(newWin);
+
       }
     }
 
@@ -209,7 +235,13 @@ const BingoGrid = ({ arrNum }) => {
         vert: [...bingoCut.vert],
         diag: [...bingoCut.diag, 0],
       });
-      win[bingoWin++] = true;
+       win[bingoWin] = true;
+      setBingoWin(bingoWin + 1)
+      const newWin = win;
+      console.log(win,bingoWin);
+
+      setWin(newWin);
+
 
     }
 
@@ -227,7 +259,12 @@ const BingoGrid = ({ arrNum }) => {
         vert: [...bingoCut.vert],
         diag: [...bingoCut.diag, 1],
       });
-      win[bingoWin++] = true;
+      win[bingoWin] = true;
+      setBingoWin(bingoWin + 1)
+      const newWin = win;
+      console.log(win,bingoWin);
+
+      setWin(newWin);
 
     }
   };
