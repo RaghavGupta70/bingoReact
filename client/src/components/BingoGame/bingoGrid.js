@@ -84,6 +84,7 @@ const BingoGrid = ({ arrNum }) => {
 
   useEffect(() => {
     if (bingoCut.horiz.length + bingoCut.vert.length + bingoCut.diag.length >= 5) {
+      console.log(bingoCut);
       dispatch(updatePlayerProfile(getUserEmail(),{oppData:[],result:'Won'}))
       Swal.fire({
         title: "Congratulations You Won",
@@ -154,7 +155,7 @@ const BingoGrid = ({ arrNum }) => {
   const handleBingo = (e) => {
     e.preventDefault();
     for (let i = 0; i < 25; i++) {
-      if (i % 5 === 0 && !bingoCut.horiz.find((elem) => elem === i)) {
+      if (i % 5 === 0 && bingoCut.horiz.find((elem) => elem === i)!==i) {
         if (
           styleToggle[i] &&
           styleToggle[i + 1] &&
@@ -176,6 +177,7 @@ const BingoGrid = ({ arrNum }) => {
       }
     }
     for (let i = 0; i < 5; i++) {
+      if(bingoCut.vert.find((elem) => elem === i)!==i)
       if (
         styleToggle[i] &&
         styleToggle[i + 5] &&
@@ -190,10 +192,10 @@ const BingoGrid = ({ arrNum }) => {
           diag: [...bingoCut.diag],
         });
         console.log(bingoCut.vert.length);
-        win[bingoWin++] = true;
-
       }
     }
+
+    if(bingoCut.diag.find((elem) => elem === 0)!==0)
     if (
       styleToggle[0] &&
       styleToggle[6] &&
@@ -205,11 +207,13 @@ const BingoGrid = ({ arrNum }) => {
       setBingoCut({
         horiz: [...bingoCut.horiz],
         vert: [...bingoCut.vert],
-        diag: [...bingoCut.diag, i],
+        diag: [...bingoCut.diag, 0],
       });
       win[bingoWin++] = true;
 
     }
+
+    if(bingoCut.diag.find((elem) => elem === 1)!==1)
     if (
       styleToggle[4] &&
       styleToggle[8] &&
@@ -221,7 +225,7 @@ const BingoGrid = ({ arrNum }) => {
       setBingoCut({
         horiz: [...bingoCut.horiz],
         vert: [...bingoCut.vert],
-        diag: [...bingoCut.diag, i],
+        diag: [...bingoCut.diag, 1],
       });
       win[bingoWin++] = true;
 
