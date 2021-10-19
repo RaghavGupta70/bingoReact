@@ -8,7 +8,7 @@ export const fetchUsers = () => async (dispatch) => {
         const {data} = await api.fetchUsers();
         dispatch({type: FETCH,payload: data})
     } catch (error) {
-        console.log(error)
+        return (error.response.data.message)
     }
 }
 
@@ -18,7 +18,7 @@ export const SignUpUser = (user,history) => async (dispatch) => {
         dispatch({type: AUTH,payload: data})
         history.push("/Home");
     } catch (error) {
-        console.log(error.response);
+        return (error.response.data.message)
     }
 } 
 
@@ -28,7 +28,7 @@ export const SignInUser = (user,history) => async (dispatch) => {
         dispatch({type: AUTH,payload: data});
         history.push("/Home")
     } catch (error) {
-        console.log(error);
+        return (error.response.data.message)
     }
 }
 
@@ -39,7 +39,7 @@ export const GoogleSignIn = (user,history) => async(dispatch) => {
         dispatch({type:AUTH, payload:data});
         history.push('/Home');
     } catch (error) {
-        console.log(error);
+        return (error.response.data.message)
     }
 }
 
@@ -50,7 +50,7 @@ export const fetchProfile  = (email) => async(dispatch) => {
     }
     catch (error)
     {
-        console.log(error);
+        return (error.response.data.message)
     }
 } 
 
@@ -59,7 +59,7 @@ export const fetchOppProfile = (email) => async (dispatch) => {
     const { data } = await api.getOpponents(email);
     dispatch({ type: OPP_PROF, payload: data });
   } catch (error) {
-    console.log(error);
+    return (error.response.data.message)
   }
 }; 
 
@@ -68,7 +68,7 @@ export const fetchLeaderBoardData = () => async(dispatch) => {
         const {data} = await api.getLeaderBoard();
         dispatch({type: LEAD_DATA, payload: data});
     } catch (error) {
-        console.log(error);
+        return (error.response.data.message)
     }
 }
 
@@ -79,7 +79,7 @@ export const updatePlayerProfile = (email,playerData) => async(dispatch) => {
     }
     catch(error)
     {
-        console.log(error);
+        return (error.response.data.message)
     }
 }
 

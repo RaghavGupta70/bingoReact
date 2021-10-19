@@ -84,6 +84,7 @@ export default function Auth({ type, setToken }) {
     userName: "",
     password: "",
   });
+  const [backError,setBackError] =  useState('');
 
   const [error, setError] = useState({
     email: { type1: false, type2: false },
@@ -153,7 +154,9 @@ export default function Auth({ type, setToken }) {
         error.password.type1 !== true &&
         error.password.type2 !== true
       ) {
-        const res = dispatch(SignInUser(userData, history));
+        const response = dispatch(SignInUser(userData, history));
+        response.then((res)=> setBackError(res))
+                .catch((err) => setBackError(err)); 
         const token = await loginUser(userData);
         console.log(token);
         setToken(token);
@@ -170,12 +173,15 @@ export default function Auth({ type, setToken }) {
         error.email.type2 !== true &&
         error.password.type1 !== true &&
         error.password.type2 !== true
-      )
-        dispatch(SignUpUser(userData, history));
+      ){
+        const respons = dispatch(SignUpUser(userData, history));
+        respons.then((res)=> setBackError(res))
+                .catch((err) => setBackError(err)); 
         const token = await loginUser(userData);
         console.log(token);
         setToken(token);
         localStorage.setItem("tok", JSON.stringify(token));
+      }  
       console.log(userData);
     }
   };
@@ -191,7 +197,9 @@ export default function Auth({ type, setToken }) {
 
   const googleSuccess = async (res) => {
     const result = res?.profileObj;
-    dispatch(GoogleSignIn(result, history));
+    const response = dispatch(GoogleSignIn(result, history));
+    response.then((res)=> setBackError(res))
+            .catch((err) => setBackError(err)); 
     const token = await loginUser(userData);
     console.log(token);
     setToken(token);
@@ -270,7 +278,7 @@ export default function Auth({ type, setToken }) {
               <span>Please enter a strong password ! </span>
             ) : null}
 
-            {/* <p className={classes.error}>{error}</p> */}
+            {backError!=='' && <p className={classes.backError}>{backError}</p>}
             <Button
               fullWidth
               variant="contained"
