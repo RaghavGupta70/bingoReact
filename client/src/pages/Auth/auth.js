@@ -172,6 +172,10 @@ export default function Auth({ type, setToken }) {
         error.password.type2 !== true
       )
         dispatch(SignUpUser(userData, history));
+        const token = await loginUser(userData);
+        console.log(token);
+        setToken(token);
+        localStorage.setItem("tok", JSON.stringify(token));
       console.log(userData);
     }
   };
