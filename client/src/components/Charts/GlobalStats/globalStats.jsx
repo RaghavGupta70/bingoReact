@@ -17,66 +17,68 @@ const GlobalStats = ({playerData,oppData}) => {
     const [show, setShow] = useState(false);
 
     return (
-      <>
-        <div className={gbStyles.toggle}>
-          <ToggleProf tog={setGraph} />
-        </div>
-        {graph === "left" ? (
-          <>
-            <div className={gbStyles.barChart}>
-              <BarChart graph={graph} playerData={playerData} />
-            </div>
-          </>
-        ) : graph === "center" ? (
-          <>
-            <div className={gbStyles.dropdown}>
-              <ReactSelect
-                placeholder={"Select Opponent"}
-                height={"5vh"}
-                width={"15vw"}
-                data={playerData.opponents}
-                onChange={(e) => {
-                  if (e === null) {
-                    setShow(false);
-                  } else {
-                    setShow(true);
-                    setOppLabel(e.label);
-                    emailOpp = playerData.opponentsData.filter((opp)=> opp.value===e.value?opp.opponentEmail:null);
-                    setLineValue(oppData.filter((opp,index)=>(opp.oppoEmail === emailOpp[0].opponentEmail)))
-                    
-                  }
+   <> {!playerData ? <>
+      <div className={gbStyles.toggle}>
+        <ToggleProf tog={setGraph} />
+      </div>
+      {graph === "left" ? (
+        <>
+          <div className={gbStyles.barChart}>
+            <BarChart graph={graph} playerData={playerData} />
+          </div>
+        </>
+      ) : graph === "center" ? (
+        <>
+          <div className={gbStyles.dropdown}>
+            <ReactSelect
+              placeholder={"Select Opponent"}
+              height={"5vh"}
+              width={"15vw"}
+              data={playerData.opponents}
+              onChange={(e) => {
+                if (e === null) {
+                  setShow(false);
+                } else {
+                  setShow(true);
+                  setOppLabel(e.label);
+                  emailOpp = playerData.opponentsData.filter((opp) => opp.value === e.value ? opp.opponentEmail : null);
+                  setLineValue(oppData.filter((opp, index) => (opp.oppoEmail === emailOpp[0].opponentEmail)))
 
-                  setReloadLine(++reloadLine);
-                }}
-                backgroundColor={"rgb(103, 58, 183)"}
+                }
+
+                setReloadLine(++reloadLine);
+              }}
+              backgroundColor={"rgb(103, 58, 183)"}
+            />
+          </div>
+          {show && lineValue.length !== 0 ? (
+            <div className={gbStyles.lineChart}>
+              <LineChart
+                value={lineValue}
+                reload={reloadLine}
+                playerData={playerData}
+                oppLabel={oppLabel}
               />
             </div>
-            {show && lineValue.length !==0 ? (
-              <div className={gbStyles.lineChart}>
-                <LineChart
-                  value={lineValue}
-                  reload={reloadLine}
-                  playerData={playerData}
-                  oppLabel={oppLabel}
-                />
-              </div>
-            ) : (
-              <div className={gbStyles.default}>
-                <h3>Select Opponent to compare stats</h3>
-                <img src={defaultStat} />
-              </div>
-            )}
-          </>
-        ) : (<>
-          <div className={gbStyles.pieChart}>
-            <PieChart playerData={playerData} />
-          </div>
-          <div className={gbStyles.pieInfo}>
-            <h1>All Time Stats</h1>
-          </div>
-          </>
-        )}
+          ) : (
+            <div className={gbStyles.default}>
+              <h3>Select Opponent to compare stats</h3>
+              <img src={defaultStat} />
+            </div>
+          )}
+        </>
+      ) : (<>
+        <div className={gbStyles.pieChart}>
+          <PieChart playerData={playerData} />
+        </div>
+        <div className={gbStyles.pieInfo}>
+          <h1>All Time Stats</h1>
+        </div>
       </>
+      )}
+    </>: <h3 style={{margin: 'auto'}}>No data available</h3>
+}
+   </>  
     );
 }
 
