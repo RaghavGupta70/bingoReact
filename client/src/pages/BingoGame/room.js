@@ -27,7 +27,6 @@ const Room = () => {
   const [usersLen,setUsersLen] = useState(0);
   const ENDPOINT = "localhost:5000";
   const history = useHistory();
-  const bingoNum=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25];
   const [play,setPlay] = useState(false);
   const [messages, setMessages] = useState([]);
   const usersRoom = useSelector((state) => state.game);
@@ -42,8 +41,8 @@ const Room = () => {
 
     useEffect(()=> {
       console.log(usersRoom);
-      setMessages(usersRoom)
-    },[usersRoom[0].numbers.length]);
+      setMessages(getUsers())
+    });
 
     useEffect(() => {
       // setUsersRoom(getUsers())
@@ -110,10 +109,7 @@ const Room = () => {
       //   );
       // }, []);
 
-    for (let i = bingoNum.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [bingoNum[i], bingoNum[j]] = [bingoNum[j], bingoNum[i]];
-    }
+ 
   // }, []);
 
   // for (var h = 0; h < 25; h++) {
@@ -161,7 +157,7 @@ console.log('Chal ja Bhadwe');
                   </>
                 ) : null}
               </ul> */}
-              <BingoGrid arrNum={bingoNum} />
+              <BingoGrid setMessage={setMessages} />
             </>
           )}
           </div>

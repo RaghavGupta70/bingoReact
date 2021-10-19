@@ -17,7 +17,7 @@ const ChatBox = ({text,message}) => {
             <div className={chatStyles.content}>
                 <ul>
                 {newText.map((newT)=>(<li>
-                    hey boi
+                    {newT.userName} cuts {newT.value}
                 </li>))}
                 </ul>
             </div>

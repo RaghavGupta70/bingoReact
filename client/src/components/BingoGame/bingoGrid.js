@@ -26,7 +26,11 @@ import binStyles from './bingoGrid.module.css';
 
 let socket;
 
-const BingoGrid = ({ arrNum }) => {
+const BingoGrid = ({ setMessage }) => {
+  const [arrNum,setArrNum] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]);
+
+
+  const [shuffleBingo, setShuffleBingo] = useState(false);
   const location = useLocation();
   const { roomID } = queryString.parse(location.search, {
     ignoreQueryPrefix: true,
@@ -44,6 +48,13 @@ const BingoGrid = ({ arrNum }) => {
     socket = io(ENDPOINT);
   }, [ENDPOINT]);
 
+if(!shuffleBingo)
+{  for (let i = arrNum.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arrNum[i], arrNum[j]] = [arrNum[j], arrNum[i]];
+  }
+setShuffleBingo(true);
+}
   useEffect(() => {
      console.log('Socket bhadwa hai')
     socket.on("lost",(result,callback) =>{
@@ -301,6 +312,7 @@ const BingoGrid = ({ arrNum }) => {
                 }}
                 key={ar.i}
                 onClick={(e) => {
+                  setMessage(getUsers())
                   if (getUsers().length === 1) {
                     alert("You are the only one here");
                     return;
