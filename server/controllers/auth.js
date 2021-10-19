@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import Auth from '../models/auth.js';
+import Profile from '../models/profile.js';
 import { OAuth2Client } from 'google-auth-library';
 
 
@@ -25,6 +26,8 @@ export const signUp = async(req,res) => {
        const hashedPassword = await bcrypt.hash(changedPassword,12);
         
        const result = await Auth.create({userName,email,password:hashedPassword,time:new Date()});
+       const profile = await Profile.create({userName:userName,emailId:email,status:'Online',registeredDate:new Date(),
+        opponents:[],opponentsData:[],matches:[]});
        const token = jwt.sign({email:result.email,time:result.time},"bingoSecretKey",{expiresIn:'1h'});
        res.status(201).json({result,token});
 
@@ -71,6 +74,8 @@ export const googleSignIn = async(req,res) => {
            const hashedPassword = await bcrypt.hash(changedPassword,12);
         
            const result = await Auth.create({userName,email,password:hashedPassword,time:new Date()});
+           const profile = await Profile.create({userName:userName,emailId:email,status:'Online',registeredDate:new Date(),
+        opponents:[],opponentsData:[],matches:[]});
            const token = jwt.sign({email:result.email,time:result.time},"bingoSecretKey",{expiresIn:'1h'});
            res.status(201).json({result,token});
         }
