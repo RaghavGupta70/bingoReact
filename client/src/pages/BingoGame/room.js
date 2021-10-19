@@ -42,7 +42,7 @@ const Room = () => {
     useEffect(()=> {
       console.log(usersRoom);
       setMessages(getUsers())
-    });
+    },[usersRoom,usersRoom[0].numbers.length]);
 
     useEffect(() => {
       // setUsersRoom(getUsers())
