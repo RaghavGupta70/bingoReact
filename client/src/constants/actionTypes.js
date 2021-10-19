@@ -6,6 +6,7 @@ export const CHECK = "Check";
 export const PROF = "Profile";
 export const OPP_PROF = "OpponentProfile";
 export const UPDATE_PROF = "UpdatedProfile";
+export const UPDATE_IMG = "UpdatedProfileImage";
 export const CREATE_ROOM = "CreateRoomPlayer";
 export const JOIN_ROOM = "JoinRoomPlayer";
 export const FETCH_ROOM = "FetchRoomPlayers";

@@ -12,19 +12,26 @@ const GlobalStats = ({playerData,oppData}) => {
   const [graph, setGraph] = useState("left");
   let emailOpp;
     let [reloadLine, setReloadLine] = useState(0);
+    const [playerD,setPlayerD] = useState(playerData)
     const [lineValue,setLineValue] = useState(null);
     const [oppLabel,setOppLabel] = useState(null);
     const [show, setShow] = useState(false);
 
+    useEffect(() => {
+      setPlayerD(playerData);
+    }, [playerData])
+
+    console.log(playerD)
+
     return (
-   <> {!playerData ? <>
+   <> {playerData.matchesPlayed !==0 ? <>
       <div className={gbStyles.toggle}>
         <ToggleProf tog={setGraph} />
       </div>
       {graph === "left" ? (
         <>
           <div className={gbStyles.barChart}>
-            <BarChart graph={graph} playerData={playerData} />
+            <BarChart graph={graph} playerData={playerD} />
           </div>
         </>
       ) : graph === "center" ? (
@@ -34,14 +41,14 @@ const GlobalStats = ({playerData,oppData}) => {
               placeholder={"Select Opponent"}
               height={"5vh"}
               width={"15vw"}
-              data={playerData.opponents}
+              data={playerD.opponents}
               onChange={(e) => {
                 if (e === null) {
                   setShow(false);
                 } else {
                   setShow(true);
                   setOppLabel(e.label);
-                  emailOpp = playerData.opponentsData.filter((opp) => opp.value === e.value ? opp.opponentEmail : null);
+                  emailOpp = playerD.opponentsData.filter((opp) => opp.value === e.value ? opp.opponentEmail : null);
                   setLineValue(oppData.filter((opp, index) => (opp.oppoEmail === emailOpp[0].opponentEmail)))
 
                 }
@@ -56,7 +63,7 @@ const GlobalStats = ({playerData,oppData}) => {
               <LineChart
                 value={lineValue}
                 reload={reloadLine}
-                playerData={playerData}
+                playerData={playerD}
                 oppLabel={oppLabel}
               />
             </div>
@@ -69,7 +76,7 @@ const GlobalStats = ({playerData,oppData}) => {
         </>
       ) : (<>
         <div className={gbStyles.pieChart}>
-          <PieChart playerData={playerData} />
+          <PieChart playerData={playerD} />
         </div>
         <div className={gbStyles.pieInfo}>
           <h1>All Time Stats</h1>

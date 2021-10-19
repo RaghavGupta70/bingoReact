@@ -49,3 +49,30 @@ li {
 .info h2{
     color:rgb(252 3 61);
 }
+
+.uploadImg {
+  color: transparent !important;
+}
+
+.uploadImg::-webkit-file-upload-button {
+  visibility: hidden;
+  display: none;
+}
+
+.uploadImg::before {
+  content: 'Edit Image';
+  /* display: inline-block; */
+  background: rgb(3 252 232);
+  border: 1px solid #999;
+  border-radius: 10%;
+  padding: 5px 8px;
+  outline: none;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  cursor: pointer;
+  text-shadow: 1px 1px #fff;
+  font-weight: 700;
+  color: black;
+  font-size: 10pt;
+}
+

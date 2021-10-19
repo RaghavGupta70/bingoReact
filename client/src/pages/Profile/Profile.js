@@ -1,4 +1,4 @@
-import React, {useEffect } from "react";
+import React, {useState,useEffect } from "react";
 import ProfileBox from "../../components/ProfileBox/profileBox";
 import { useSelector } from 'react-redux';
 import PrStyles from "./Profile.module.css";
@@ -11,6 +11,7 @@ import PlayerStats from "../../components/Charts/PlayerStats/playerStats";
 const Profile = () => {
     const profileDetails = useSelector((state) => state.profile);
     const oppDetails = useSelector((state) => state.oppProfile);
+    const [playerD,setPlayerD] = useState(profileDetails);
 
     const dispatch = useDispatch();
 
@@ -18,6 +19,11 @@ const Profile = () => {
       dispatch(fetchProfile(getUserEmail()));
       dispatch(fetchOppProfile(getUserEmail()));
     },[dispatch]);
+
+    useEffect(() => {
+      setPlayerD(profileDetails)
+      console.log(profileDetails)
+    }, [profileDetails])
 
   return (
     <div className={PrStyles.main_container}>
@@ -29,11 +35,11 @@ const Profile = () => {
           <PlayerStats data={profileDetails} />
         </div>
       </div>
-      <div className={PrStyles.globalStats}>
+     { playerD && <div className={PrStyles.globalStats}>
         <div className={PrStyles.globalSt}>
-          <GlobalStats playerData={profileDetails} oppData={oppDetails} />
+          <GlobalStats playerData={playerD} oppData={oppDetails} />
         </div>
-      </div>
+      </div>}
     </div>
   );
 };

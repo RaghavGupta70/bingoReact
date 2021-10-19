@@ -13,6 +13,7 @@ export const getProfile = (email) => axios.get(`${profileURl}/getMyProfile/${ema
 export const getOpponents = (email) => axios.get(`${profileURl}/getAllOpponents/${email}`);
 export const getLeaderBoard = () => axios.get(`${profileURl}/getLeaderboardData`);
 export const updatePlayerData = (email,data) => axios.patch(`${profileURl}/updateProfile/${email}`,data);
+export const updatePlayerImage = (email, data) => axios.patch(`${profileURl}/updateImage/${email}`, data);
 
 export const fetchRoom = (id) => axios.get(`${gameURl}/fetchRoomData/${id}`)
 export const createRoom = (data) => axios.post(`${gameURl}/createPlayer`,data);

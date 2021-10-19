@@ -1,5 +1,5 @@
 import * as api from "../api/index.js";
-import { FETCH,AUTH,LEAD_DATA,PROF,OPP_PROF,UPDATE_PROF,CREATE_ROOM,JOIN_ROOM,FETCH_ROOM,CUT_NUM } from "../constants/actionTypes.js";
+import { FETCH, AUTH, LEAD_DATA, PROF, OPP_PROF, UPDATE_PROF,UPDATE_IMG,CREATE_ROOM,JOIN_ROOM,FETCH_ROOM,CUT_NUM } from "../constants/actionTypes.js";
 
 
 export const fetchUsers = () => async (dispatch) => {
@@ -50,7 +50,7 @@ export const fetchProfile  = (email) => async(dispatch) => {
     }
     catch (error)
     {
-        return (error.response.data.message)
+        return (error)
     }
 } 
 
@@ -79,6 +79,16 @@ export const updatePlayerProfile = (email,playerData) => async(dispatch) => {
     }
     catch(error)
     {
+        return (error.response.data.message)
+    }
+}
+
+export const updatePlayerImageData = (email, playerImage) => async (dispatch) => {
+    try {
+        const { data } = await api.updatePlayerImage(email, {image: playerImage});
+        dispatch({ type: UPDATE_IMG, payload: data })
+    }
+    catch (error) {
         return (error.response.data.message)
     }
 }

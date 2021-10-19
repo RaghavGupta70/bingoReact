@@ -5,10 +5,12 @@ export const getProfile = async (req, res) => {
     console.log(email);
     try {
         const user = await Profile.findOne({ emailId: email.email });
+        console.log(user);
         if (!user) return res.status(409).json('User not found');
 
         return res.status(201).json(user);
     } catch (error) {
+        console.log(error)
         return res.status(404).json('Server Error Occured. Try Again');
     }
 }
@@ -67,13 +69,13 @@ export const updatePlayerData = async (req, res) => {
 
         if (result === 'Won') {
             playerData.matchesWon++;
-            const matchMon = playerData.matches.filter((mt)=> mt.matchMonth === todayMonth);
-            playerData.matches = playerData.matches.filter((mt)=> mt.matchMonth !== todayMonth);
-            if(matchMon.length>0){
+            const matchMon = playerData.matches.filter((mt) => mt.matchMonth === todayMonth);
+            playerData.matches = playerData.matches.filter((mt) => mt.matchMonth !== todayMonth);
+            if (matchMon.length > 0) {
                 matchMon[0].matchWon++;
             }
-            else{
-                const newMatchMon = {matchMonth:todayMonth,matchWon:1,matchLost:0,matchNoResult:0};
+            else {
+                const newMatchMon = { matchMonth: todayMonth, matchWon: 1, matchLost: 0, matchNoResult: 0 };
                 matchMon[0] = newMatchMon;
             }
             playerData.matches.push(matchMon[0]);
@@ -81,13 +83,13 @@ export const updatePlayerData = async (req, res) => {
 
         else if (result === 'Lost') {
             playerData.matchesLost++;
-            const matchMon = playerData.matches.filter((mt)=> mt.matchMonth === todayMonth);
-            playerData.matches = playerData.matches.filter((mt)=> mt.matchMonth !== todayMonth);
-            if(matchMon.length>0){
+            const matchMon = playerData.matches.filter((mt) => mt.matchMonth === todayMonth);
+            playerData.matches = playerData.matches.filter((mt) => mt.matchMonth !== todayMonth);
+            if (matchMon.length > 0) {
                 matchMon[0].matchLost++;
             }
-            else{
-                const newMatchMon = {matchMonth:todayMonth,matchWon:0,matchLost:1,matchNoResult:0};
+            else {
+                const newMatchMon = { matchMonth: todayMonth, matchWon: 0, matchLost: 1, matchNoResult: 0 };
                 matchMon[0] = newMatchMon;
             }
             playerData.matches.push(matchMon[0]);
@@ -131,11 +133,35 @@ export const updatePlayerData = async (req, res) => {
                 playerData.opponents.push(newOppLab);
             }
         }
-        const updated = await Profile.findOneAndUpdate({emailId:playerEmail},{$set:playerData},{ new:true,upsert:true });
+        const updated = await Profile.findOneAndUpdate({ emailId: playerEmail }, { $set: playerData }, { new: true, upsert: true });
         return res.status(201).json(updated);
     }
 
     catch (error) {
-        return res.status(404).json({message:'You fucked Up'});
+        return res.status(404).json({ message: 'You fucked Up' });
     }
-} 
+}
+
+export const uploadImage = async (req, res) => {
+    try {
+
+        const email = req.params;
+        const { image } = req.body;
+        console.log(image.data, email.email)
+
+        const profileData = await Profile.find({ emailId: email.email });
+
+        if (profileData) {
+            profileData.profileImage = image;
+            console.log(profileData)
+            const updated = await Profile.findOneAndUpdate({ emailId: email.email }, { $set: {profileImage: profileData.profileImage} }, { new: true, upsert: true });
+            console.log(updated);
+            return res.status(200).json(updated);
+        }
+
+        return res.status(404).json({ message: 'Fucked up' });
+
+    } catch (error) {
+        console.log(error);
+    }
+}
