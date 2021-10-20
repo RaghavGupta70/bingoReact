@@ -64,7 +64,7 @@ export const updatePlayerData = async (req, res) => {
         let playerData = await Profile.find({ emailId: playerEmail });
         playerData = playerData[0];
 
-        const todayMonth = new Date().getMonth();
+        const todayMonth = new Date().getMonth() + 1;
 
         playerData.matchesPlayed++;
 
@@ -76,7 +76,7 @@ export const updatePlayerData = async (req, res) => {
                 matchMon[0].matchWon++;
             }
             else {
-                const newMatchMon = { matchMonth: todayMonth+1, matchWon: 1, matchLost: 0, matchNoResult: 0 };
+                const newMatchMon = { matchMonth: todayMonth, matchWon: 1, matchLost: 0, matchNoResult: 0 };
                 matchMon[0] = newMatchMon;
             }
             playerData.matches.push(matchMon[0]);
@@ -90,7 +90,7 @@ export const updatePlayerData = async (req, res) => {
                 matchMon[0].matchLost++;
             }
             else {
-                const newMatchMon = { matchMonth: todayMonth+1, matchWon: 0, matchLost: 1, matchNoResult: 0 };
+                const newMatchMon = { matchMonth: todayMonth, matchWon: 0, matchLost: 1, matchNoResult: 0 };
                 matchMon[0] = newMatchMon;
             }
             playerData.matches.push(matchMon[0]);
