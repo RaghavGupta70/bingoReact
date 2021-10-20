@@ -8,7 +8,7 @@ import { io } from "socket.io-client";
 import Swal from "sweetalert2";
 import { getUserEmail, getUserName, getUsers } from "../../utils/commonData/common";
 import { useHistory } from "react-router-dom";
-import {useDispatch,useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { cutNumbers, updatePlayerProfile } from '../../actions/index.js';
 import WinnerGif from "../../assets/images/winnerGif.gif";
 import bingoB from "../../assets/images/bingoB.png";
@@ -27,7 +27,7 @@ import binStyles from './bingoGrid.module.css';
 let socket;
 
 const BingoGrid = ({ setMessage }) => {
-  const [arrNum,setArrNum] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]);
+  const [arrNum, setArrNum] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]);
 
 
   const [shuffleBingo, setShuffleBingo] = useState(false);
@@ -48,22 +48,13 @@ const BingoGrid = ({ setMessage }) => {
     socket = io(ENDPOINT);
   }, [ENDPOINT]);
 
-if(!shuffleBingo)
-{  for (let i = arrNum.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arrNum[i], arrNum[j]] = [arrNum[j], arrNum[i]];
+  if (!shuffleBingo) {
+    for (let i = arrNum.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arrNum[i], arrNum[j]] = [arrNum[j], arrNum[i]];
+    }
+    setShuffleBingo(true);
   }
-setShuffleBingo(true);
-}
-  useEffect(() => {
-     console.log('Socket bhadwa hai')
-    socket.on("lost",(result,callback) =>{
-      const winData = getUsers().filter((elem) => elem.userEmail !== getUserEmail());
-      const finalData = winData.map((elem) => { return { label: elem.userName, email: elem.userEmail, result: 'Lost' } });
-    console.log(result);
-      // dispatch(updatePlayerProfile(getUserEmail(), { oppData: finalData, result: 'Lost' }))
-    })
-  },[])
 
   let [gameValue, setGameValue] = useState({
     userName: "",
@@ -74,7 +65,7 @@ setShuffleBingo(true);
     arr[i] = new Array(5);
   }
   var h = 0;
-  
+
   // useEffect(() => {
   //   socket.emit("gameValue", (gameValue), (error) => {
   //     alert("You bitch");
@@ -96,22 +87,35 @@ setShuffleBingo(true);
 
   const [styleToggle, setStyleToggle] = useState([]);
   const [shuffle, setShuffle] = useState(false);
-  const [win,setWin] = useState([false,false,false,false,false]);
-  const [bingoWin,setBingoWin] = useState(0);
+  const [win, setWin] = useState([false, false, false, false, false]);
+  const [bingoWin, setBingoWin] = useState(0);
 
   for (var i = 1; i <= 25; i++) {
     styleToggle.push(false);
   }
 
   useEffect(() => {
+    if (getUsers().length>0) {
+      if (getUsers()[0].numbers.length > 0) {
+        if (getUsers()[0].numbers[getUsers()[0].numbers.length - 1].value === 100 && getUsers()[0].numbers[getUsers()[0].numbers.length - 1].userName !== getUserName()) {
+          console.log('You lost');
+        }
+      }
+    }
+  });
+
+  useEffect(() => {
     if (bingoCut.horiz.length + bingoCut.vert.length + bingoCut.diag.length >= 5) {
       console.log(bingoCut);
-      const winData = getUsers().filter((elem)=> elem.userEmail!== getUserEmail());
-      const finalData = winData.map((elem)=> {return {label: elem.userName,email: elem.userEmail,result: 'Lost'}});
-      socket.emit("win",{roomID:getUsers()[0].roomID,email:getUserEmail()},(error)=> {
-        console.log(error);
-      })
-      dispatch(updatePlayerProfile(getUserEmail(),{oppData:finalData,result:'Won'}))
+      const winData = getUsers().filter((elem) => elem.userEmail !== getUserEmail());
+      const finalData = winData.map((elem) => { return { label: elem.userName, email: elem.userEmail, result: 'Lost' } });
+      const gameVal = getUsers();
+      const num = 100;
+      const user = getUserName();
+      socket.emit("gameValue", { gameVal, num, user }, (error) => {
+        alert("You bitch");
+      });
+      dispatch(updatePlayerProfile(getUserEmail(), { oppData: finalData, result: 'Won' }))
       Swal.fire({
         title: "Congratulations You Won",
         color: "red",
@@ -181,7 +185,7 @@ setShuffleBingo(true);
   const handleBingo = (e) => {
     e.preventDefault();
     for (let i = 0; i < 25; i++) {
-      if (i % 5 === 0 && bingoCut.horiz.find((elem) => elem === i)!==i) {
+      if (i % 5 === 0 && bingoCut.horiz.find((elem) => elem === i) !== i) {
         if (
           styleToggle[i] &&
           styleToggle[i + 1] &&
@@ -197,97 +201,97 @@ setShuffleBingo(true);
           });
 
           win[bingoWin] = true;
-          setBingoWin(bingoWin+1)
+          setBingoWin(bingoWin + 1)
           const newWin = win;
-          console.log(win,bingoWin);
+          console.log(win, bingoWin);
           setWin(newWin);
-          
+
           console.log(bingoCut.horiz.length);
         }
       }
     }
     for (let i = 0; i < 5; i++) {
-      if(bingoCut.vert.find((elem) => elem === i)!==i)
+      if (bingoCut.vert.find((elem) => elem === i) !== i)
+        if (
+          styleToggle[i] &&
+          styleToggle[i + 5] &&
+          styleToggle[i + 10] &&
+          styleToggle[i + 15] &&
+          styleToggle[i + 20]
+        ) {
+          console.log(i, "You can cut now");
+          setBingoCut({
+            horiz: [...bingoCut.horiz],
+            vert: [...bingoCut.vert, i],
+            diag: [...bingoCut.diag],
+          });
+          console.log(bingoCut.vert.length);
+          win[bingoWin] = true;
+          setBingoWin(bingoWin + 1);
+          const newWin = win;
+          console.log(win, bingoWin);
+
+          setWin(newWin);
+
+        }
+    }
+
+    if (bingoCut.diag.find((elem) => elem === 0) !== 0)
       if (
-        styleToggle[i] &&
-        styleToggle[i + 5] &&
-        styleToggle[i + 10] &&
-        styleToggle[i + 15] &&
-        styleToggle[i + 20]
+        styleToggle[0] &&
+        styleToggle[6] &&
+        styleToggle[12] &&
+        styleToggle[18] &&
+        styleToggle[24]
       ) {
-        console.log(i, "You can cut now");
+        console.log("You can cut now");
         setBingoCut({
           horiz: [...bingoCut.horiz],
-          vert: [...bingoCut.vert, i],
-          diag: [...bingoCut.diag],
+          vert: [...bingoCut.vert],
+          diag: [...bingoCut.diag, 0],
         });
-        console.log(bingoCut.vert.length);
         win[bingoWin] = true;
-        setBingoWin(bingoWin + 1);
+        setBingoWin(bingoWin + 1)
         const newWin = win;
-        console.log(win,bingoWin);
+        console.log(win, bingoWin);
+
+        setWin(newWin);
+
+
+      }
+
+    if (bingoCut.diag.find((elem) => elem === 1) !== 1)
+      if (
+        styleToggle[4] &&
+        styleToggle[8] &&
+        styleToggle[12] &&
+        styleToggle[16] &&
+        styleToggle[20]
+      ) {
+        console.log("You can cut now");
+        setBingoCut({
+          horiz: [...bingoCut.horiz],
+          vert: [...bingoCut.vert],
+          diag: [...bingoCut.diag, 1],
+        });
+        win[bingoWin] = true;
+        setBingoWin(bingoWin + 1)
+        const newWin = win;
+        console.log(win, bingoWin);
 
         setWin(newWin);
 
       }
-    }
-
-    if(bingoCut.diag.find((elem) => elem === 0)!==0)
-    if (
-      styleToggle[0] &&
-      styleToggle[6] &&
-      styleToggle[12] &&
-      styleToggle[18] &&
-      styleToggle[24]
-    ) {
-      console.log("You can cut now");
-      setBingoCut({
-        horiz: [...bingoCut.horiz],
-        vert: [...bingoCut.vert],
-        diag: [...bingoCut.diag, 0],
-      });
-       win[bingoWin] = true;
-      setBingoWin(bingoWin + 1)
-      const newWin = win;
-      console.log(win,bingoWin);
-
-      setWin(newWin);
-
-
-    }
-
-    if(bingoCut.diag.find((elem) => elem === 1)!==1)
-    if (
-      styleToggle[4] &&
-      styleToggle[8] &&
-      styleToggle[12] &&
-      styleToggle[16] &&
-      styleToggle[20]
-    ) {
-      console.log("You can cut now");
-      setBingoCut({
-        horiz: [...bingoCut.horiz],
-        vert: [...bingoCut.vert],
-        diag: [...bingoCut.diag, 1],
-      });
-      win[bingoWin] = true;
-      setBingoWin(bingoWin + 1)
-      const newWin = win;
-      console.log(win,bingoWin);
-
-      setWin(newWin);
-
-    }
   };
 
   return (
     <>
       <div className={binStyles.bingo}>
-        <img src={win[0]?bingoB2:bingoB} />
-        <img src={win[1]?bingoI2:bingoI} />
-        <img src={win[2]?bingoN2:bingoN} />
-        <img src={win[3]?bingoG2:bingoG} />
-        <img src={win[4]?bingoO2:bingoO} />
+        <img src={win[0] ? bingoB2 : bingoB} />
+        <img src={win[1] ? bingoI2 : bingoI} />
+        <img src={win[2] ? bingoN2 : bingoN} />
+        <img src={win[3] ? bingoG2 : bingoG} />
+        <img src={win[4] ? bingoO2 : bingoO} />
       </div>
       <div className={binStyles.mainGrid}>
         <GridLayout
@@ -299,7 +303,7 @@ setShuffleBingo(true);
           isDraggable={false}
           className={binStyles.gridLayout}
         >
-          
+
           {arr.map((row, index) =>
             row.map((ar, ind) => (
               <div className={binStyles.elem}
@@ -312,6 +316,13 @@ setShuffleBingo(true);
                 }}
                 key={ar.i}
                 onClick={(e) => {
+                  if (getUsers().length>0) {
+                    if (getUsers()[0].numbers.length > 0) {
+                      if (getUsers()[0].numbers[getUsers()[0].numbers.length - 1].value === 100 && getUsers()[0].numbers[getUsers()[0].numbers.length - 1].userName !== getUserName()) {
+                        console.log('You lost');
+                      }
+                    }
+                  }
                   if (getUsers().length === 1) {
                     alert("You are the only one here");
                     return;
@@ -328,12 +339,12 @@ setShuffleBingo(true);
                         roomID: roomID,
                       };
                       setGameValue(gameValue);
-                      
+
                       const gameVal = JSON.parse(sessionStorage.getItem('usersRoom'));
                       const num = ar.i;
                       const user = getUserName();
-                      dispatch(cutNumbers({userName:getUsers()[turn].userName,value:num}));
-                      socket.emit("gameValue", {gameVal,num,user}, (error) => {
+                      dispatch(cutNumbers({ userName: getUsers()[turn].userName, value: num }));
+                      socket.emit("gameValue", { gameVal, num, user }, (error) => {
                         alert("You bitch");
                       });
                       var newArr = [];
@@ -359,10 +370,11 @@ setShuffleBingo(true);
                     const gameVal = getUsers();
                     const num = ar.i;
                     const user = getUserName();
-                    dispatch(cutNumbers({userName:getUsers()[turn].userName,value:num}));
-                    socket.emit("gameValue", {gameVal,num,user}, (error) => {
+                    dispatch(cutNumbers({ userName: getUsers()[turn].userName, value: num }));
+                    socket.emit("gameValue", { gameVal, num, user }, (error) => {
                       alert("You bitch");
                     });
+                    var newArr = [];
                     for (var p = 0; p < 25; p++) {
                       if (styleToggle[p]) newArr[p] = true;
                       else if (p === index * 5 + ind) newArr[p] = true;
@@ -386,10 +398,11 @@ setShuffleBingo(true);
                         const gameVal = getUsers();
                         const num = ar.i;
                         const user = getUserName();
-                        dispatch(cutNumbers({userName:getUsers()[turn].userName,value:num}));
-                        socket.emit("gameValue", {gameVal, num,user}, (error) => {
+                        dispatch(cutNumbers({ userName: getUsers()[turn].userName, value: num }));
+                        socket.emit("gameValue", { gameVal, num, user }, (error) => {
                           alert("You bitch");
                         });
+                        var newArr = [];
                         for (var p = 0; p < 25; p++) {
                           if (styleToggle[p]) newArr[p] = true;
                           else if (p === index * 5 + ind) newArr[p] = true;
@@ -418,7 +431,7 @@ setShuffleBingo(true);
                 />
               </div>
             ))
-            )}
+          )}
         </GridLayout>
         <button onClick={handleBingo}>Bingo</button>
       </div>

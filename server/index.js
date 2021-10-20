@@ -57,15 +57,13 @@ io.on("connection", (socket) => {
     // });
   });
 
-  socket.on("win",(data,callback)=> {
+  socket.on("win", (data, callback) => {
     console.log(data);
-    const result={type:'Loser',sender: data.email};
-    socket.to(data.roomID).emit("lost",result);
-  })
+    const result = { type: 'Loser', sender: data.email };
+    socket.broadcast.to(data.roomID).emit("message", {gameValue:result,type:'Lost'});
+  });
 
   socket.on("join", async (Id, callback) => {
-
-
     socket.join(Id);
   }
   );
@@ -89,7 +87,7 @@ io.on("connection", (socket) => {
 
     console.log(data.gameVal, data.gameVal[0].roomID, data.user);
 
-    socket.broadcast.to(data.gameVal[0].roomID).emit("message", data.gameVal);
+    socket.broadcast.to(data.gameVal[0].roomID).emit("message", {gameValue:data.gameVal,type:'Cut'});
   });
 
   socket.on("disconnect", () => {

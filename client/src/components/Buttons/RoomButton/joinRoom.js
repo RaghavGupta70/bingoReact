@@ -46,8 +46,10 @@ export default function JoinRoom({ type }) {
   }, [ENDPOINT]);
 
   useEffect(() => {
-    socket.on("message", (gameVal) => {
-      const success = putUsers(gameVal);
+    socket.on("message", ({gameValue,type}) => {
+      if(type === 'Cut'){
+        const success = putUsers(gameValue);
+      }
     });
   }, []);
 
