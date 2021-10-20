@@ -95,7 +95,7 @@ const BingoGrid = ({ setMessage }) => {
   }
 
   useEffect(() => {
-    if (getUsers().length>0) {
+    if (getUsers().length > 0) {
       if (getUsers()[0].numbers.length > 0) {
         if (getUsers()[0].numbers[getUsers()[0].numbers.length - 1].value === 100 && getUsers()[0].numbers[getUsers()[0].numbers.length - 1].userName !== getUserName()) {
           console.log('You lost');
@@ -130,9 +130,9 @@ const BingoGrid = ({ setMessage }) => {
     no-repeat
   `,
       });
-      setTimeOut(()=> {
-        history.push('/home');
-      },[2000]);
+      // setTimeout(() => {
+      //   history.push('/home');
+      // }, 2000);
     }
   }, [bingoCut]);
 
@@ -319,10 +319,30 @@ const BingoGrid = ({ setMessage }) => {
                 }}
                 key={ar.i}
                 onClick={(e) => {
-                  if (getUsers().length>0) {
+                  if (getUsers().length > 0) {
                     if (getUsers()[0].numbers.length > 0) {
                       if (getUsers()[0].numbers[getUsers()[0].numbers.length - 1].value === 100 && getUsers()[0].numbers[getUsers()[0].numbers.length - 1].userName !== getUserName()) {
                         console.log('You lost');
+                        const winData = getUsers().filter((elem) => elem.userEmail !== getUserEmail());
+                        const winner = getUsers()[0].numbers[getUsers()[0].numbers.length - 1].userName;
+                        const finalData = winData.map((elem) => { return { label: elem.userName, email: elem.userEmail, result: winner === elem.userName ? 'Won' : 'Lost' } });
+
+                        dispatch(updatePlayerProfile(getUserEmail(), { oppData: finalData, result: 'Lost' }))
+                        Swal.fire({
+                          title: "You Lost the Game",
+                          color: "red",
+                          width: 600,
+                          position: "bottom",
+                          padding: "3em",
+                          background: `rgb(255,255,255)`,
+                          backdrop: `
+                               rgba(0,0,0,0.4)
+                               url(${WinnerGif})
+                               center top
+                               no-repeat
+                              `,
+                        });
+                        return;
                       }
                     }
                   }

@@ -5,12 +5,12 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { io } from "socket.io-client";
 import { useHistory } from "react-router-dom";
-import {useDispatch,useSelector} from 'react-redux';
-import { putUsers,addUsers } from "../../../utils/commonData/common";
+import { useDispatch, useSelector } from 'react-redux';
+import { putUsers, addUsers } from "../../../utils/commonData/common";
 import CreateButton from "../HomeRoomButton/createButton";
 import "./styles.css";
-import {createRoomPlayer,joinRoomPlayer,fetchRoomValue} from '../../../actions/index.js';
-import {getUserName,getUserEmail} from '../../../utils/commonData/common.js';
+import { createRoomPlayer, joinRoomPlayer, fetchRoomValue } from '../../../actions/index.js';
+import { getUserName, getUserEmail } from '../../../utils/commonData/common.js';
 
 let socket;
 
@@ -46,29 +46,34 @@ export default function JoinRoom({ type }) {
   }, [ENDPOINT]);
 
   useEffect(() => {
-    socket.on("message", ({gameValue,type}) => {
-      if(type === 'Cut'){
+    socket.on("message", ({ gameValue, type }) => {
+      if (type === 'Cut') {
         const success = putUsers(gameValue);
       }
     });
   }, []);
 
   useEffect(() => {
-    console.log(roomData);
-    if(roomData.length>0){
-      socket.emit("create", (roomData[0].roomID), (error) => {
-        alert("You joined Lodu");
-        console.log(error);
-      });
-
+    console.log('Socket chutiya hai', roomData);
+    if (roomData.length > 0) {
+      if (roomData[0].numbers) {
+        if (roomData[0].numbers.length > 0) {
+          if (roomData[0].numbers[roomData[0].numbers.length - 1].value !== 100) {
+            socket.emit("create", (roomData[0].roomID), (error) => {
+              alert("You joined Lodu");
+              console.log(error);
+            });
+          }
+        }
+      }
       sessionStorage.setItem("currentType", "Creator");
       history.push(`/Room?roomID=${roomData[0].roomID}`);
-      sessionStorage.setItem('usersRoom',JSON.stringify(dispatch(fetchRoomValue(roomData[0].roomID))));
+      sessionStorage.setItem('usersRoom', JSON.stringify(dispatch(fetchRoomValue(roomData[0].roomID))));
     }
   }, [roomData.length])
 
-  useEffect(()=>{
-    socket.on("room", (roomID,callback) => {
+  useEffect(() => {
+    socket.on("room", (roomID, callback) => {
       const dataAll = dispatch(fetchRoomValue(roomID));
     });
   })
@@ -87,16 +92,16 @@ export default function JoinRoom({ type }) {
   const handleClick = (e) => {
     e.preventDefault();
     const v = JSON.parse(localStorage.getItem("user"));
-    console.log(getUserName(),getUserEmail())
+    console.log(getUserName(), getUserEmail())
 
-    dispatch(createRoomPlayer({userName: getUserName(),userEmail: getUserEmail()}))
+    dispatch(createRoomPlayer({ userName: getUserName(), userEmail: getUserEmail() }))
 
 
 
     // socket.on("room", (roomData, callback) => {
     //   setroomId(roomData.roomId);
     //   const success = putUsers([roomData]);
-      
+
     // });
   };
 
@@ -107,7 +112,7 @@ export default function JoinRoom({ type }) {
 
     console.log(ID);
 
-    dispatch(joinRoomPlayer({id: ID,userName: getUserName(),userEmail: getUserEmail()}));
+    dispatch(joinRoomPlayer({ id: ID, userName: getUserName(), userEmail: getUserEmail() }));
   };
 
   return (

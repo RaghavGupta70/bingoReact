@@ -8,7 +8,7 @@ const DonutChart = ({value,reload}) => {
       datasets: [
         {
           label: "Statistics",
-          data: [value[0].matchPlayed, value[0].matchWon, value[0].matchLost],
+          data: [value[0].matchWon, value[0].matchLost, value[0].matchPlayed-(value[0].matchLost+value[0].matchWon)],
           backgroundColor: [
             "rgb(3 252 103)",
             "rgb(252 3 61)",

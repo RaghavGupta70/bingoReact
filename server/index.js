@@ -69,7 +69,7 @@ io.on("connection", (socket) => {
   );
 
   socket.on("gameValue", (data, callback) => {
-    console.log(data, data.gameVal[0].numbers);
+    // console.log(data, data.gameVal[0].numbers);
 
     if (data.gameVal[0].numbers.length > 0) {
       if (!data.gameVal[0].numbers.find((nums) => nums.value === data.num)) {

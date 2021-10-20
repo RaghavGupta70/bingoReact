@@ -74,6 +74,7 @@ export const fetchLeaderBoardData = () => async(dispatch) => {
 
 export const updatePlayerProfile = (email,playerData) => async(dispatch) => {
     try{
+        console.log(email,playerData);
         const {data} = await api.updatePlayerData(email,playerData);
         dispatch({type: UPDATE_PROF, payload: data})
     }
