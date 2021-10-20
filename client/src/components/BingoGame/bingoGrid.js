@@ -130,6 +130,9 @@ const BingoGrid = ({ setMessage }) => {
     no-repeat
   `,
       });
+      setTimeOut(()=> {
+        history.push('/home');
+      },[2000]);
     }
   }, [bingoCut]);
 
