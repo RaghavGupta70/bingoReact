@@ -55,17 +55,26 @@ export default function JoinRoom({ type }) {
 
   useEffect(() => {
     console.log('Socket chutiya hai', roomData);
-    if (roomData.length > 0) {
-      if (roomData[0].numbers) {
-        if (roomData[0].numbers.length > 0) {
-          if (roomData[0].numbers[roomData[0].numbers.length - 1].value !== 100) {
-            socket.emit("create", (roomData[0].roomID), (error) => {
-              alert("You joined Lodu");
-              console.log(error);
-            });
-          }
-        }
+    if(roomData[0].numbers){
+      const num = roomData;
+      if(roomData[0].numbers[roomData[0].numbers.length-1].value === 100){
+        putUsers(num);
       }
+      else {
+        socket.emit("create", (roomData[0].roomID), (error) => {
+          alert("You joined Lodu");
+          console.log(error);
+        });
+        sessionStorage.setItem("currentType", "Creator");
+        history.push(`/Room?roomID=${roomData[0].roomID}`);
+        sessionStorage.setItem('usersRoom', JSON.stringify(dispatch(fetchRoomValue(roomData[0].roomID))));
+      }
+    }
+    else if (roomData.length > 0) {
+      socket.emit("create", (roomData[0].roomID), (error) => {
+        alert("You joined Lodu");
+        console.log(error);
+      });
       sessionStorage.setItem("currentType", "Creator");
       history.push(`/Room?roomID=${roomData[0].roomID}`);
       sessionStorage.setItem('usersRoom', JSON.stringify(dispatch(fetchRoomValue(roomData[0].roomID))));
