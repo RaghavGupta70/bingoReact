@@ -8,7 +8,7 @@ import { io } from "socket.io-client";
 import Swal from "sweetalert2";
 import { getUserEmail, getUserName, getUsers } from "../../utils/commonData/common";
 import { useHistory } from "react-router-dom";
-import {useDispatch} from 'react-redux';
+import {useDispatch,useSelector} from 'react-redux';
 import { cutNumbers, updatePlayerProfile } from '../../actions/index.js';
 import WinnerGif from "../../assets/images/winnerGif.gif";
 import bingoB from "../../assets/images/bingoB.png";
@@ -312,13 +312,10 @@ setShuffleBingo(true);
                 }}
                 key={ar.i}
                 onClick={(e) => {
-                  setMessage(getUsers())
                   if (getUsers().length === 1) {
                     alert("You are the only one here");
                     return;
                   }
-                  console.log(styleToggle);
-                  console.log(e.target, ar.i);
                   let result = getUserName();
 
                   var numLen = getUsers()[0].numbers.length;
@@ -333,10 +330,9 @@ setShuffleBingo(true);
                       setGameValue(gameValue);
                       
                       const gameVal = JSON.parse(sessionStorage.getItem('usersRoom'));
-                      console.log(gameVal);
                       const num = ar.i;
                       const user = getUserName();
-                      dispatch(cutNumbers({userName:user,value:num}));
+                      dispatch(cutNumbers({userName:getUsers()[turn].userName,value:num}));
                       socket.emit("gameValue", {gameVal,num,user}, (error) => {
                         alert("You bitch");
                       });
@@ -346,7 +342,6 @@ setShuffleBingo(true);
                         else if (p === index * 5 + ind) newArr[p] = true;
                         else newArr[p] = false;
                       }
-                      console.log(ar);
                       setStyleToggle(newArr);
                       var f = turn + 1;
                       setTurn(f);
@@ -364,17 +359,15 @@ setShuffleBingo(true);
                     const gameVal = getUsers();
                     const num = ar.i;
                     const user = getUserName();
-                    dispatch(cutNumbers({userName:user,value:num}));
+                    dispatch(cutNumbers({userName:getUsers()[turn].userName,value:num}));
                     socket.emit("gameValue", {gameVal,num,user}, (error) => {
                       alert("You bitch");
                     });
-                    var newArr = [];
                     for (var p = 0; p < 25; p++) {
                       if (styleToggle[p]) newArr[p] = true;
                       else if (p === index * 5 + ind) newArr[p] = true;
                       else newArr[p] = false;
                     }
-                    console.log(ar);
                     setStyleToggle(newArr);
                     var f = turn + 1;
                     setTurn(f);
@@ -393,17 +386,15 @@ setShuffleBingo(true);
                         const gameVal = getUsers();
                         const num = ar.i;
                         const user = getUserName();
-                        dispatch(cutNumbers({userName:user,value:num}));
+                        dispatch(cutNumbers({userName:getUsers()[turn].userName,value:num}));
                         socket.emit("gameValue", {gameVal, num,user}, (error) => {
                           alert("You bitch");
                         });
-                        var newArr = [];
                         for (var p = 0; p < 25; p++) {
                           if (styleToggle[p]) newArr[p] = true;
                           else if (p === index * 5 + ind) newArr[p] = true;
                           else newArr[p] = false;
                         }
-                        console.log(ar);
                         setStyleToggle(newArr);
                         var f = turn + 1;
                         setTurn(f);

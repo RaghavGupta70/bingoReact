@@ -28,8 +28,8 @@ const Room = () => {
   const ENDPOINT = "localhost:5000";
   const history = useHistory();
   const [play,setPlay] = useState(false);
-  const [messages, setMessages] = useState([]);
   const usersRoom = useSelector((state) => state.game);
+  const [messages, setMessages] = useState([]);
    const currentUserInfo = JSON.parse(localStorage.getItem("user"));
   const currentUser = currentUserInfo.result.userName;
   const { roomID } = queryString.parse(location.search, {
@@ -42,7 +42,7 @@ const Room = () => {
     useEffect(()=> {
       console.log(usersRoom);
       setMessages(getUsers())
-    },[usersRoom,usersRoom[0].numbers.length]);
+    },[usersRoom]);
 
     useEffect(() => {
       // setUsersRoom(getUsers())
