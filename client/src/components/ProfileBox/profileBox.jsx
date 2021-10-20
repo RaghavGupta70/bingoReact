@@ -13,7 +13,7 @@ import { getUserEmail } from '../../utils/commonData/common';
 const ProfileBox = ({ data }) => {
     const user = JSON.parse(localStorage.getItem('user'));
     const dispatch = useDispatch();
-    const [fileImg,setFileImg] = useState(data.profileImage);
+    const [fileImg,setFileImg] = useState('');
     console.log(data.profileImage)
 
     const handleChange = ({base64}) => {
@@ -64,7 +64,7 @@ const ProfileBox = ({ data }) => {
                     </div>
                 </div>
                 <div className="profile_img" xs={6} md={4}>
-                    <Image src={fileImg} className="avatar_img" roundedCircle />
+                    <Image src={fileImg !== '' ? fileImg:data.profileImage} className="avatar_img" roundedCircle />
                     {/* <AiOutlinePlusCircle /> */}
                     <FileBase type="file" multiple={false}  accept=' .jpeg .png .jpg' className="uploadImg" onDone={handleChange} />
                 </div>
