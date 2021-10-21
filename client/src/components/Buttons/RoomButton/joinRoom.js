@@ -45,13 +45,7 @@ export default function JoinRoom({ type }) {
     socket = io(ENDPOINT);
   }, [ENDPOINT]);
 
-  useEffect(() => {
-    socket.on("message", ({ gameValue, type }) => {
-      if (type === 'Cut') {
-        const success = putUsers(gameValue);
-      }
-    });
-  }, []);
+ 
 
   useEffect(() => {
     console.log('Socket chutiya hai', roomData);

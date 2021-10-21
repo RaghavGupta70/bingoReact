@@ -6,7 +6,7 @@ import GridLayout from "react-grid-layout";
 import { FaSlash } from "react-icons/fa";
 import { io } from "socket.io-client";
 import Swal from "sweetalert2";
-import { getUserEmail, getUserName, getUsers } from "../../utils/commonData/common";
+import { getUserEmail, getUserName, getUsers, putUsers } from "../../utils/commonData/common";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { cutNumbers, updatePlayerProfile } from '../../actions/index.js';
@@ -47,6 +47,14 @@ const BingoGrid = ({ setMessage }) => {
   useEffect(() => {
     socket = io(ENDPOINT);
   }, [ENDPOINT]);
+
+  useEffect(() => {
+    socket.on("message", ({ gameValue, type }) => {
+      if (type === 'Cut') {
+        const success = putUsers(gameValue);
+      }
+    });
+  }, []);
 
   if (!shuffleBingo) {
     for (let i = arrNum.length - 1; i > 0; i--) {
@@ -439,6 +447,8 @@ const BingoGrid = ({ setMessage }) => {
                       }
                     }
                   }
+
+                  setMessage(getUsers());
                 }}
               >
                 {ar.i}

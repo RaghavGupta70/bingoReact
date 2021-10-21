@@ -3,11 +3,14 @@ import chatStyles from './chatBoxGame.module.css';
 
 const ChatBox = ({text,message}) => {
 
-    const [newText,setNewText] = useState(message[0].numbers);
+    var [newText,setNewText] = useState(message[0].numbers);
 
     useEffect(() => {
+        newText = message[0].numbers;
+        console.log(newText)
         setNewText(message[0].numbers)
-    }, [message[0].numbers.length])
+    })
+    
     console.log(message[0].numbers);
     return (
         <div className={chatStyles.mainCont}>
