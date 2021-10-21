@@ -18,3 +18,4 @@ export const updatePlayerImage = (email, data) => axios.patch(`${profileURl}/upd
 export const fetchRoom = (id) => axios.get(`${gameURl}/fetchRoomData/${id}`)
 export const createRoom = (data) => axios.post(`${gameURl}/createPlayer`,data);
 export const joinRoom = (data) => axios.post(`${gameURl}/joinPlayer`,data);
+export const lockRoom = (roomID) => axios.patch(`${gameURl}/lockRoom/${roomID}`);

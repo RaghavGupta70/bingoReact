@@ -1,4 +1,5 @@
 import react,{useEffect, useState} from 'react';
+import { getUsers } from '../../utils/commonData/common';
 import chatStyles from './chatBoxGame.module.css';
 
 const ChatBox = ({text,message}) => {
@@ -7,11 +8,11 @@ const ChatBox = ({text,message}) => {
 
     useEffect(() => {
         newText = message[0].numbers;
-        console.log(newText)
-        setNewText(message[0].numbers)
+        // console.log(newText)
+        setNewText(getUsers()[0].numbers)
     })
     
-    console.log(message[0].numbers);
+    // console.log(message[0].numbers);
     return (
         <div className={chatStyles.mainCont}>
             <div className={chatStyles.header}>

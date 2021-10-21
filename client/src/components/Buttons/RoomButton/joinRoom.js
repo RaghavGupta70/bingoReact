@@ -45,6 +45,18 @@ export default function JoinRoom({ type }) {
     socket = io(ENDPOINT);
   }, [ENDPOINT]);
 
+  useEffect(() => {
+    socket.on("message", ({ gameValue, type }) => {
+      if (type === 'Cut') {
+        const success = putUsers(gameValue);
+      }
+
+      if (type === 'Start') {
+        console.log(gameValue);
+        sessionStorage.setItem('lock',JSON.stringify(gameValue));
+      }
+    });
+  }, []);
  
 
   useEffect(() => {
@@ -101,6 +113,7 @@ export default function JoinRoom({ type }) {
 
   const handleClick = (e) => {
     e.preventDefault();
+    sessionStorage.clear();
     const v = JSON.parse(localStorage.getItem("user"));
     console.log(getUserName(), getUserEmail())
 
@@ -117,6 +130,7 @@ export default function JoinRoom({ type }) {
 
   const handleClick2 = (e) => {
     e.preventDefault();
+    sessionStorage.clear();
     const v = JSON.parse(localStorage.getItem("user"));
     const value = v.result.userName;
 

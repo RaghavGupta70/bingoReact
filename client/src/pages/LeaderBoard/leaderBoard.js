@@ -90,7 +90,7 @@ export default function LeaderBoard() {
       setRows(sortByName);
     } 
     else if(filter === 1){
-      const sortByRating = rows.sort((a,b) => a.rating<b.rating?1:-1);
+      const sortByRating = rows.sort((a,b) => a.rank>b.rank?1:-1);
       setRows(sortByRating);
     }
     else if(filter === 2){
@@ -124,7 +124,7 @@ export default function LeaderBoard() {
                   setRows(sortByName);
                 } 
                 else if(e.value === 1){
-                  const sortByRating = rows.sort((a,b) => a.rating<b.rating?1:-1);
+                  const sortByRating = rows.sort((a,b) => a.rank>b.rank?1:-1);
                   setRows(sortByRating);
                 }
                 else if(e.value === 2){

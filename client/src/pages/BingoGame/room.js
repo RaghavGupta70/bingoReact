@@ -4,7 +4,8 @@ import React, { useEffect, useState } from "react";
 import { useLocation,useHistory } from "react-router-dom";
 import { io } from "socket.io-client";
 import Swal from "sweetalert2";
-import { useSelector } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
+import { lockRoomCreator } from "../../actions/index";
 // import { getUserInRoom } from "../../../../../server/controllers/users";
 import BingoImage from '../../assets/images/bingoGame.png';
 import PlayButton from "../../components/Buttons/PlayButton/playButton";
@@ -13,6 +14,7 @@ import {
   getType,
   getUsers,
   getPlayValue,
+  getUserName,
 } from "../../utils/commonData/common";
 import BingoGrid from "../../components/BingoGame/bingoGrid.js";
 import ChatBox from '../../components/ChatBox/chatBoxGame';
@@ -25,6 +27,7 @@ const Room = () => {
   // var temp = [];
   const location = useLocation();
   const [usersLen,setUsersLen] = useState(0);
+  const dispatch = useDispatch();
   const ENDPOINT = "localhost:5000";
   const history = useHistory();
   const [play,setPlay] = useState(false);
@@ -48,20 +51,24 @@ const Room = () => {
     useEffect(() => {
       // setUsersRoom(getUsers())
       setUsersLen(getUsers().length)
-      console.log('start',getUsers().length)
-    }, [getUsers().length])
+      console.log('start', getUsers().length, JSON.parse(sessionStorage.getItem('lock')))
+    }, [getUsers().length,sessionStorage.getItem('lock')])
 
     useEffect(() => {
-      socket.on('playStart',(played) =>{
-        console.log('You called me')
-        setPlay(played);
-          })
-    },[])
+      console.log('socket play', JSON.parse(sessionStorage.getItem('lock')))
+      setPlay(JSON.parse(sessionStorage.getItem('lock')));
+    })
+
+    setInterval(() => {
+      if (JSON.parse(sessionStorage.getItem('lock')) === true)
+      setPlay(JSON.parse(sessionStorage.getItem('lock')));
+    },2000);
 
 
     const handlePlay = (e) => {
       e.preventDefault();
       setPlay(true);
+      dispatch(lockRoomCreator(roomID));
       socket.emit('play',(roomID),(error) => {
         console.log('You played');
       })
@@ -140,24 +147,13 @@ console.log('Chal ja Bhadwe');
           }
         </div>  
           <div className={roomStyles.bingoGame}>
-          {play ? (
+          {!play ? (
             <>
             <img src={BingoImage} />
-            {usersLen >=2? <h6> Start</h6>: null}
+            {usersLen >=2 && getUsers()[0].userName === getUserName()? <PlayButton onClick={handlePlay} />: null}
             </>
           ) : (
             <>
-              {" "}
-              {/* <ul>
-                {}
-                {messages ? (
-                  <>
-                    {" "}
-                    <li>{messages.map((val) => val.userName)}</li>
-                    <li>{messages.map((val) => val.value)}</li>
-                  </>
-                ) : null}
-              </ul> */}
               <BingoGrid setMessage={setMessages} />
             </>
           )}

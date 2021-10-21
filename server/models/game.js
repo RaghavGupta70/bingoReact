@@ -9,7 +9,11 @@ const gameModel = new Schema({
     numbers: [{
         value: Number,
         userName: String,
-    }]
+    }],
+    lock: {
+        type: Boolean,
+        default: false,
+    },
 })
 
 const game = mongoose.model('game',gameModel);

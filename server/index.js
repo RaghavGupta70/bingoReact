@@ -48,7 +48,7 @@ io.on("connection", (socket) => {
 
     console.log(typeof (roomID))
     if (roomID) {
-      socket.to(obj.id).emit("playStart", played);
+      socket.to(obj.id).emit("message", { gameValue: played, type: 'Start' });
       console.log("Working");
     }
 

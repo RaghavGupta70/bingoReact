@@ -57,14 +57,42 @@ export const createRoom = async (req, res) => {
   }
 };
 
+export const lockRoom = async (req,res) => {
+  try {
+
+    const roomID = req.params.roomID;
+
+    const roomExist = await game.findOne({roomID: roomID});
+
+    if(!roomExist)
+    {
+      return res.status(404).json({ message: "Wrong room ID" });
+    }
+
+    roomExist.lock = true;
+
+    const newRoom = await game.findOneAndUpdate({ roomID: roomID }, { $set: roomExist }, { new: true, upsert: true });
+
+    return res.status(200).json(newRoom);
+
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export const joinRoom = async (req, res) => {
   const { id, userName, userEmail } = req.body;
 
   try {
-    const existingID = await game.find({ roomID: id });
+    const existingID = await game.findOne({ roomID: id });
 
     if (!existingID) {
       return res.status(404).json({ message: "Wrong room ID" });
+    }
+
+    if(existingID.lock)
+    {
+      return res.status(404).json({message: 'Match already started find another'});
     }
 
     const newPlayer = {

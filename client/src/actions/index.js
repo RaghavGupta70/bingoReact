@@ -112,7 +112,8 @@ export const joinRoomPlayer = (data) => async (dispatch) => {
         console.log(message.data);
         dispatch({ type: JOIN_ROOM, payload: message.data })
     } catch (error) {
-        console.log(error);
+        alert(error.response.data.message);
+        console.log(error.response.data.message);
     }
 }
 
@@ -133,5 +134,14 @@ export const cutNumbers = (numberSel) => async(dispatch) => {
         dispatch({type: CUT_NUM, payload:numberSel});
     } catch (error) {
         console.log(error);
+    }
+}
+
+export const lockRoomCreator = (roomID) => async(dispatch) => {
+    try {
+        const {data} = await api.lockRoom(roomID);
+        console.log(data);
+    } catch (error) {
+        console.log(error.response.data.message);
     }
 }

@@ -48,13 +48,7 @@ const BingoGrid = ({ setMessage }) => {
     socket = io(ENDPOINT);
   }, [ENDPOINT]);
 
-  useEffect(() => {
-    socket.on("message", ({ gameValue, type }) => {
-      if (type === 'Cut') {
-        const success = putUsers(gameValue);
-      }
-    });
-  }, []);
+
 
   if (!shuffleBingo) {
     for (let i = arrNum.length - 1; i > 0; i--) {
@@ -138,9 +132,9 @@ const BingoGrid = ({ setMessage }) => {
     no-repeat
   `,
       });
-      // setTimeout(() => {
-      //   history.push('/home');
-      // }, 2000);
+      setTimeout(() => {
+        history.push('/home');
+      }, 2000);
     }
   }, [bingoCut]);
 
@@ -350,6 +344,9 @@ const BingoGrid = ({ setMessage }) => {
                                no-repeat
                               `,
                         });
+                        setTimeout(() => {
+                          history.push('/home');
+                        }, 2000);
                         return;
                       }
                     }
