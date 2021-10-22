@@ -3,10 +3,8 @@ import queryString from "query-string";
 import React, { useEffect, useState } from "react";
 import { useLocation,useHistory } from "react-router-dom";
 import { io } from "socket.io-client";
-import Swal from "sweetalert2";
 import { useDispatch,useSelector } from "react-redux";
 import { lockRoomCreator } from "../../actions/index";
-// import { getUserInRoom } from "../../../../../server/controllers/users";
 import BingoImage from '../../assets/images/bingoGame.png';
 import PlayButton from "../../components/Buttons/PlayButton/playButton";
 import {
@@ -74,68 +72,10 @@ const Room = () => {
       })
     }
 
-    // useEffect(() => {
-    //   window.addEventListener("beforeunload", alertUser);
-    //   return () => {
-    //     window.removeEventListener("beforeunload", alertUser);
-    //   };
-    // }, []);
-    // const alertUser = (e) => {
-    //   e.preventDefault();
-    //   e.returnValue = "";
-    // }
-      // useEffect(() => {
-      //   const swalWithBootstrapButtons = Swal.mixin({
-      //     customClass: {
-      //       confirmButton: "btn btn-success",
-      //       cancelButton: "btn btn-danger",
-      //     },
-      //     buttonsStyling: false,
-      //   });
-
-      //   swalWithBootstrapButtons
-      //     .fire({
-      //       title: "Are you sure?",
-      //       text: "You won't be able to revert this!",
-      //       icon: "warning",
-      //       showCancelButton: true,
-      //       confirmButtonText: "Yes, Exit Game!",
-      //       cancelButtonText: "No, cancel!",
-      //       reverseButtons: true,
-      //     })
-      //     .then((result) => {
-      //       if (result.isConfirmed) {
-      //         history.push("/home");
-      //       } else if (result.dismiss === Swal.DismissReason.cancel) {
-      //       }
-      //     });
-      // }, []);
-
-      // useEffect(() => {
-      //   setReload(
-      //     performance.navigation.type === performance.navigation.TYPE_RELOAD
-      //   );
-      // }, []);
-
- 
-  // }, []);
-
-  // for (var h = 0; h < 25; h++) {
-  //   temp.push(h+1);
-  // }
-
+   
 console.log('Chal ja Bhadwe');
 
-  // useEffect(() => {
-  //   setUsersRoom(getUsers());
-  //   members = usersRoom.filter((user) => user.userName !== currentUser);
-  //   setMessages(getUsers()[0].numbers);
-  // }, [getUsers()[0]]);
-
-  // function generator() {
-  //   const num = Math.floor(Math.random() * 25 + 1);
-  //   return num;
-  // }
+  
 
   return (
     <div className={roomStyles.bingoRoom}>

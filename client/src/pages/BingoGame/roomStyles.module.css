@@ -1,22 +1,26 @@
 .chat {
-    padding: 20px;
-    width:25%;
+  padding: 20px;
+  margin-top: -1.5%;
+  width: 25%;
 }
 
-.bingoRoom{
-    display:flex;
-    flex-direction: row;
-    margin:4% 0%;
-    width:100%;
+.bingoRoom {
+  display: flex;
+  flex-direction: row;
+  padding: 4% 0%;
+  width: 100%;
+  background-color: #f0eee4;
+  background-image: url("https://www.transparenttextures.com/patterns/ag-square.png");
 }
 
-.members{
-    width:25%;
-    padding:2%;
+.members {
+  width: 25%;
+  padding: 2%;
+  margin-top: -3%;
 }
 
-.bingoGame{
-    width:50%;
-    text-align:center;
-    margin:auto;
+.bingoGame {
+  width: 50%;
+  text-align: center;
+  margin: auto;
 }
