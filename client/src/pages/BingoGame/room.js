@@ -80,7 +80,7 @@ console.log('Chal ja Bhadwe');
   return (
     <div className={roomStyles.bingoRoom}>
       {getToken() != null ? (<>
-        <div className="members">
+        <div className={roomStyles.members}>
           <span>Room Id:-{roomID}</span>{
             usersRoom.length > 0 &&
               <MembersInRoom names={usersRoom} />
@@ -89,8 +89,8 @@ console.log('Chal ja Bhadwe');
           <div className={roomStyles.bingoGame}>
           {!play ? (
             <>
-            <img src={BingoImage} />
-            {usersLen >=2 && getUsers()[0].userName === getUserName()? <PlayButton onClick={handlePlay} />: null}
+            <img src={BingoImage} width="35%" />
+            {usersLen >=2 ? getUsers()[0].userName === getUserName()? <PlayButton onClick={handlePlay} />: <h5>Waiting for the Host to Start the game</h5>:null}
             </>
           ) : (
             <>

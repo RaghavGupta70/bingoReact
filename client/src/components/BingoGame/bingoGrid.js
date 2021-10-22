@@ -11,6 +11,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { cutNumbers, updatePlayerProfile } from '../../actions/index.js';
 import WinnerGif from "../../assets/images/winnerGif.gif";
+import LoserGif from "../../assets/images/loserGif.gif";
 import bingoB from "../../assets/images/bingoB.png";
 import bingoI from "../../assets/images/bingoI.png";
 import bingoN from "../../assets/images/bingoN.png";
@@ -68,24 +69,6 @@ const BingoGrid = ({ setMessage }) => {
   }
   var h = 0;
 
-  // useEffect(() => {
-  //   socket.emit("gameValue", (gameValue), (error) => {
-  //     alert("You bitch");
-  //   });
-  // }, [gameValue]);
-
-  // useEffect(() => {
-  //   console.log(turn);
-  //   socket.on("value", (gameV) => {
-  //     console.log(gameV);
-  //     console.log("hello");
-  //     sessionStorage.setItem("playValue", gameV);
-  //   });
-  // }, []);
-
-  // setInterval(() => {
-  //   dependency++;
-  // }, 100);
 
   const [styleToggle, setStyleToggle] = useState([]);
   const [shuffle, setShuffle] = useState(false);
@@ -339,7 +322,7 @@ const BingoGrid = ({ setMessage }) => {
                           background: `rgb(255,255,255)`,
                           backdrop: `
                                rgba(0,0,0,0.4)
-                               url(${WinnerGif})
+                               url(${LoserGif})
                                center top
                                no-repeat
                               `,

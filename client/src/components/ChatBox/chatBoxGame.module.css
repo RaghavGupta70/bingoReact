@@ -1,12 +1,13 @@
 .mainCont {
     border: 5px solid hsl(101, 100%, 53%);
     border-radius: 20px;
-    box-shadow: 10px 10px 20px yellow;
+    box-shadow: 2px 2px 5px yellow;
     width: 100%
 }
 
 .header h1 {
     font-size: 25px;
+    text-align: center;
 }
 
 .content li {
@@ -20,4 +21,37 @@
 
 .message1 {
     text-align: right;
+}
+
+.chatHead {
+    display: flex;
+    flex-direction: column;
+    padding: 4% 2% 0%;
+    height: 35vh;
+    max-height: 35vh;
+    overflow: auto;
+
+}
+
+.chatHead::-webkit-scrollbar {
+  width: 7px;
+}
+ 
+.chatHead::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+ 
+.chatHead::-webkit-scrollbar-thumb {
+  background-color: #6351ce;
+  border-radius: 20px;
+}
+
+.chat {
+    color : red;
+    justify-content: right;
+}
+
+.chat2 {
+    color: green;
 }
