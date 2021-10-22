@@ -62,22 +62,22 @@ export default function LeaderBoard() {
   const leaderDataValue = useSelector((state) => state.leaderBoardDataSet);
   const dispatch = useDispatch();
   const [filter, setFilter] = useState(1);
-  const [r,setR] = useState(1); 
+  const [r, setR] = useState(1);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
   const [rows, setRows] = useState(leaderDataValue.map((ld, index) => createData(index + 1, ld.userName, ld.matchesWon, ld.matchesLost, ld.matchesPlayed, ld.rating.toFixed(2))));
-  const handleChangeRowsPerPage = ( event) => {
+  const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
 
-  useEffect(()=> {
-    var sortedData = leaderDataValue.sort((a,b)=> a.rating<b.rating?1:-1);
-    var leaderboardData = sortedData.map((ld,index) => createData(index+1,ld.userName, ld.matchesWon, ld.matchesLost, ld.matchesPlayed, ld.rating.toFixed(2)));
+  useEffect(() => {
+    var sortedData = leaderDataValue.sort((a, b) => a.rating < b.rating ? 1 : -1);
+    var leaderboardData = sortedData.map((ld, index) => createData(index + 1, ld.userName, ld.matchesWon, ld.matchesLost, ld.matchesPlayed, ld.rating.toFixed(2)));
     setRows(leaderboardData);
-  },[leaderDataValue])
+  }, [leaderDataValue])
 
   useEffect(() => {
     dispatch(fetchLeaderBoardData());
@@ -85,20 +85,20 @@ export default function LeaderBoard() {
   }, []);
 
   useEffect(() => {
-    if(filter === 0){
-      const sortByName = rows.sort((a,b) => a.namePl>b.namePl?1:-1);
+    if (filter === 0) {
+      const sortByName = rows.sort((a, b) => a.namePl > b.namePl ? 1 : -1);
       setRows(sortByName);
-    } 
-    else if(filter === 1){
-      const sortByRating = rows.sort((a,b) => a.rank>b.rank?1:-1);
+    }
+    else if (filter === 1) {
+      const sortByRating = rows.sort((a, b) => a.rank > b.rank ? 1 : -1);
       setRows(sortByRating);
     }
-    else if(filter === 2){
-      const sortByWon = rows.sort((a,b) => a.matchesWon<b.matchesWon?1:-1);
+    else if (filter === 2) {
+      const sortByWon = rows.sort((a, b) => a.matchesWon < b.matchesWon ? 1 : -1);
       setRows(sortByWon);
     }
-    else if(filter === 3){
-      const sortByLost = rows.sort((a,b) => a.matchesLost<b.matchesLost?1:-1);
+    else if (filter === 3) {
+      const sortByLost = rows.sort((a, b) => a.matchesLost < b.matchesLost ? 1 : -1);
       setRows(sortByLost);
     }
   }, [filter])
@@ -117,26 +117,32 @@ export default function LeaderBoard() {
               height={"5vh"}
               width={"17vw"}
               data={filterTable}
-              onChange={(e) => { 
+              onChange={(e) => {
                 console.log(rows);
-                if(e.value === 0){
-                  const sortByName = rows.sort((a,b) => a.namePl>b.namePl?1:-1);
+                console.log(e)
+                if (!e) {
+                  console.log('Nothing');
+                  return;
+                }
+
+                else if (e.value === 0) {
+                  const sortByName = rows.sort((a, b) => a.namePl > b.namePl ? 1 : -1);
                   setRows(sortByName);
-                } 
-                else if(e.value === 1){
-                  const sortByRating = rows.sort((a,b) => a.rank>b.rank?1:-1);
+                }
+                else if (e.value === 1) {
+                  const sortByRating = rows.sort((a, b) => a.rank > b.rank ? 1 : -1);
                   setRows(sortByRating);
                 }
-                else if(e.value === 2){
-                  const sortByWon = rows.sort((a,b) => a.matchesWon<b.matchesWon?1:-1);
+                else if (e.value === 2) {
+                  const sortByWon = rows.sort((a, b) => a.matchesWon < b.matchesWon ? 1 : -1);
                   setRows(sortByWon);
                 }
-                else if(e.value === 3){
-                  const sortByLost = rows.sort((a,b) => a.matchesLost<b.matchesLost?1:-1);
+                else if (e.value === 3) {
+                  const sortByLost = rows.sort((a, b) => a.matchesLost < b.matchesLost ? 1 : -1);
                   setRows(sortByLost);
                 }
                 setFilter(e.value);
-               }}
+              }}
               backgroundColor={"rgb(103, 58, 183)"}
             />
           </div>

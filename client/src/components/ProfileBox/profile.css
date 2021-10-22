@@ -50,13 +50,25 @@ li {
     color:rgb(252 3 61);
 }
 
+.fileUp{
+    color: transparent;
+    margin-left: 13%;
+    margin-top: 5%;
+}
+
 .uploadImg {
   color: transparent !important;
+  background-color: aqua;
+  display: none;
+  
+
 }
 
 .uploadImg::-webkit-file-upload-button {
   visibility: hidden;
   display: none;
+  background-color: aqua;
+
 }
 
 .uploadImg::before {

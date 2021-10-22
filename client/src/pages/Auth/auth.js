@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -186,6 +186,80 @@ export default function Auth({ type, setToken }) {
     }
   };
 
+  // useEffect(() => {
+  //   const listener = event => {
+  //     if (event.code === "Enter" || event.code === "NumpadEnter") {
+  //       console.log("Enter key was pressed. Run your function.");
+  //       handleClick(event);
+  //       event.preventDefault();
+  //       // callMyFunction();
+  //     }
+  //   };
+  //   document.addEventListener("keydown", listener);
+  //   return () => {
+  //     document.removeEventListener("keydown", listener);
+  //   };
+  // }, []);
+
+  const handleEnter = (e) => {
+    if(e.key === 'Enter')
+    {
+      handleClick();
+    }
+  }
+  // const handleEnter = async (e) => {
+  //   console.log(e.key)
+  //   if(e.key === 'Enter')
+  // {  if (userData.email === "") {
+  //     error.email.type1 = true;
+  //     setError({ ...error, email: { ...error.email, type1: true } });
+  //   }
+
+  //   if (userData.password === "") {
+  //     error.password.type1 = true;
+  //     setError({ ...error, password: { ...error.password, type1: true } });
+  //   }
+
+  //   if (type === "SignIn") {
+  //     if (
+  //       error.email.type1 !== true &&
+  //       error.email.type2 !== true &&
+  //       error.password.type1 !== true &&
+  //       error.password.type2 !== true
+  //     ) {
+  //       const response = dispatch(SignInUser(userData, history));
+  //       response.then((res) => setBackError(res))
+  //         .catch((err) => setBackError(err));
+  //       const token = await loginUser(userData);
+  //       console.log(token);
+  //       setToken(token);
+  //       localStorage.setItem("tok", JSON.stringify(token));
+  //     }
+  //   } else {
+  //     if (userData.userName === "") {
+  //       error.userName = true;
+  //       setError({ ...error, userName: true });
+  //     }
+  //     if (
+  //       error.userName !== true &&
+  //       error.email.type1 !== true &&
+  //       error.email.type2 !== true &&
+  //       error.password.type1 !== true &&
+  //       error.password.type2 !== true
+  //     ) {
+  //       const respons = dispatch(SignUpUser(userData, history));
+  //       respons.then((res) => setBackError(res))
+  //         .catch((err) => setBackError(err));
+  //       const token = await loginUser(userData);
+  //       console.log(token);
+  //       setToken(token);
+  //       localStorage.setItem("tok", JSON.stringify(token));
+  //     }
+  //     console.log(userData);
+  //   }}
+  // };
+
+
   const handleChange = (e) => {
     var { name, value } = e.target;
     setUserData((prevVal) => {
@@ -233,6 +307,7 @@ export default function Auth({ type, setToken }) {
               label="Email Address"
               name="email"
               autoComplete="email"
+              onKeyPress={handleEnter}
             />
             {error.email.type1 ? <span>This is a required field! </span> : null}
             {error.email.type2 ? (
@@ -249,6 +324,7 @@ export default function Auth({ type, setToken }) {
                   color="secondary"
                   fullWidth
                   value={userData.userName}
+                  onKeyPress={handleEnter}
                   id="userName"
                   label="Username"
                   name="userName"
@@ -263,6 +339,7 @@ export default function Auth({ type, setToken }) {
               margin="normal"
               onChange={handleChange}
               value={userData.password}
+              onKeyPress={handleEnter}
               required
               color="secondary"
               fullWidth
