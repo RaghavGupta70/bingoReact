@@ -10,12 +10,16 @@
 .membersBlock{
     border:2px solid black;
     margin:1%;
-    border-radius:10px;
 }
 
 .player{
     padding:1%;
     border-bottom: 1px solid black;
+    text-align: center;
+}
+
+.you{
+    background-color: #41ee1c;
 }
 
 .player:nth-Child(4){
