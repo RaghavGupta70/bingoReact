@@ -294,7 +294,7 @@ const BingoGrid = ({ setMessage }) => {
         >
           {arr.map((row, index) =>
             row.map((ar, ind) => (
-              <div className={binStyles.elem}
+              <div className={styleToggle[index * 5 + ind]?binStyles.elem1:binStyles.elem}
                 style={{
                   display: "flex",
                   justifyContent: "center",
@@ -398,7 +398,7 @@ const BingoGrid = ({ setMessage }) => {
                     if (getUsers()[0].numbers[numLen - 1].userName === result) {
                       alert("Keep Your Calm Boi");
                     } else {
-                      if (getUsers()[0].numbers[numLen - 1].value === ar.i) {
+                      if (getUsers()[0].numbers.find((elem)=> elem.value == ar.i)) {
                         gameValue = {
                           userName: result,
                           userEmail: getUserEmail(),

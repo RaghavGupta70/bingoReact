@@ -9,8 +9,13 @@
 }
 
 .elem {
-    /* margin-left: 18%; */
+    margin-left: 18%;
     background-color: aqua;
+}
+
+.elem1 {
+    margin-left: 18%;
+    background-color: tomato;
 }
 
 .gridLayout {
@@ -18,30 +23,6 @@
     display: flex;
     /* justify-content: center;
     align-items: center; */
-}
-
-.elem:nth-child(3) {
-    /* margin-left: 20%; */
-    background-color: tomato;
-    margin-left: 20%; 
-}
-
-.elem:nth-child(8) {
-    /* margin-left: 20%; */
-    background-color: tomato;
-}
-
-.elem:nth-child(13) {
-    /* margin-left: 20%; */
-    background-color: tomato;
-}
-.elem:nth-child(18) {
-    /* margin-left: 20%; */
-    background-color: tomato;
-}
-.elem:nth-child(23) {
-    /* margin-left: 20%; */
-    background-color: tomato;
 }
 
 
