@@ -22,6 +22,7 @@ import bingoI2 from '../../assets/images/bingoI2.png'
 import bingoN2 from '../../assets/images/bingoN2.png'
 import bingoG2 from '../../assets/images/bingoG2.png'
 import bingoO2 from '../../assets/images/bingoO2.png'
+import BingoButton from '../Buttons/BingoButton/bingoButton';
 
 import binStyles from './bingoGrid.module.css';
 
@@ -446,7 +447,7 @@ const BingoGrid = ({ setMessage }) => {
             ))
           )}
         </GridLayout>
-        <button onClick={handleBingo}>Bingo</button>
+        <BingoButton onBingo={handleBingo} />
       </div>
     </>
   );
