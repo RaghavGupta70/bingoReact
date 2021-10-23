@@ -1,5 +1,5 @@
 import React from 'react';
-import { getUserName } from '../../utils/commonData/common';
+import { getUserName,getUsers } from '../../utils/commonData/common';
 import './styles.css';
 
 const MembersInRoom = ({names}) => {
