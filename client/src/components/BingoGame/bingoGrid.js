@@ -292,7 +292,6 @@ const BingoGrid = ({ setMessage }) => {
           isDraggable={false}
           className={binStyles.gridLayout}
         >
-
           {arr.map((row, index) =>
             row.map((ar, ind) => (
               <div className={binStyles.elem}
