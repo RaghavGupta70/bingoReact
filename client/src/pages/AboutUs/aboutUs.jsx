@@ -6,7 +6,7 @@ const AboutUs = () => {
         <div className='aboutPage'>
             <h2>About Binod Bingo</h2>
             <p>Binod Bingo website is game made for fun. Come play bingo and feel high af.An experience to be remembered
-                 forever.Play with friends and get fucked.Happy Playing:). Join the room with your friends or family members 
+                 forever.Play with friends.Happy Playing:). Join the room with your friends or family members 
                  and play this excited game and see the leaderboard and your statistics with your opponents which are represented
                  in Pie chart, Bar chart and Donut chart.</p>
              <h4>Technologies Used</h4>

@@ -58,7 +58,7 @@ const FooterPage = () => {
             />
             <p>
               Come play bingo and feel high af.An experience to be remembered
-              forever.Play with friends and get fucked.Happy Playing:)
+              forever.Play with friends.Happy Playing:)
             </p>
           </MDBCol>
           <MDBCol md="2" lg="2" xl="2" className="mb-4">
