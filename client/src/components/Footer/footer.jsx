@@ -121,7 +121,7 @@ const FooterPage = () => {
               <a href="#!">Privacy Policy</a>
             </p>
             <p>
-              <a href="#!">About Us</a>
+              <a href="/aboutus">About Us</a>
             </p>
             <p>
               <a href="#!">Help</a>
