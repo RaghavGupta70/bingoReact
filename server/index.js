@@ -7,8 +7,10 @@ import profile from './routes/profile.js';
 import game from './routes/game.js';
 import http from "http";
 import { Server } from "socket.io";
+import dotenv from 'dotenv';
 import * as room from './controllers/users.js';
 
+dotenv.config();
 const app = express();
 const server = http.createServer(app);
 
@@ -82,8 +84,7 @@ io.on("connection", (socket) => {
   });
 });
 
-const mongoUrl =
-  "mongodb+srv://sukhanDeo:Raghav@70@cluster0.4pnog.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const mongoUrl = process.env.MONGO_URL;
 
 mongoose.connect(mongoUrl, {
   useNewUrlParser: true,
