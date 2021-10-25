@@ -22,7 +22,6 @@ const Profile = () => {
 
     useEffect(() => {
       setPlayerD(profileDetails)
-      console.log(profileDetails)
     }, [profileDetails])
 
   return (

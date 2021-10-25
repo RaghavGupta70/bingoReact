@@ -1,4 +1,3 @@
-// import { set } from "mongoose";
 import queryString from "query-string";
 import React, { useEffect, useState } from "react";
 import { useLocation,useHistory } from "react-router-dom";
@@ -9,9 +8,7 @@ import BingoImage from '../../assets/images/bingoGame.png';
 import PlayButton from "../../components/Buttons/PlayButton/playButton";
 import {
   getToken,
-  getType,
   getUsers,
-  getPlayValue,
   getUserName,
 } from "../../utils/commonData/common";
 import BingoGrid from "../../components/BingoGame/bingoGrid.js";
@@ -22,7 +19,6 @@ import MembersInRoom from '../../components/MembersInRoom/membersInRoom.jsx';
 let socket;
 
 const Room = () => {
-  // var temp = [];
   const location = useLocation();
   const [usersLen,setUsersLen] = useState(0);
   const dispatch = useDispatch();
@@ -31,8 +27,7 @@ const Room = () => {
   const [play,setPlay] = useState(false);
   const usersRoom = useSelector((state) => state.game);
   var [messages, setMessages] = useState([]);
-   const currentUserInfo = JSON.parse(localStorage.getItem("user"));
-  const currentUser = currentUserInfo.result.userName;
+   const currentUserInfo = JSON.parse(localStorage.getItem("user"))
   const { roomID } = queryString.parse(location.search, {
     ignoreQueryPrefix: true,
   });
@@ -41,19 +36,15 @@ const Room = () => {
     }, [ENDPOINT]);
 
     useEffect(()=> {
-      console.log(usersRoom);
       messages = getUsers();
       setMessages(getUsers())
     },[usersRoom]);
 
     useEffect(() => {
-      // setUsersRoom(getUsers())
       setUsersLen(getUsers().length)
-      console.log('start', getUsers().length, JSON.parse(sessionStorage.getItem('lock')))
     }, [getUsers().length,sessionStorage.getItem('lock')])
 
     useEffect(() => {
-      console.log('socket play', JSON.parse(sessionStorage.getItem('lock')))
       setPlay(JSON.parse(sessionStorage.getItem('lock')));
     })
 
@@ -71,11 +62,6 @@ const Room = () => {
         console.log('You played');
       })
     }
-
-   
-console.log('Chal ja Bhadwe');
-
-  
 
   return (
     <div className={roomStyles.bingoRoom}>

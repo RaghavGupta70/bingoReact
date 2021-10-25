@@ -21,9 +21,6 @@ function Home({token}) {
         history.push("/home");
        }
    },[location.pathname]);
-
-//    const user = JSON.parse(localStorage.getItem('user'));
-//    const person = user.result.userName;
    
    return(
        <div className="image">

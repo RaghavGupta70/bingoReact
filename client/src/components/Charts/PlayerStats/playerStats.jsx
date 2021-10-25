@@ -18,7 +18,6 @@ const PlayerStats = ({ data }) => {
           width={"15vw"}
           data={data.opponents}
           onChange={(e) => {
-            console.log(e);
             if (e === null) {
               setShow(false);
             } else {

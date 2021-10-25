@@ -14,12 +14,10 @@ const ProfileBox = ({ data }) => {
     const user = JSON.parse(localStorage.getItem('user'));
     const dispatch = useDispatch();
     const [fileImg, setFileImg] = useState('');
-    console.log(data.profileImage)
 
     const handleChange = ({ base64 }) => {
         setFileImg(base64);
         dispatch(updatePlayerImageData(getUserEmail(), base64));
-        console.log(base64)
     }
 
     return (
@@ -65,7 +63,6 @@ const ProfileBox = ({ data }) => {
                 </div>
                 <div className="profile_img" xs={6} md={4}>
                     <Image src={fileImg !== '' ? fileImg : data.profileImage} className="avatar_img" roundedCircle />
-                    {/* <AiOutlinePlusCircle /> */}
                     <div className='fileUp'>
                         <FileBase type="file" multiple={false} accept=' .jpeg .png .jpg' className="uploadImg" onDone={handleChange} style={{
                             marginLeft: '13%',

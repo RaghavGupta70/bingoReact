@@ -81,7 +81,6 @@ export default function LeaderBoard() {
 
   useEffect(() => {
     dispatch(fetchLeaderBoardData());
-    console.log(leaderDataValue);
   }, []);
 
   useEffect(() => {
@@ -118,10 +117,7 @@ export default function LeaderBoard() {
               width={"17vw"}
               data={filterTable}
               onChange={(e) => {
-                console.log(rows);
-                console.log(e)
                 if (!e) {
-                  console.log('Nothing');
                   return;
                 }
 

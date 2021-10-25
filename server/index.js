@@ -31,34 +31,24 @@ app.use("/SignIn", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  console.log("User has connected with socket.io");
 
   socket.on("create", (roomID, callback) => {
 
     socket.join(roomID);
     socket.to(roomID).emit("room", roomID);
-    console.log(roomID, 'AA gaye swaad')
   });
 
   socket.on("play", (roomID, callback) => {
-    console.log(roomID, "here i am");
     const played = true;
     let obj = { id: roomID };
-    // const roomId = roomID.toString();
 
     console.log(typeof (roomID))
     if (roomID) {
       socket.to(obj.id).emit("message", { gameValue: played, type: 'Start' });
-      console.log("Working");
     }
-
-    // io.on("connection", (socket) => {
-    //   socket.to(roomID).emit('playStart',(played));
-    // });
   });
 
   socket.on("win", (data, callback) => {
-    console.log(data);
     const result = { type: 'Loser', sender: data.email };
     socket.broadcast.to(data.roomID).emit("message", {gameValue:result,type:'Lost'});
   });
@@ -69,7 +59,6 @@ io.on("connection", (socket) => {
   );
 
   socket.on("gameValue", (data, callback) => {
-    // console.log(data, data.gameVal[0].numbers);
 
     if (data.gameVal[0].numbers.length > 0) {
       if (!data.gameVal[0].numbers.find((nums) => nums.value === data.num)) {
@@ -85,13 +74,11 @@ io.on("connection", (socket) => {
       })
     }
 
-    console.log(data.gameVal, data.gameVal[0].roomID, data.user);
-
     socket.broadcast.to(data.gameVal[0].roomID).emit("message", {gameValue:data.gameVal,type:'Cut'});
   });
 
   socket.on("disconnect", () => {
-    console.log("User disconnected");
+    
   });
 });
 
@@ -105,16 +92,15 @@ mongoose.connect(mongoUrl, {
   useCreateIndex: true,
 }).then;
 try {
-  console.log("Connected to MongoDb");
+  console.log("Connected to Database");
 } catch (error) {
   console.log(error.message);
 }
 
 app.get("/", (req, res) => {
-  res.send("Hello Sucker");
+  res.send("Hello Guys");
 });
 
 server.listen(5000, (req, res) => {
   console.log("Port successfully connected");
 });
-

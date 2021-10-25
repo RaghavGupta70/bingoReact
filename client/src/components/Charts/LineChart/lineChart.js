@@ -48,17 +48,6 @@ const LineChart = ({ value, reload, playerData,oppLabel }) => {
             } else {
               str = oppLabel + " Won : " + context.formattedValue;
             }
-            // console.log(context)
-            // if (str) {
-            //   str += ": ";
-            //}
-
-            // let sum = 0;
-            // context.dataset.data.forEach((element) => {
-            //   sum += element;
-            // });
-            // console.log(context.dataset);
-            // str += ((context.formattedValue / sum) * 100).toFixed(1) + "%";
             return str;
           },
         },

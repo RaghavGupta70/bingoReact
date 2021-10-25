@@ -21,8 +21,6 @@ const GlobalStats = ({playerData,oppData}) => {
       setPlayerD(playerData);
     }, [playerData])
 
-    console.log(playerD)
-
     return (
    <> {playerData.matchesPlayed !==0 ? <>
       <div className={gbStyles.toggle}>
