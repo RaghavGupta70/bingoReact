@@ -179,6 +179,7 @@ const BingoGrid = ({ setMessage }) => {
         }
       }
     }
+    
     for (let i = 0; i < 5; i++) {
       if (bingoCut.vert.find((elem) => elem === i) !== i)
         if (
