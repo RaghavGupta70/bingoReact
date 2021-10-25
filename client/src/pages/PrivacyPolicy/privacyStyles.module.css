@@ -1,4 +1,4 @@
-.aboutPage{
+.body{
     margin:6% 10%;
     padding:5%;
     border:2px solid black;
@@ -8,12 +8,19 @@
     color:white;
 }
 
-.aboutPage h2{
+.body h2{
     text-decoration: underline;
 }
 
-.techUl{
+.listPrivacy{
     color:yellow;
     list-style: disc !important;
+    padding: 2%;
     /* list-style-type: circle; */
+}
+
+.listItem{
+    color: white;
+    margin: 2%;
+    margin-top: 0%;
 }

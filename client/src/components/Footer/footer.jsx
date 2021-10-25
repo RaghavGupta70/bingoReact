@@ -118,13 +118,13 @@ const FooterPage = () => {
               <a href="/profile">Your Profile</a>
             </p>
             <p>
-              <a href="#!">Privacy Policy</a>
+              <a href="/privacyPolicy">Privacy Policy</a>
             </p>
             <p>
-              <a href="/aboutus">About Us</a>
+              <a href="/aboutUs">About Us</a>
             </p>
             <p>
-              <a href="#!">Help</a>
+              <a href="/leaderBoard">LeaderBoard</a>
             </p>
           </MDBCol>
           <MDBCol md="4" lg="3" xl="3" className="mb-4">
@@ -135,9 +135,6 @@ const FooterPage = () => {
               className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto"
               style={{ width: "60px" }}
             />
-            <p>
-              <i className="fa fa-home mr-3" /> Red Light Area,UIET,Chd
-            </p>
             <p>
               <i className="fa fa-envelope mr-3" /> sukhanDeo@gmail.com
             </p>

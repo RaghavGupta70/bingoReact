@@ -13,8 +13,8 @@ const AboutUs = () => {
              <p>Our core aim has always been to provide amazing free bingo cards to 
                  anyone organizing a small bingo game. This means that school teachers, families,
                   friends, small clubs and community groups can all enjoy a fun game of bingo completely free.
-                 <br/>Technolgies which we used are:-
-                 <uL className='techUl'>
+                 <br/>Technologies which we used are:-
+                 <ul className='techUl'>
                      <li>React Js</li>
                      <li>Express Js</li>
                      <li>Node Js</li>
@@ -23,7 +23,7 @@ const AboutUs = () => {
                      <li>Socket.io</li>
                      <li>React Material UI</li>
                      <li>React ChartJs Library</li>
-                 </uL> </p>
+                 </ul> </p>
              <h4>What's the catch?</h4>
              <p>There is no catch. Our bingo games are totally free. You just need to create an account. There are no ads.
                 Due to demand for bigger games we offer simple, and free Bingo game.</p>

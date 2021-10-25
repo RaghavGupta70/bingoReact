@@ -18,7 +18,8 @@ import AppStyles from "./App.module.css";
 import { getToken } from "./utils/commonData/common.js";
 import FooterPage from "./components/Footer/footer.jsx";
 import Error404 from "./pages/Error404/error404";
-import AboutUs from './pages/AboutUs/aboutUs.jsx';
+import AboutUs from './pages/AboutUs/aboutUs.js';
+import Privacy from './pages/PrivacyPolicy/privacyPolicy.js';
 
 const App = () => {
   const history = useHistory();
@@ -73,7 +74,8 @@ const App = () => {
         <Route path="/error">
           <Error404 />
         </Route>
-        <Route path="/aboutus" component={AboutUs} />
+        <Route path="/aboutUs" component={AboutUs} />
+        <Route path="/privacyPolicy" component={Privacy} />
         <Route>
           <Home token={token} />
         </Route>
