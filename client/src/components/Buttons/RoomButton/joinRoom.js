@@ -52,7 +52,6 @@ export default function JoinRoom({ type }) {
       }
 
       if (type === 'Start') {
-        console.log(gameValue);
         sessionStorage.setItem('lock',JSON.stringify(gameValue));
       }
     });
@@ -60,7 +59,6 @@ export default function JoinRoom({ type }) {
  
 
   useEffect(() => {
-    console.log('Socket chutiya hai', roomData);
     if (roomData[0]) {
       if (roomData[0].numbers) {
         const num = roomData;
@@ -74,7 +72,6 @@ export default function JoinRoom({ type }) {
         else {
           socket.emit("create", (roomData[0].roomID), (error) => {
             alert("You joined Lodu");
-            console.log(error);
           });
           sessionStorage.setItem("currentType", "Creator");
           history.push(`/Room?roomID=${roomData[0].roomID}`);
@@ -85,7 +82,6 @@ export default function JoinRoom({ type }) {
       else {
         socket.emit("create", (roomData[0].roomID), (error) => {
           alert("You joined Lodu");
-          console.log(error);
         });
         sessionStorage.setItem("currentType", "Creator");
         history.push(`/Room?roomID=${roomData[0].roomID}`);
@@ -115,17 +111,8 @@ export default function JoinRoom({ type }) {
     e.preventDefault();
     sessionStorage.clear();
     const v = JSON.parse(localStorage.getItem("user"));
-    console.log(getUserName(), getUserEmail())
 
     dispatch(createRoomPlayer({ userName: getUserName(), userEmail: getUserEmail() }))
-
-
-
-    // socket.on("room", (roomData, callback) => {
-    //   setroomId(roomData.roomId);
-    //   const success = putUsers([roomData]);
-
-    // });
   };
 
   const handleClick2 = (e) => {
@@ -133,8 +120,6 @@ export default function JoinRoom({ type }) {
     sessionStorage.clear();
     const v = JSON.parse(localStorage.getItem("user"));
     const value = v.result.userName;
-
-    console.log(ID);
 
     dispatch(joinRoomPlayer({ id: ID, userName: getUserName(), userEmail: getUserEmail() }));
   };
@@ -168,7 +153,6 @@ export default function JoinRoom({ type }) {
                 value={ID}
                 onChange={(e) => {
                   setID(e.target.value);
-                  console.log(ID);
                 }}
               />
               <button id="transition-modal-description" onClick={handleClick2}>

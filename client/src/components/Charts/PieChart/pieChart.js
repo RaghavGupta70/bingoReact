@@ -2,8 +2,6 @@ import {Pie} from 'react-chartjs-2';
 
 const PieChart = ({playerData}) => {
 
-  console.log(playerData);
-
     const data = {
       labels: ["Won", "Lose", "No Result"],
       datasets: [

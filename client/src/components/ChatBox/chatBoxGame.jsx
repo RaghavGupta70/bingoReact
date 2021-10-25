@@ -9,7 +9,6 @@ const ChatBox = ({text,message}) => {
 
     useEffect(() => {
         newText = message[0].numbers;
-        // console.log(newText)
         setNewText(getUsers()[0].numbers)
     })
 
@@ -22,7 +21,6 @@ const ChatBox = ({text,message}) => {
         }
     }, [])
     
-    // console.log(message[0].numbers);
     return (
         <div className={chatStyles.mainCont}>
             <div className={chatStyles.header}>

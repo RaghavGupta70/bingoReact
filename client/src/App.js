@@ -25,7 +25,6 @@ const App = () => {
   const history = useHistory();
   const [token, setToken] = useState(JSON.parse(localStorage.getItem("tok")));
   let location = useLocation();
-  console.log(history.location.pathname !== "SignIn");
 
   useEffect(() => {
     if (location.pathname === "/") {
@@ -62,7 +61,6 @@ const App = () => {
         <Route path="/Room">
           <>
             <Room />
-            {console.log(location)}
           </>
         </Route>
         <Route path="/leaderBoard">

@@ -9,7 +9,6 @@ const BarChart = ({graph,playerData}) => {
   useEffect(() => {
     if(playerData.matches)
     {
-      console.log(playerData.matches.sort((a, b) => a.matchMonth > b.matchMonth ? 1 : -1));
       setBarData(playerData.matches.sort((a, b) => a.matchMonth > b.matchMonth ? 1 : -1));
     }
   })

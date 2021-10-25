@@ -81,19 +81,6 @@ export default function CustomizedButtons({heading,onClick}) {
       >
         {heading}
       </ColorButton>
-      {/* <ThemeProvider theme={theme}>
-        <Button variant="contained" color="primary" className={classes.margin}>
-          Theme Provider
-        </Button>
-      </ThemeProvider>
-      <BootstrapButton
-        variant="contained"
-        color="primary"
-        disableRipple
-        className={classes.margin}
-      >
-        Bootstrap
-      </BootstrapButton> */}
     </div>
   );
 }

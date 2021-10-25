@@ -81,16 +81,6 @@ const BingoGrid = ({ setMessage }) => {
   }
 
   useEffect(() => {
-    if (getUsers().length > 0) {
-      if (getUsers()[0].numbers.length > 0) {
-        if (getUsers()[0].numbers[getUsers()[0].numbers.length - 1].value === 100 && getUsers()[0].numbers[getUsers()[0].numbers.length - 1].userName !== getUserName()) {
-          console.log('You lost');
-        }
-      }
-    }
-  });
-
-  useEffect(() => {
     if (bingoCut.horiz.length + bingoCut.vert.length + bingoCut.diag.length >= 5) {
       console.log(bingoCut);
       const winData = getUsers().filter((elem) => elem.userEmail !== getUserEmail());
@@ -123,7 +113,6 @@ const BingoGrid = ({ setMessage }) => {
   }, [bingoCut]);
 
   useEffect(() => {
-    console.log(getUsers()[turn], turn);
     if (turn === getUsers().length) {
       setTurn(0);
     }
@@ -131,10 +120,7 @@ const BingoGrid = ({ setMessage }) => {
 
   if (!shuffle) {
     setShuffle(true);
-    console.log("here", arrNum);
   }
-
-  console.log("Random");
 
   var obj = {
     i: "",
@@ -169,8 +155,6 @@ const BingoGrid = ({ setMessage }) => {
     ar[t] = obj;
   }
 
-  // console.log(arr);
-
   const handleBingo = (e) => {
     e.preventDefault();
     for (let i = 0; i < 25; i++) {
@@ -182,7 +166,6 @@ const BingoGrid = ({ setMessage }) => {
           styleToggle[i + 3] &&
           styleToggle[i + 4]
         ) {
-          console.log(i, "You can cut now");
           setBingoCut({
             horiz: [...bingoCut.horiz, i],
             vert: [...bingoCut.vert],
@@ -192,13 +175,11 @@ const BingoGrid = ({ setMessage }) => {
           win[bingoWin] = true;
           setBingoWin(bingoWin + 1)
           const newWin = win;
-          console.log(win, bingoWin);
           setWin(newWin);
-
-          console.log(bingoCut.horiz.length);
         }
       }
     }
+    
     for (let i = 0; i < 5; i++) {
       if (bingoCut.vert.find((elem) => elem === i) !== i)
         if (
@@ -208,20 +189,16 @@ const BingoGrid = ({ setMessage }) => {
           styleToggle[i + 15] &&
           styleToggle[i + 20]
         ) {
-          console.log(i, "You can cut now");
           setBingoCut({
             horiz: [...bingoCut.horiz],
             vert: [...bingoCut.vert, i],
             diag: [...bingoCut.diag],
           });
-          console.log(bingoCut.vert.length);
           win[bingoWin] = true;
           setBingoWin(bingoWin + 1);
           const newWin = win;
-          console.log(win, bingoWin);
 
           setWin(newWin);
-
         }
     }
 
@@ -233,7 +210,6 @@ const BingoGrid = ({ setMessage }) => {
         styleToggle[18] &&
         styleToggle[24]
       ) {
-        console.log("You can cut now");
         setBingoCut({
           horiz: [...bingoCut.horiz],
           vert: [...bingoCut.vert],
@@ -242,7 +218,6 @@ const BingoGrid = ({ setMessage }) => {
         win[bingoWin] = true;
         setBingoWin(bingoWin + 1)
         const newWin = win;
-        console.log(win, bingoWin);
 
         setWin(newWin);
 
@@ -257,7 +232,6 @@ const BingoGrid = ({ setMessage }) => {
         styleToggle[16] &&
         styleToggle[20]
       ) {
-        console.log("You can cut now");
         setBingoCut({
           horiz: [...bingoCut.horiz],
           vert: [...bingoCut.vert],
@@ -266,7 +240,6 @@ const BingoGrid = ({ setMessage }) => {
         win[bingoWin] = true;
         setBingoWin(bingoWin + 1)
         const newWin = win;
-        console.log(win, bingoWin);
 
         setWin(newWin);
 
@@ -307,7 +280,6 @@ const BingoGrid = ({ setMessage }) => {
                   if (getUsers().length > 0) {
                     if (getUsers()[0].numbers.length > 0) {
                       if (getUsers()[0].numbers[getUsers()[0].numbers.length - 1].value === 100 && getUsers()[0].numbers[getUsers()[0].numbers.length - 1].userName !== getUserName()) {
-                        console.log('You lost');
                         const winData = getUsers().filter((elem) => elem.userEmail !== getUserEmail());
                         const winner = getUsers()[0].numbers[getUsers()[0].numbers.length - 1].userName;
                         const finalData = winData.map((elem) => { return { label: elem.userName, email: elem.userEmail, result: winner === elem.userName ? 'Won' : 'Lost' } });

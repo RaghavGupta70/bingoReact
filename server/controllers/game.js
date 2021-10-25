@@ -18,7 +18,7 @@ export const fetchRoom = async (req, res) => {
 
     return res.status(200).json(existingID);
   } catch (error) {
-    console.log(error.message);
+
   }
 };
 
@@ -47,13 +47,12 @@ export const createRoom = async (req, res) => {
     };
 
     const newPlayer = new game(newCreator);
-    console.log(id, "Hai bhai kaisi lagi");
 
     newPlayer.save();
 
     return res.status(200).json(newPlayer);
   } catch (error) {
-    console.log(error.message);
+
   }
 };
 
@@ -76,7 +75,7 @@ export const lockRoom = async (req,res) => {
     return res.status(200).json(newRoom);
 
   } catch (error) {
-    console.log(error);
+
   }
 }
 
@@ -108,6 +107,6 @@ export const joinRoom = async (req, res) => {
 
     return res.status(200).json(newData);
   } catch (error) {
-    console.log(error.message);
+    
   }
 };

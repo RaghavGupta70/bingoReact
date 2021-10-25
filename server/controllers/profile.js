@@ -2,15 +2,12 @@ import Profile from '../models/profile.js';
 
 export const getProfile = async (req, res) => {
     const email = req.params;
-    console.log(email);
     try {
         const user = await Profile.findOne({ emailId: email.email });
-        console.log(user);
         if (!user) return res.status(409).json('User not found');
 
         return res.status(201).json(user);
     } catch (error) {
-        console.log(error)
         return res.status(404).json('Server Error Occured. Try Again');
     }
 }
@@ -42,7 +39,7 @@ export const getAllOpponentMatches = async (req, res) => {
         }
         return res.status(200).json(oppoMatches);
     } catch (error) {
-        console.log(error);
+
     }
 }
 
@@ -60,7 +57,6 @@ export const updatePlayerData = async (req, res) => {
         const playerEmail = req.params.email;
         const { oppData, result } = req.body;
 
-        // console.log('Winner',playerEmail,oppData)
         let playerData = await Profile.find({ emailId: playerEmail });
         playerData = playerData[0];
 
@@ -148,21 +144,18 @@ export const uploadImage = async (req, res) => {
 
         const email = req.params;
         const { image } = req.body;
-        console.log(image.data, email.email)
 
         const profileData = await Profile.find({ emailId: email.email });
 
         if (profileData) {
             profileData.profileImage = image;
-            console.log(profileData)
             const updated = await Profile.findOneAndUpdate({ emailId: email.email }, { $set: {profileImage: profileData.profileImage} }, { new: true, upsert: true });
-            console.log(updated);
             return res.status(200).json(updated);
         }
 
         return res.status(404).json({ message: 'Fucked up' });
 
     } catch (error) {
-        console.log(error);
+        
     }
 }

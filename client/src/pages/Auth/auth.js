@@ -45,7 +45,6 @@ async function loginUser(credentials) {
     }),
   }).then((data) => {
     const r = data.json();
-    console.log(r);
     return r;
   });
 }
@@ -53,10 +52,9 @@ async function loginUser(credentials) {
 export default function Auth({ type, setToken }) {
   var schema = new passwordValidator();
 
-  // Add properties to it
   schema
     .is()
-    .min(8) // Minimum length 8
+    .min(8)
     .is()
     .max(100) // Maximum length 100
     .has()
@@ -158,7 +156,6 @@ export default function Auth({ type, setToken }) {
         response.then((res)=> setBackError(res))
                 .catch((err) => setBackError(err)); 
         const token = await loginUser(userData);
-        console.log(token);
         setToken(token);
         localStorage.setItem("tok", JSON.stringify(token));
       }
@@ -178,28 +175,11 @@ export default function Auth({ type, setToken }) {
         respons.then((res)=> setBackError(res))
                 .catch((err) => setBackError(err)); 
         const token = await loginUser(userData);
-        console.log(token);
         setToken(token);
         localStorage.setItem("tok", JSON.stringify(token));
       }  
-      console.log(userData);
     }
   };
-
-  // useEffect(() => {
-  //   const listener = event => {
-  //     if (event.code === "Enter" || event.code === "NumpadEnter") {
-  //       console.log("Enter key was pressed. Run your function.");
-  //       handleClick(event);
-  //       event.preventDefault();
-  //       // callMyFunction();
-  //     }
-  //   };
-  //   document.addEventListener("keydown", listener);
-  //   return () => {
-  //     document.removeEventListener("keydown", listener);
-  //   };
-  // }, []);
 
   const handleEnter = (e) => {
     if(e.key === 'Enter')
@@ -207,57 +187,6 @@ export default function Auth({ type, setToken }) {
       handleClick();
     }
   }
-  // const handleEnter = async (e) => {
-  //   console.log(e.key)
-  //   if(e.key === 'Enter')
-  // {  if (userData.email === "") {
-  //     error.email.type1 = true;
-  //     setError({ ...error, email: { ...error.email, type1: true } });
-  //   }
-
-  //   if (userData.password === "") {
-  //     error.password.type1 = true;
-  //     setError({ ...error, password: { ...error.password, type1: true } });
-  //   }
-
-  //   if (type === "SignIn") {
-  //     if (
-  //       error.email.type1 !== true &&
-  //       error.email.type2 !== true &&
-  //       error.password.type1 !== true &&
-  //       error.password.type2 !== true
-  //     ) {
-  //       const response = dispatch(SignInUser(userData, history));
-  //       response.then((res) => setBackError(res))
-  //         .catch((err) => setBackError(err));
-  //       const token = await loginUser(userData);
-  //       console.log(token);
-  //       setToken(token);
-  //       localStorage.setItem("tok", JSON.stringify(token));
-  //     }
-  //   } else {
-  //     if (userData.userName === "") {
-  //       error.userName = true;
-  //       setError({ ...error, userName: true });
-  //     }
-  //     if (
-  //       error.userName !== true &&
-  //       error.email.type1 !== true &&
-  //       error.email.type2 !== true &&
-  //       error.password.type1 !== true &&
-  //       error.password.type2 !== true
-  //     ) {
-  //       const respons = dispatch(SignUpUser(userData, history));
-  //       respons.then((res) => setBackError(res))
-  //         .catch((err) => setBackError(err));
-  //       const token = await loginUser(userData);
-  //       console.log(token);
-  //       setToken(token);
-  //       localStorage.setItem("tok", JSON.stringify(token));
-  //     }
-  //     console.log(userData);
-  //   }}
-  // };
 
 
   const handleChange = (e) => {
@@ -275,13 +204,12 @@ export default function Auth({ type, setToken }) {
     response.then((res)=> setBackError(res))
             .catch((err) => setBackError(err)); 
     const token = await loginUser(userData);
-    console.log(token);
     setToken(token);
     localStorage.setItem("tok", JSON.stringify(token));
   };
 
   const googleFailure = () => {
-    console.log("Error during google sign in");
+    
   };
 
   return (

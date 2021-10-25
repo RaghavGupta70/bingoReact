@@ -8,9 +8,7 @@ export function randomString(length, chars) {
 
 export const createRoom = (userName,userEmail) => {
     var id = randomString(11, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-    console.log(arr)
     const existingRoom = arr.find((item) => (item.roomId === id));
-    console.log(existingRoom);
     if (existingRoom) return { error: 'Try again! You have some connectivity issue LOL:)' };
 
     const users = {
@@ -21,7 +19,6 @@ export const createRoom = (userName,userEmail) => {
       numbers: [],
     };
     arr.push(users);
-        console.log(arr);
     return {users};
 }
 
@@ -45,7 +42,6 @@ export const joinRoom = async(Id, userName,userEmail) => {
     if(c === 4)
      return {error:'Room is already full'};
      const roomNo ={roomId: Id,userName: userName,userEmail:userEmail,numbers:[]}
-      console.log(validRoom);
       arr.push(roomNo)
       return {roomNo};
 }
@@ -56,9 +52,8 @@ export const getUserInRoom = (Id) => {
 
 export const fillNumbers = (Id,userName,num) => {
    var users = arr.filter((user)=> user.roomId === Id);
-   console.log(users);
    var obj = {userName: userName,value: num};
-// users.map((user) => {user.numbers.find(number)=>{number.value=== num}});
+   
 users.map((user) => {if(!user.numbers.find(numb => numb.value === num)){user.numbers.push(obj)}});
 
    return users;

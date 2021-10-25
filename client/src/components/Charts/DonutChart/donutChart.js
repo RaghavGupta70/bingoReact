@@ -45,7 +45,6 @@ const DonutChart = ({value,reload}) => {
       },
     };
     return (<>
-      {console.log(reload)}
         <Doughnut data={data} options={options} />
         </>
     )

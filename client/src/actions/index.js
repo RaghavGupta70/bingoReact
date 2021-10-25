@@ -74,7 +74,6 @@ export const fetchLeaderBoardData = () => async(dispatch) => {
 
 export const updatePlayerProfile = (email,playerData) => async(dispatch) => {
     try{
-        console.log(email,playerData);
         const {data} = await api.updatePlayerData(email,playerData);
         dispatch({type: UPDATE_PROF, payload: data})
     }
@@ -90,58 +89,50 @@ export const updatePlayerImageData = (email, playerImage) => async (dispatch) =>
         dispatch({ type: UPDATE_IMG, payload: data })
     }
     catch (error) {
-        return (error.response.data.message)
+        return (error.response.data.message);
     }
 }
 
 export const createRoomPlayer = (data) => async(dispatch) => {
     try {
-        // console.log(data);
         const message = await api.createRoom(data);
-        console.log(message.data);
         dispatch({type: CREATE_ROOM, payload: message.data})
     } catch (error) {
-        console.log(error);
+
     }
 }
 
 export const joinRoomPlayer = (data) => async (dispatch) => {
     try {
-        // console.log(data);
         const message = await api.joinRoom(data);
-        console.log(message.data);
         dispatch({ type: JOIN_ROOM, payload: message.data })
     } catch (error) {
         alert(error.response.data.message);
-        console.log(error.response.data.message);
     }
 }
 
 export const fetchRoomValue = (id) => async(dispatch) => {
     try {
         const message = await api.fetchRoom(id);
-        console.log(id,message);
         dispatch({type: FETCH_ROOM,payload: message.data})
         return message.data;
     } catch (error) {
-        console.log(error)
+
     }
 }
 
 export const cutNumbers = (numberSel) => async(dispatch) => {
-    console.log(numberSel)
     try {
         dispatch({type: CUT_NUM, payload:numberSel});
     } catch (error) {
-        console.log(error);
+
     }
 }
 
 export const lockRoomCreator = (roomID) => async(dispatch) => {
     try {
         const {data} = await api.lockRoom(roomID);
-        console.log(data);
     } catch (error) {
-        console.log(error.response.data.message);
+
     }
 }
