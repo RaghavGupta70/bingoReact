@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@material-ui/lab": "^4.0.0-alpha.60",
-    "@react-spring/web": "^9.2.4",
-    "prop-types": "^15.7.2"
-  }
-}

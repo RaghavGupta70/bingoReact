@@ -321,7 +321,7 @@ export default function Auth({ type, setToken }) {
           </div>
           <p style={{ color: "#673ab7", padding: "6px" }}> OR </p>
           <GoogleLogin
-            clientId="453680329284-9t4ic7kq6krkfgqnabl6tsnak2r63ldq.apps.googleusercontent.com"
+            clientId={process.env.REACT_APP_CLIENT_ID}
             render={(renderProps) => (
               <Button
                 className={classes.google}
