@@ -84,7 +84,7 @@ const BingoGrid = ({ setMessage }) => {
     if (getUsers().length > 0) {
       if (getUsers()[0].numbers.length > 0) {
         if (getUsers()[0].numbers[getUsers()[0].numbers.length - 1].value === 100 && getUsers()[0].numbers[getUsers()[0].numbers.length - 1].userName !== getUserName()) {
-          console.log('You lost');
+          
         }
       }
     }
